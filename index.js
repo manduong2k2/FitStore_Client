@@ -24,12 +24,17 @@ app.listen(port, async () => {
   if (response.status === 200) {
     const data = await response.json();
     app.get("/", (req, res) => {
-      res.render("home", { titlePage: "home", data: data });
+      res.render("home", { titlePage: "Trang chủ", data: data });
     });
     app.get("/introduce", (req, res) => {
-      res.render("introduce", { titlePage: "introduce" });
+      res.render("introduce", { titlePage: "Sản phẩm" });
     });
-    
+    app.get("/signup", (req, res) => {
+      res.render("signup", { titlePage: "Đăng ký" });
+    });
+    app.get("/signin", (req, res) => {
+      res.render("signin", { titlePage: "Đăng nhập" });
+    });
     console.log(data);
   }
   console.log(`Example app listening on port ${port}`);
