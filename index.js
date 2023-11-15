@@ -29,12 +29,7 @@ app.listen(port, async () => {
     app.get("/introduce", (req, res) => {
       res.render("introduce", { titlePage: "introduce" });
     });
-    app.get("/signin", (req, res) => {
-      res.render("signin", { titlePage: "Đăng nhập" });
-    });
-    app.get("/signup", (req, res) => {
-      res.render("signup", { titlePage: "Đăng ký" });
-    });
+    
     console.log(data);
   }
   console.log(`Example app listening on port ${port}`);
