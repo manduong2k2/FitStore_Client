@@ -1,0 +1,43 @@
+h1 {
+  color: #333;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-item {
+  width: calc(25% - 20px);
+  margin: 0 10px 20px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.brand,
+.category {
+  margin-top: 10px;
+}
+
+.btn {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #28a745;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background-color: #218838;
+}
