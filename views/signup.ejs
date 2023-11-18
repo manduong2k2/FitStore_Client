@@ -78,7 +78,7 @@
 
             <div class="card bg-glass">
               <div class="card-body px-4 py-5 px-md-5">
-                <form action="/register" method="POST">
+                <form >
                   <!-- 2 column grid layout with text inputs for the first and last names -->
                   <div class="row">
                     <h1 class="mb-3 h3 text-center">Đăng ký</h1>
@@ -86,12 +86,12 @@
                       <div class="form-outline">
                         <input
                           type="text"
-                          name="name"
-                          id="form3Example2"
+                          name="accountUsername"
+                          id="accountUsername"
                           class="form-control"
-                          placeholder="Họ và tên"
+                          placeholder="Username"
+                          required
                         />
-                        
                       </div>
                     </div>
                   </div>
@@ -104,24 +104,45 @@
                       id="form3Example3"
                       class="form-control"
                       placeholder="Email"
-                    />                    
+                    />
                   </div>
 
                   <!-- Password input -->
                   <div class="form-outline mb-4">
                     <input
                       type="password"
-                      name="password"
-                      id="form3Example4"
+                      name="accountPassword"
+                      id="accountPassword"
                       class="form-control"
                       placeholder="Mật khẩu"
+                      required
                     />
-                    
                   </div>
 
+                  <div class="form-outline mb-4">
+                    <input
+                      type="password"
+                      name="checkPassword"
+                      id="checkPassword"
+                      class="form-control"
+                      placeholder="Nhập lạị mật khẩu"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="brandImage">Brand Image:</label>
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      id="accountImage"
+                      name="accountImage"
+                      accept="image/*"
+                      required
+                    />
+                  </div>
                   <!-- Submit button -->
                   <button
-                    type="submit"
+                    onclick="submitForm()"
                     class="btn btn-primary btn-block mx-auto d-block mb-4"
                   >
                     Đăng ký
@@ -140,7 +161,35 @@
     </section>
     <!-- Section: Design Block -->
   </div>
+  <script>
+    function submitForm() {
+      var accountUsername = document.getElementById("accountUsername").value;
+      var accountPassword = document.getElementById("accountPassword").value;
+      var checkPassword = document.getElementById("checkPassword").value;
+      var accountImage = document.getElementById("accountImage").files[0];
+      if (accountPassword !== checkPassword) {
+        window.alert("Mật khẩu nhập lại không đúng!!!");
+      } else {
+        const formData = new FormData();
+        formData.append("username", accountUsername);
+        formData.append("password", accountPassword);
+        formData.append("image", accountImage);
 
+        fetch("http://jul2nd.ddns.net/account", {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("Success:", data);
+            
+            window.location.href = 'http://localhost:3000/signin';
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+    }
+  </script>
   <%- include('includes/footer.ejs')%>
 </body>
-
