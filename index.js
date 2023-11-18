@@ -1,5 +1,7 @@
 const morgan = require("morgan");
 const express = require("express");
+const homeController = require('./controller/home.controller');
+const brandController = require('./controller/brand.controller');
 const app = express();
 const port = 3000;
 const path = require("path");
@@ -11,11 +13,13 @@ const requestOptions = {
     "Content-Type": "application/json",
   },
 };
+
 //http logger
 app.use(morgan("combined"));
-
+app.use('', homeController);
+app.use('/brand', brandController);
 //template engine
-app.use(express.static(path.join(__dirname, "public")));
+app.use('public',express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -23,18 +27,6 @@ app.listen(port, async () => {
   const response = await request("http://jul2nd.ddns.net/product");
   if (response.status === 200) {
     const data = await response.json();
-    app.get("/", (req, res) => {
-      res.render("home", { titlePage: "Trang chủ", data: data });
-    });
-    app.get("/introduce", (req, res) => {
-      res.render("introduce", { titlePage: "Sản phẩm" });
-    });
-    app.get("/signup", (req, res) => {
-      res.render("signup", { titlePage: "Đăng ký" });
-    });
-    app.get("/signin", (req, res) => {
-      res.render("signin", { titlePage: "Đăng nhập" });
-    });
     console.log(data);
   }
   console.log(`Example app listening on port ${port}`);
