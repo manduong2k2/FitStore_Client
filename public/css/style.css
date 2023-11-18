@@ -5,17 +5,18 @@ h1 {
 .product-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .product-item {
-  width: calc(25% - 20px);
-  margin: 0 10px 20px 0;
+  width: calc(20% - 20px); 
+  margin-bottom: 20px; 
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
 }
-
+ 
 img {
   max-width: 100%;
   height: auto;
