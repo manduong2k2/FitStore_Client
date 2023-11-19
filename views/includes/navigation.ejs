@@ -37,16 +37,66 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img src="/images/account.png" alt="#" style="height: 25px" />
+            <img id="accountImage" src="/images/account.png" alt="#" style="height: 25px" />
+            <script>
+              function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for(let i = 0; i <ca.length; i++) {
+                  let c = ca[i];
+                  while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                  }
+                  if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                  }
+                }
+                return "";
+              }
+              const accountImage = document.getElementById('accountImage');
+              const imageFromCookie = getCookie('image');
+              if (imageFromCookie) {
+                accountImage.src = decodeURIComponent(imageFromCookie);
+              }
+            </script>
           </a>
           <ul class="dropdown-menu">
-            <!-- Dieu kien if -->
-            <!-- f(condition) {  -->
-            <li><a class="dropdown-item" href="signin">Đăng nhập</a></li>
-            <li><a class="dropdown-item" href="signup">Đăng ký</a></li>
-            <!-- } else { -->
-            <!-- <li><a class="dropdown-item" href="#">Log out</a></li> -->
-            <!--  }  -->
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                const idCookieExists = document.cookie.includes('id=');
+        
+                const dropdownMenu = document.querySelector('.dropdown-menu');
+                if (idCookieExists) {
+                  // Thực hiện logic khi cookie 'id' tồn tại
+                  dropdownMenu.innerHTML = `
+                    <li><a class="dropdown-item" href="Manage account">Quản lý tài khoản</a></li>
+                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                  `;
+                } else {
+                  // Thực hiện logic khi cookie 'id' không tồn tại
+                  dropdownMenu.innerHTML = `
+                    <li><a class="dropdown-item" href="signin">Đăng nhập</a></li>
+                    <li><a class="dropdown-item" href="signup">Đăng ký</a></li>
+                  `;
+                }
+              });
+              function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for(let i = 0; i <ca.length; i++) {
+                  let c = ca[i];
+                  while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                  }
+                  if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                  }
+                }
+                return "";
+              }
+            </script>
           </ul>
         </li>
       </ul>
