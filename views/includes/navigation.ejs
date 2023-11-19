@@ -18,16 +18,16 @@
           <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="introduce">Giới thiệu</a>
+          <a class="nav-link" href="/introduce">Giới thiệu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sản phẩm</a>
+          <a class="nav-link" href="/product">Sản phẩm</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Cộng đồng</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="contact">Liên hệ</a>
+          <a class="nav-link" href="/contact">Liên hệ</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -62,41 +62,13 @@
             </script>
           </a>
           <ul class="dropdown-menu">
-            <script>
-              document.addEventListener('DOMContentLoaded', function() {
-                const idCookieExists = document.cookie.includes('id=');
-        
-                const dropdownMenu = document.querySelector('.dropdown-menu');
-                if (idCookieExists) {
-                  // Thực hiện logic khi cookie 'id' tồn tại
-                  dropdownMenu.innerHTML = `
-                    <li><a class="dropdown-item" href="Manage account">Quản lý tài khoản</a></li>
-                    <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
-                  `;
-                } else {
-                  // Thực hiện logic khi cookie 'id' không tồn tại
-                  dropdownMenu.innerHTML = `
-                    <li><a class="dropdown-item" href="signin">Đăng nhập</a></li>
-                    <li><a class="dropdown-item" href="signup">Đăng ký</a></li>
-                  `;
-                }
-              });
-              function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for(let i = 0; i <ca.length; i++) {
-                  let c = ca[i];
-                  while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                  }
-                  if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                  }
-                }
-                return "";
-              }
-            </script>
+            <!-- Dieu kien if -->
+            <!-- f(condition) {  -->
+            <li><a class="dropdown-item" href="signin">Đăng nhập</a></li>
+            <li><a class="dropdown-item" href="signup">Đăng ký</a></li>
+            <!-- } else { -->
+            <!-- <li><a class="dropdown-item" href="#">Log out</a></li> -->
+            <!--  }  -->
           </ul>
         </li>
       </ul>

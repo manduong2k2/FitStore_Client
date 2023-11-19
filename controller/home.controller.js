@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
 router.use(express.json());
-const axios = require('axios');
-const cookieParser = require('cookie-parser');
-router.use(express.urlencoded({ extended: true }));
 
 router.get("/", (req, res) => {
   res.render("home", { titlePage: "Trang chủ" });
 });
+router.get("/product", async (req, res) => {
+    const response = await request("http://jul2nd.ddns.net/product");
+  if (response.status === 200) {
+    const data = await response.json();
+    console.log(data);
+  
+    res.render("product", { titlePage: "Sản phẩm", data: data });
+  }});
 router.get("/contact", (req, res) => {
   res.render("contact", { titlePage: "Liên hệ" });
 });
