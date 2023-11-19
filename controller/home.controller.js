@@ -1,19 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const axios = require('axios');
 router.use(express.json());
 const cookieParser = require('cookie-parser');
+router.use(express.urlencoded({ extended: true }));
+const request = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 router.get("/", (req, res) => {
   res.render("home", { titlePage: "Trang chủ" });
 });
 router.get("/product", async (req, res) => {
-    const response = await request("http://jul2nd.ddns.net/product");
-  if (response.status === 200) {
-    const data = await response.json();
-    console.log(data);
+  axios.get("http://jul2nd.ddns.net/product")
+  .then(response => {
+    if (response.status === 200) {
+      const data = response.data;
+      res.render("product", { titlePage: "Sản phẩm", data: data });
+    }
+  })
   
-    res.render("product", { titlePage: "Sản phẩm", data: data });
-  }});
+});
 router.get("/contact", (req, res) => {
   res.render("contact", { titlePage: "Liên hệ" });
 });
@@ -36,7 +41,6 @@ router.post('/login', (req, res) => {
     password: req.body.password
   })
   .then(response => {
-    // Lưu session ID vào cookie
     var account = JSON.parse(response.data.account);
     console.log(account);
     res.cookie('id', account.id );
@@ -52,7 +56,6 @@ router.post('/login', (req, res) => {
   });
 });
 router.get('/logout', (req, res) => {
-  // Xóa cookie có tên 'sessionId'
   res.clearCookie('sessionId', { SameSite: 'None', httpOnly: false, secure: true });
   res.clearCookie('id', { SameSite: 'None', httpOnly: false, secure: true });
   res.clearCookie('username', { SameSite: 'None', httpOnly: false, secure: true });

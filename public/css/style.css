@@ -2,6 +2,10 @@ h1 {
   color: #333;
 }
 
+.text-center{
+  color: white;
+}
+
 .product-list {
   display: flex;
   flex-wrap: wrap;
@@ -36,9 +40,14 @@ img {
   color: #fff;
   background-color: #28a745;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 7px;
 }
 
 .btn:hover {
   background-color: #218838;
+}
+#loginPanel {
+  border-radius: 20px;
+  background-color: transparent !important;
+  backdrop-filter: saturate(200%) blur(15px);
 }
