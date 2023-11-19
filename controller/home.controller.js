@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 router.use(express.json());
+const cookieParser = require('cookie-parser');
 
 router.get("/", (req, res) => {
   res.render("home", { titlePage: "Trang chủ" });
