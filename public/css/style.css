@@ -46,8 +46,3 @@ img {
 .btn:hover {
   background-color: #218838;
 }
-#loginPanel {
-  border-radius: 20px;
-  background-color: transparent !important;
-  backdrop-filter: saturate(200%) blur(15px);
-}

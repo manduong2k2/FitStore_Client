@@ -1,5 +1,13 @@
 <%- include('includes/head.ejs')%>
-<body>
+<body onload="sendMessage()">
+  <script>
+    function sendMessage() {
+      var message = "<%= message %>";
+      if (message) {
+        document.getElementById("passwordError").innerHTML = message;
+      }   
+    }
+  </script>
   <%- include('includes/navigation.ejs')%>
   <div class="container mt-4">
     <!-- Section: Design Block -->
@@ -45,8 +53,9 @@
         }
 
         .bg-glass {
-          background-color: hsla(0, 0%, 100%, 0.9) !important;
-          backdrop-filter: saturate(200%) blur(25px);
+          background-color: transparent !important;
+          border-radius: 20px;
+          backdrop-filter: saturate(200%) blur(15px);
         }
       </style>
 
@@ -76,7 +85,7 @@
               class="position-absolute shadow-5-strong"
             ></div>
 
-            <div id="loginPanel" class="card bg-glass">
+            <div id="loginPanel"class="card bg-glass">
               <div  class="card-body px-4 py-5 px-md-5">
                 <h1 class="mb-3 h3 text-center">Đăng nhập</h1>
                 <form action="/login" method="POST" enctype="application/x-www-form-urlencoded" >
@@ -107,9 +116,9 @@
                     class="btn btn-primary btn-block mx-auto d-block mb-4">
                     Đăng nhập
                   </button>
-
+                    <div id="passwordError" style="color: red;"></div>
                   <!-- Register buttons -->
-                  <div class="text-center">
+                  <div class="text-center"></div>
                     <p>
                       Bạn chưa có tài khoản?
                       <a href="/signup">Đăng ký</a>

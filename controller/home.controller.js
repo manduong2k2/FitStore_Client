@@ -29,7 +29,8 @@ router.get("/signup", (req, res) => {
   res.render("signup", { titlePage: "Đăng ký" });
 });
 router.get("/signin", (req, res) => {
-  res.render("signin", { titlePage: "Đăng nhập" });
+  const message = req.query.message ;
+  res.render("signin", { titlePage: "Đăng nhập" , message});
 })
 //
 router.use(cookieParser());
@@ -41,18 +42,24 @@ router.post('/login', (req, res) => {
     password: req.body.password
   })
   .then(response => {
-    var account = JSON.parse(response.data.account);
-    console.log(account);
-    res.cookie('id', account.id );
-    res.cookie('username', account.username);
-    res.cookie('name', account.name);
-    res.cookie('image', account.image);
-    res.cookie('email', account.email);
-    res.cookie('sessionId', response.data.sessionId);
-    res.redirect('/');
+    if(response.message === 401){
+      
+    }
+    else{
+      var account = JSON.parse(response.data.account);
+      console.log(account);
+      res.cookie('id', account.id );
+      res.cookie('username', account.username);
+      res.cookie('name', account.name);
+      res.cookie('image', account.image);
+      res.cookie('email', account.email);
+      res.cookie('sessionId', response.data.sessionId);
+      res.redirect('/');
+    }
   })
   .catch(error => {
-    res.send(error);
+    const message = '';
+    res.redirect('/signin?message=${encodeURIComponent(message)}');
   });
 });
 router.get('/logout', (req, res) => {
