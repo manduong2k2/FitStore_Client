@@ -2,30 +2,29 @@
 <body>
   <%- include('includes/navigation.ejs')%>
   <main>
-    <div class="container">
-      <a href="/product/create" class="btn btn-success">Thêm sản phẩm</a>
-      <a href="/brand/create" class="btn btn-success">Mẫu Thêm</a>
-      <div class="row">
-        <div class="col-md-12">
-          <a href="./brand/createProduct.ejs"></a>
-          <h1>Sản phẩm</h1>
-          <ul>
+    <div class="container-fluid">
+        <a href="/product/create" class="btn btn-success">Thêm sản phẩm</a>
+        <a href="/brand/create" class="btn btn-success">Mẫu Thêm</a>
+        <div class="row">
             <% data.forEach(item => { %>
-            <li><h2><%= item.name %></h2></li>
-            <li><p>Price: <%= item.price %></p></li>
-            <li><p>Stock: <%= item.stock %></p></li>
-              <li><img src="<%= item.image %>" alt="#" style="height:100px"></li>
-            <li><h3>Brand</h3></li>
-            <li><p>Name: <%= item.brand.name %></p></li>
-      
-            <li><h3>Category</h3></li>
-            <li><p>Name: <%= item.category.name %></p></li>
-            <!-- Access properties of 'item' in your data -->
+            <div class="col-md-3"> <!-- Sử dụng col-md-3 để chia thành 4 cột trên màn hình lớn -->
+                <div class="product-item">
+                    <h2><%= item.name %></h2>
+                    <p>Price: <%= item.price %></p>
+                    <p>Stock: <%= item.stock %></p>
+                    <img src="<%= item.image %>" alt="#" style="height:100px">
+                    <div class="brand">
+                        <h3>Brand</h3>
+                        <p>Name: <%= item.brand.name %></p>
+                    </div>
+                    <div class="category">
+                        <h3>Category</h3>
+                        <p>Name: <%= item.category.name %></p>
+                    </div>
+                </div>
+            </div>
             <% }); %>
-          </ul>
         </div>
-      </div>
     </div>
-  </main>
-  <%- include('includes/footer.ejs')%>
-
+</main>
+<%- include('includes/footer.ejs')%>

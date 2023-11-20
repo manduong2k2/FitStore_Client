@@ -45,8 +45,10 @@
         }
 
         .bg-glass {
-          background-color: hsla(0, 0%, 100%, 0.9) !important;
-          backdrop-filter: saturate(200%) blur(25px);
+          height: 480px;
+          border-radius: 20px;
+          background-color: transparent !important;
+          backdrop-filter: saturate(200%) blur(15px);
         }
       </style>
 
@@ -77,9 +79,51 @@
             ></div>
 
             <div class="card bg-glass">
-              <div class="card-body px-4 py-5 px-md-5">
-                <form >
+              <div
+                style="display: flex; justify-content: center"
+                class="card-body px-4 py-5 px-md-5"
+              >
+                <form id="form1">
                   <!-- 2 column grid layout with text inputs for the first and last names -->
+                  <div class="row">
+                    <h1 class="mb-3 h3 text-center">Đăng ký</h1>
+                    <div class="col-md-12 mb-4">
+                      <div class="form-outline">
+                        <input
+                          type="text"
+                          name="accountName"
+                          id="accountName"
+                          class="form-control"
+                          placeholder="Họ và tên"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Password input -->
+                  <div class="form-outline mb-4">
+                    <input
+                      type="email"
+                      name="accountEmail"
+                      id="accountEmail"
+                      class="form-control"
+                      placeholder="Địa chỉ email"
+                      required
+                    />
+                  </div>
+                  <!-- Submit button -->
+                  <button
+                    onclick="switchToForm2(event)"
+                    class="btn btn-primary btn-block mx-auto d-block mb-4"
+                  >
+                    Tiếp theo
+                  </button>
+                  <!-- Register buttons -->
+                  <div class="text-center">
+                    <p>Bạn đã có tài khoản?<a href="/signin">Đăng nhập.</a></p>
+                  </div>
+                </form>
+                <form id="form2" style="display: none">
                   <div class="row">
                     <h1 class="mb-3 h3 text-center">Đăng ký</h1>
                     <div class="col-md-12 mb-4">
@@ -95,19 +139,16 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- Email input -->
                   <div class="form-outline mb-4">
                     <input
-                      type="email"
-                      name="email"
-                      id="form3Example3"
+                      type="file"
+                      id="profileImage"
+                      name="accountImage"
+                      accept="image/*"
                       class="form-control"
-                      placeholder="Email"
+                      required
                     />
                   </div>
-
-                  <!-- Password input -->
                   <div class="form-outline mb-4">
                     <input
                       type="password"
@@ -129,28 +170,22 @@
                       required
                     />
                   </div>
-                  <div class="form-group">
-                    <label for="brandImage">Brand Image:</label>
-                    <input
-                      type="file"
-                      class="form-control-file"
-                      id="accountImage"
-                      name="accountImage"
-                      accept="image/*"
-                      required
-                    />
-                  </div>
-                  <!-- Submit button -->
-                  <button
-                    onclick="submitForm()"
-                    class="btn btn-primary btn-block mx-auto d-block mb-4"
+                  <div
+                    style="display: flex; justify-content: space-between"
+                    class="form-outline mb-4"
                   >
-                    Đăng ký
-                  </button>
-
-                  <!-- Register buttons -->
-                  <div class="text-center">
-                    <p>Bạn đã có tài khoản?<a href="/signin">Đăng nhập.</a></p>
+                    <button
+                      onclick="switchToForm1(event)"
+                      class="btn btn-primary btn-block mx-auto d-block mb-4"
+                    >
+                      Quay lại
+                    </button>
+                    <button
+                      onclick="submitForm(event)"
+                      class="btn btn-primary btn-block mx-auto d-block mb-4"
+                    >
+                      Đăng ký
+                    </button>
                   </div>
                 </form>
               </div>
@@ -162,18 +197,52 @@
     <!-- Section: Design Block -->
   </div>
   <script>
-    function submitForm() {
+    function switchToForm2(event) {
+      event.preventDefault();
+      if (validateForm1()) {
+        document.getElementById("form1").style.display = "none";
+        document.getElementById("form2").style.display = "block";
+      }
+    }
+    function switchToForm1(event) {
+      event.preventDefault();
+      document.getElementById("form1").style.display = "block";
+      document.getElementById("form2").style.display = "none";
+    }
+    function validateForm1() {
+      var accountName = document.getElementById("accountName").value;
+      var accountEmail = document.getElementById("accountEmail").value;
+      if (accountName === "" || accountEmail === "") {
+        alert(
+          "Vui lòng nhập thông tin cho Form 1 trước khi chuyển sang Form 2."
+        );
+        return false;
+      }
+      return true;
+    }
+    function submitForm(event) {
+      event.preventDefault();
       var accountUsername = document.getElementById("accountUsername").value;
       var accountPassword = document.getElementById("accountPassword").value;
       var checkPassword = document.getElementById("checkPassword").value;
-      var accountImage = document.getElementById("accountImage").files[0];
+      var accountImage = document.getElementById("profileImage").files[0];
+      var accountEmail = document.getElementById("accountEmail").value;
+      var accountName = document.getElementById("accountName").value;
       if (accountPassword !== checkPassword) {
         window.alert("Mật khẩu nhập lại không đúng!!!");
+      } else if (
+        accountUsername === "" ||
+        accountPassword === "" ||
+        checkPassword === ""
+      ) {
+        alert("Vui lòng nhập thông tin cho Form 2 trước khi hoàn tất.");
       } else {
         const formData = new FormData();
         formData.append("username", accountUsername);
         formData.append("password", accountPassword);
         formData.append("image", accountImage);
+        formData.append("email", accountEmail);
+        formData.append("name", accountName);
 
         fetch("http://jul2nd.ddns.net/account", {
           method: "POST",
@@ -182,8 +251,7 @@
           .then((res) => res.json())
           .then((data) => {
             console.log("Success:", data);
-            
-            window.location.href = 'http://localhost:3000/signin';
+            window.location.href = "http://localhost:3000/signin";
           })
           .catch((error) => {
             console.error("Error:", error);

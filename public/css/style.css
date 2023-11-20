@@ -1,0 +1,74 @@
+h1 {
+  color: #333;
+}
+
+.text-center {
+  color: white;
+}
+
+/* .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }*/
+
+.product-item {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+.nav-link, .navbar-brand{
+  color: #ccc;
+}
+.nav-link{
+  margin-left: 12px;
+}
+.icon-nav{
+  background-color: #ccc;
+}
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: #ccc;
+  }
+
+.nav-color {
+  background-color: #384f79;
+}
+
+.brand,
+.category {
+  margin-top: 10px;
+}
+#accountImage {
+  border-radius: 40px;
+}
+.btn-floating {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #44536a;
+  padding: 8px 16px;
+  border-radius: 7px;
+}
+#log {
+  position: absolute; /* Đảm bảo phần tử có kiểu position để có thể sử dụng thuộc tính left */
+  right: 0;
+  margin-right:30px;
+  bottom: 1px;
+}
+.dropdown-menu {
+  transform: translate(-80px);
+}
+.btn-floating:hover {
+  background-color: #2a446d;
+}
