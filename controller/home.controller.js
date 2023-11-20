@@ -43,7 +43,6 @@ router.post('/login', (req, res) => {
   })
   .then(response => {
     if(response.message === 401){
-      
     }
     else{
       var account = JSON.parse(response.data.account);
