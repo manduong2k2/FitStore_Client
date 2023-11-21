@@ -2,7 +2,7 @@ h1 {
   color: #333;
 }
 
-.text-center{
+.text-center {
   color: white;
 }
 
@@ -13,23 +13,25 @@ h1 {
 }
 
 .product-item {
-  width: calc(20% - 20px); 
-  margin-bottom: 20px; 
+  width: calc(20% - 20px);
+  margin-bottom: 20px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
 }
- 
+
 img {
   max-width: 100%;
-  height: auto;
-  border-radius: 5px;
+  height: 100px;
+  object-fit: cover; 
+
 }
 
-.brand,
-.category {
-  margin-top: 10px;
+
+.item-info {
+  flex-grow: 1; 
+  float: right;
 }
 
 .btn {
@@ -45,4 +47,49 @@ img {
 
 .btn:hover {
   background-color: #218838;
+}
+
+.background-radial-gradient {
+  background-color: hsl(218, 41%, 15%);
+  background-image: radial-gradient(
+      650px circle at 0% 0%,
+      hsl(218, 41%, 35%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%
+    ),
+    radial-gradient(
+      1250px circle at 100% 100%,
+      hsl(218, 41%, 45%) 15%,
+      hsl(218, 41%, 30%) 35%,
+      hsl(218, 41%, 20%) 75%,
+      hsl(218, 41%, 19%) 80%,
+      transparent 100%
+    );
+}
+
+#radius-shape-1 {
+  height: 220px;
+  width: 220px;
+  top: -60px;
+  left: -130px;
+  background: radial-gradient(#44006b, #ad1fff);
+  overflow: hidden;
+}
+
+#radius-shape-2 {
+  border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+  bottom: -60px;
+  right: -110px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(#44006b, #ad1fff);
+  overflow: hidden;
+}
+
+.bg-glass {
+  background-color: transparent !important;
+  border-radius: 20px;
+  backdrop-filter: saturate(200%) blur(15px);
 }
