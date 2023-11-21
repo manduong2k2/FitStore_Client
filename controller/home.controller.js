@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 router.use(express.json());
+const cookie = require('cookie');
 const cookieParser = require('cookie-parser');
 router.use(express.urlencoded({ extended: true }));
 const request = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -58,17 +59,28 @@ router.post('/login', (req, res) => {
   })
   .catch(error => {
     const message = '';
-    res.redirect('/signin?message=${encodeURIComponent(message)}');
+    res.redirect('/signin?message=Sai thông tin đăng nhập');
   });
 });
 router.get('/logout', (req, res) => {
-  res.clearCookie('sessionId', { SameSite: 'None', httpOnly: false, secure: true });
-  res.clearCookie('id', { SameSite: 'None', httpOnly: false, secure: true });
-  res.clearCookie('username', { SameSite: 'None', httpOnly: false, secure: true });
-  res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
-  res.clearCookie('image', { SameSite: 'None', httpOnly: false, secure: true });
-  res.clearCookie('email', { SameSite: 'None', httpOnly: false, secure: true });
-  res.redirect('/');
+  try{
+    axios.post('http://jul2nd.ddns.net/account/logout',{withCredentials: true})
+    .then(response =>{
+      console.log(response.config.headers);
+      console.log(response);
+    }).catch(error =>{
+      console.log(error);
+    });
+    res.clearCookie('sessionId', { SameSite: 'None', httpOnly: false, secure: true });
+    res.clearCookie('id', { SameSite: 'None', httpOnly: false, secure: true });
+    res.clearCookie('username', { SameSite: 'None', httpOnly: false, secure: true });
+    res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
+    res.clearCookie('image', { SameSite: 'None', httpOnly: false, secure: true });
+    res.clearCookie('email', { SameSite: 'None', httpOnly: false, secure: true });
+    res.redirect('/');
+  }catch (err){
+    console.log(err);
+  }
 });
 router.get('/protected', async (req, res) => {
     try {
