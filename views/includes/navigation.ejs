@@ -71,14 +71,14 @@
                   if (idCookieExists) {
                     // Thực hiện logic khi cookie 'id' tồn tại
                     dropdownMenu.innerHTML = `
-                      <li><a class="dropdown-item" href="Manage account">Quản lý tài khoản</a></li>
-                      <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                      <li><a class="dropdown-item" href="/account/detail">Quản lý tài khoản</a></li>
+                      <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
                     `;
                   } else {
                     // Thực hiện logic khi cookie 'id' không tồn tại
                     dropdownMenu.innerHTML = `
-                      <li><a class="dropdown-item" href="signin">Đăng nhập</a></li>
-                      <li><a class="dropdown-item" href="signup">Đăng ký</a></li>
+                      <li><a class="dropdown-item" href="/signin">Đăng nhập</a></li>
+                      <li><a class="dropdown-item" href="/signup">Đăng ký</a></li>
                     `;
                   }
                 });

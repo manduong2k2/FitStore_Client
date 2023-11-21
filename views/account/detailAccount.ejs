@@ -1,0 +1,148 @@
+<%- include('../includes/head.ejs') %>
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <style>
+    .form-container {
+      max-width: 400px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .btn {
+      margin: 30px auto;
+    }
+    label {
+      margin: 10px 0;
+    }
+  </style>
+  <div class="container form-container">
+    <h2>Account Form</h2>
+    <div class="form-group">
+      <img id="accountImage" name="accountImage" src="#" alt="#" />
+      <input
+        type="file"
+        id="accountProfile"
+        name="accountImage"
+        accept="image/*"
+        class="form-control"
+        required
+      />
+    </div>
+    <form id="accountForm">
+      <div class="form-group">
+        <label for="accountUsername">Username:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="accountUsername"
+          name="accountUsername"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="accountName">Họ và tên:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="accountName"
+          name="accountName"
+          required
+          readonly
+          value="asdasd"
+        />
+      </div>
+      <div class="form-group">
+        <label for="accountEmail">Email:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="accountEmail"
+          name="accountEmail"
+          required
+          readonly
+          value="abc"
+        />
+      </div>
+      <div style="display: flex; justify-content: space-between" class="">
+        <button id="btnEdit" type="button" class="btn btn-primary">
+          Chỉnh sửa
+        </button>
+        <button
+          id="btnCancel"
+          type="button"
+          class="btn btn-danger"
+          style="display: none"
+        >
+          Huỷ
+        </button>
+        <button
+          id="btnSubmit"
+          type="button"
+          class="btn btn-success"
+          style="display: none"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Include Bootstrap JS and Popper.js from CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    let tempEmail; 
+    let tempName;
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("btnEdit").addEventListener("click", function () {
+        const accountEmail = document.querySelector("#accountEmail");
+        const accountName = document.querySelector("#accountName");
+        const btnEdit = document.getElementById("btnEdit");
+        const btnCancel = document.getElementById("btnCancel");
+        const btnSubmit = document.getElementById("btnSubmit");
+
+        // Save the current values
+        tempEmail = accountEmail.value;
+        tempName = accountName.value;
+        console.log(tempEmail);
+        // Toggle button visibility
+        btnSubmit.style.display = "inline-block";
+        btnEdit.style.display = "none";
+        btnCancel.style.display = "inline-block";
+
+        // Enable editing
+        accountEmail.readOnly = false;
+        accountName.readOnly = false;
+      });
+
+      document
+        .getElementById("btnCancel")
+        .addEventListener("click", function () {
+          const accountEmail = document.querySelector("#accountEmail");
+          const accountName = document.querySelector("#accountName");
+          const btnEdit = document.getElementById("btnEdit");
+          const btnCancel = document.getElementById("btnCancel");
+          const btnSubmit = document.getElementById("btnSubmit");
+
+          // Restore the previous values
+          accountEmail.value = tempEmail;
+          accountName.value = tempName;
+          console.log(accountEmail.value);
+          // Toggle button visibility
+          btnSubmit.style.display = "none";
+          btnEdit.style.display = "inline-block";
+          btnCancel.style.display = "none";
+
+          // Disable editing
+          accountEmail.readOnly = true;
+          accountName.readOnly = true;
+        });
+    });
+  </script>
+  <%- include('../includes/footer.ejs') %>
+</body>
