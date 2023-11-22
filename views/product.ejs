@@ -3,7 +3,6 @@
   <%- include('includes/navigation.ejs')%>
   <main>
     <div class="container-fluid">
-<<<<<<< HEAD
         <a href="/product/create" class="btn btn-success">Thêm sản phẩm</a>
         <a href="/brand/create" class="btn btn-success">Mẫu Thêm</a>
         <div class="row">
@@ -25,36 +24,8 @@
                 </div>
             </div>
             <% }); %>
-=======
-      <a href="/product/create" class="btn btn-success">Thêm sản phẩm</a>
-      <a href="/brand/create" class="btn btn-success">Mẫu Thêm</a>
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Sản phẩm</h1>
-          <div class="product-list">
-            <% data.forEach(item => { %>
-            <div class="product-item">
-              <img src="<%= item.image %>" alt="#" />
-              <div class="item-info">
-                <h2><%= item.name %></h2>
-                <p>Price: <%= item.price %></p>
-                <p>Stock: <%= item.stock %></p>
-                <h2>Brand</h2>
-                <p>Name: <%= item.brand.name %></p>
-                <h2>Category</h2>
-                <p>Name: <%= item.category.name %></p>
-                <button class="btn" style="margin-right: 50px;">Mua</button>
-            </div>
-            </div>
-            <% }); %>
-          </div>
->>>>>>> 03c6ab9fb7f69ca995e92c7ff2387f6addf9dbf0
+
         </div>
     </div>
-<<<<<<< HEAD
 </main>
 <%- include('includes/footer.ejs')%>
-=======
-  </main>
-  <%- include('includes/footer.ejs')%>
->>>>>>> 03c6ab9fb7f69ca995e92c7ff2387f6addf9dbf0
