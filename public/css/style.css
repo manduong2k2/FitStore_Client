@@ -12,12 +12,30 @@ h1 {
     justify-content: space-between;
   }*/
 
+.col-md-3 {
+  width: 20%;
+}
+
 .product-item {
   margin-bottom: 20px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-item img {
+  margin: auto;
+  height: 250px;
+  border-radius: 5px;
+}
+
+.product-item h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 img {
@@ -25,38 +43,43 @@ img {
   height: auto;
   border-radius: 5px;
 }
-.nav-link, .navbar-brand{
+
+.nav-link,
+.navbar-brand {
   color: floralwhite;
   transition: 0.3s;
 }
+
 nav {
   background-color: hsl(218, 41%, 21%);
 }
 
-.nav-brand:hover, .navbar-nav a:hover {   
+.nav-brand:hover,
+.navbar-nav a:hover {
   color: hsl(218, 36%, 75%);
-
 }
-.nav-link{
+.nav-link {
   margin-left: 12px;
 }
-.icon-nav{
+
+.icon-nav {
   background-color: #ccc;
 }
+
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link.show {
   color: #ccc;
-  
-  }
-
+}
 
 .brand,
 .category {
   margin-top: 10px;
 }
+
 #accountImage {
   border-radius: 40px;
 }
+
 .btn-floating {
   display: inline-block;
   margin-right: 10px;
@@ -69,18 +92,21 @@ nav {
 }
 
 #log {
-  position: absolute; 
+  position: absolute;
   right: 0;
-  margin-right:30px;
+  margin-right: 30px;
   bottom: 1px;
 }
+
 .dropdown-menu {
   transform: translate(-50px);
   min-width: auto;
 }
+
 .btn-floating:hover {
   background-color: #2a446d;
 }
+
 .background-radial-gradient {
   background-color: hsl(218, 41%, 15%);
   background-image: radial-gradient(
@@ -127,10 +153,10 @@ nav {
   backdrop-filter: saturate(200%) blur(15px);
 }
 
-input[type=search] {
+input[type="search"] {
   width: 130px;
-  padding: 8px 20px 8px ;
-  border:#ffffff62 solid 2px;
+  padding: 8px 20px 8px;
+  border: #ffffff62 solid 2px;
   font-size: 18px;
   border-radius: 25px;
   background-position: 2% 50%;
@@ -142,9 +168,8 @@ input[type=search] {
   text-overflow: ellipsis;
 }
 
-
-input[type=search]:focus,
-input[type=search]:not(:placeholder-shown) {
+input[type="search"]:focus,
+input[type="search"]:not(:placeholder-shown) {
   width: 280px;
   background-color: #fff;
   filter: brightness(100%);
