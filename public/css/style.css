@@ -26,7 +26,16 @@ img {
   border-radius: 5px;
 }
 .nav-link, .navbar-brand{
-  color: #ccc;
+  color: floralwhite;
+  transition: 0.3s;
+}
+nav {
+  background-color: hsl(218, 41%, 21%);
+}
+
+.nav-brand:hover, .navbar-nav a:hover {   
+  color: hsl(218, 36%, 75%);
+
 }
 .nav-link{
   margin-left: 12px;
@@ -37,15 +46,10 @@ img {
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link.show {
   color: #ccc;
+  
   }
 
-.nav-color {
-  background-color: #384f79;
-}
-footer{
-  margin-top: 30px;
-  background-color: #6483bd;
-}
+
 .brand,
 .category {
   margin-top: 10px;
@@ -63,8 +67,9 @@ footer{
   padding: 8px 16px;
   border-radius: 7px;
 }
+
 #log {
-  position: absolute; /* Đảm bảo phần tử có kiểu position để có thể sử dụng thuộc tính left */
+  position: absolute; 
   right: 0;
   margin-right:30px;
   bottom: 1px;

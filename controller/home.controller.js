@@ -6,7 +6,6 @@ router.use(express.json());
 const cookieParser = require('cookie-parser');
 var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch'); 
-const cookieParser = require("cookie-parser");
 
 router.use(express.urlencoded({ extended: true }));
 const request = (...args) =>
