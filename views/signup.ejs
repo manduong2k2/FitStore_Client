@@ -32,8 +32,11 @@
             ></div>
 
             <div class="card bg-glass">
-              <div style="display: flex; justify-content: center;" class="card-body px-4 py-5 px-md-5">
-                <form id="form1" >
+              <div
+                style="display: flex; justify-content: center"
+                class="card-body px-4 py-5 px-md-5"
+              >
+                <form id="form1">
                   <!-- 2 column grid layout with text inputs for the first and last names -->
                   <div class="row">
                     <h1 class="mb-3 h3 text-center">Đăng ký</h1>
@@ -62,7 +65,10 @@
                     />
                   </div>
                   <!-- Submit button -->
-                  <button onclick="switchToForm2(event)" class="btn btn-primary btn-block mx-auto d-block mb-4">
+                  <button
+                    onclick="switchToForm2(event)"
+                    class="btn btn-primary btn-block mx-auto d-block mb-4"
+                  >
                     Tiếp theo
                   </button>
                   <!-- Register buttons -->
@@ -70,7 +76,7 @@
                     <p>Bạn đã có tài khoản?<a href="/signin">Đăng nhập.</a></p>
                   </div>
                 </form>
-                <form id="form2" style="display: none;">
+                <form id="form2" style="display: none">
                   <div class="row">
                     <h1 class="mb-3 h3 text-center">Đăng ký</h1>
                     <div class="col-md-12 mb-4">
@@ -87,13 +93,14 @@
                     </div>
                   </div>
                   <div class="form-outline mb-4">
-                    <input 
-                      type="file" 
-                      id="profileImage" 
-                      name="accountImage" 
-                      accept="image/*" 
-                      class="form-control" 
-                      required>
+                    <input
+                      type="file"
+                      id="profileImage"
+                      name="accountImage"
+                      accept="image/*"
+                      class="form-control"
+                      required
+                    />
                   </div>
                   <div class="form-outline mb-4">
                     <input
@@ -116,11 +123,23 @@
                       required
                     />
                   </div>
-                  <div style="display: flex; justify-content: space-between;" class="form-outline mb-4">
-                    <button onclick="switchToForm1(event)" class="btn btn-primary btn-block mx-auto d-block mb-4">Quay lại</button>
-                    <button onclick="submitForm(event)" class="btn btn-primary btn-block mx-auto d-block mb-4"> Đăng ký </button>
+                  <div
+                    style="display: flex; justify-content: space-between"
+                    class="form-outline mb-4"
+                  >
+                    <button
+                      onclick="switchToForm1(event)"
+                      class="btn btn-primary btn-block mx-auto d-block mb-4"
+                    >
+                      Quay lại
+                    </button>
+                    <button
+                      onclick="submitForm(event)"
+                      class="btn btn-primary btn-block mx-auto d-block mb-4"
+                    >
+                      Đăng ký
+                    </button>
                   </div>
-                  
                 </form>
               </div>
             </div>
@@ -133,14 +152,26 @@
   <script>
     function switchToForm2(event) {
       event.preventDefault();
-      document.getElementById('form1').style.display = 'none';
-      document.getElementById('form2').style.display = 'block';
-
+      if (validateForm1()) {
+        document.getElementById("form1").style.display = "none";
+        document.getElementById("form2").style.display = "block";
+      }
     }
     function switchToForm1(event) {
       event.preventDefault();
-      document.getElementById('form1').style.display = 'block';
-      document.getElementById('form2').style.display = 'none';
+      document.getElementById("form1").style.display = "block";
+      document.getElementById("form2").style.display = "none";
+    }
+    function validateForm1() {
+      var accountName = document.getElementById("accountName").value;
+      var accountEmail = document.getElementById("accountEmail").value;
+      if (accountName === "" || accountEmail === "") {
+        alert(
+          "Vui lòng nhập thông tin cho Form 1 trước khi chuyển sang Form 2."
+        );
+        return false;
+      }
+      return true;
     }
     function submitForm(event) {
       event.preventDefault();
@@ -152,6 +183,12 @@
       var accountName = document.getElementById("accountName").value;
       if (accountPassword !== checkPassword) {
         window.alert("Mật khẩu nhập lại không đúng!!!");
+      } else if (
+        accountUsername === "" ||
+        accountPassword === "" ||
+        checkPassword === ""
+      ) {
+        alert("Vui lòng nhập thông tin cho Form 2 trước khi hoàn tất.");
       } else {
         const formData = new FormData();
         formData.append("username", accountUsername);
@@ -167,7 +204,7 @@
           .then((res) => res.json())
           .then((data) => {
             console.log("Success:", data);
-            window.location.href = 'http://localhost:3000/signin';
+            window.location.href = "http://localhost:3000/signin";
           })
           .catch((error) => {
             console.error("Error:", error);

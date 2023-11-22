@@ -6,29 +6,26 @@
         <a href="/product/create" class="btn btn-success">Thêm sản phẩm</a>
         <a href="/brand/create" class="btn btn-success">Mẫu Thêm</a>
         <div class="row">
-            <div class="col-md-12">
-                <h1>Sản phẩm</h1>
-                <div class="product-list">
-                    <% data.forEach(item => { %>
-                    <div class="product-item">
-                        <h2><%= item.name %></h2>
-                        <p>Price: <%= item.price %></p>
-                        <p>Stock: <%= item.stock %></p>
-                        <img src="<%= item.image %>" alt="#" style="height:100px">
-                        <div class="brand">
-                            <h3>Brand</h3>
-                            <p>Name: <%= item.brand.name %></p>
-                        </div>
-                        <div class="category">
-                            <h3>Category</h3>
-                            <p>Name: <%= item.category.name %></p>
-                        </div>
+            <% data.forEach(item => { %>
+            <div class="col-md-3"> <!-- Sử dụng col-md-3 để chia thành 4 cột trên màn hình lớn -->
+                <div class="product-item">
+                    <h2><%= item.name %></h2>
+                    <p>Price: <%= item.price %></p>
+                    <p>Stock: <%= item.stock %></p>
+                    <img src="<%= item.image %>" alt="#" style="height:100px">
+                    <div class="brand">
+                        <h3>Brand</h3>
+                        <p>Name: <%= item.brand.name %></p>
                     </div>
-                    <% }); %>
+                    <div class="category">
+                        <h3>Category</h3>
+                        <p>Name: <%= item.category.name %></p>
+                    </div>
                 </div>
             </div>
+            <% }); %>
+
         </div>
     </div>
 </main>
-  <%- include('includes/footer.ejs')%>
-
+<%- include('includes/footer.ejs')%>
