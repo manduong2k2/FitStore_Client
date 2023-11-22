@@ -37,7 +37,11 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
+<<<<<<< HEAD
             <img id="accountImage" src="/images/account.png" alt="#" style="height: 40px" />
+=======
+            <img id="accountImage" src="/images/account.png" alt="#" style="height: 25px" />
+>>>>>>> 03c6ab9fb7f69ca995e92c7ff2387f6addf9dbf0
             <script>
               function getCookie(cname) {
                 let name = cname + "=";
@@ -71,14 +75,24 @@
                   if (idCookieExists) {
                     // Thực hiện logic khi cookie 'id' tồn tại
                     dropdownMenu.innerHTML = `
+<<<<<<< HEAD
                       <li><a class="dropdown-item" href="/account/detail">Quản lý tài khoản</a></li>
                       <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+=======
+                      <li><a class="dropdown-item" href="Manage account">Quản lý tài khoản</a></li>
+                      <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+>>>>>>> 03c6ab9fb7f69ca995e92c7ff2387f6addf9dbf0
                     `;
                   } else {
                     // Thực hiện logic khi cookie 'id' không tồn tại
                     dropdownMenu.innerHTML = `
+<<<<<<< HEAD
                       <li><a class="dropdown-item" href="/signin">Đăng nhập</a></li>
                       <li><a class="dropdown-item" href="/signup">Đăng ký</a></li>
+=======
+                      <li><a class="dropdown-item" href="signin">Đăng nhập</a></li>
+                      <li><a class="dropdown-item" href="signup">Đăng ký</a></li>
+>>>>>>> 03c6ab9fb7f69ca995e92c7ff2387f6addf9dbf0
                     `;
                   }
                 });
