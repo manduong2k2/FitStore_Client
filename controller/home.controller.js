@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 router.use(express.json());
-const cookie = require('cookie');
 const cookieParser = require('cookie-parser');
+var LocalStorage = require('node-localstorage').LocalStorage;
+localStorage = new LocalStorage('./scratch');
 router.use(express.urlencoded({ extended: true }));
 const request = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
@@ -53,7 +54,8 @@ router.post('/login', (req, res) => {
       res.cookie('name', account.name);
       res.cookie('image', account.image);
       res.cookie('email', account.email);
-      res.cookie('sessionId', response.data.sessionId);
+      res.cookie('token', response.data.token);
+      localStorage.setItem('token',response.data.token);
       res.redirect('/');
     }
   })
@@ -64,14 +66,18 @@ router.post('/login', (req, res) => {
 });
 router.get('/logout', (req, res) => {
   try{
-    axios.post('http://jul2nd.ddns.net/account/logout',{withCredentials: true})
+    request('http://jul2nd.ddns.net/account/logout',{
+      method: 'POST',
+      withCredentials: true,
+      headers: {
+        Authorization: localStorage.getItem('token')
+      }
+    })
     .then(response =>{
-      console.log(response.config.headers);
       console.log(response);
     }).catch(error =>{
       console.log(error);
     });
-    res.clearCookie('sessionId', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('id', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('username', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
