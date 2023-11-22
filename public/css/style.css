@@ -75,7 +75,8 @@ nav {
   bottom: 1px;
 }
 .dropdown-menu {
-  transform: translate(-80px);
+  transform: translate(-50px);
+  min-width: auto;
 }
 .btn-floating:hover {
   background-color: #2a446d;
@@ -124,4 +125,27 @@ nav {
   border-radius: 20px;
   background-color: transparent !important;
   backdrop-filter: saturate(200%) blur(15px);
+}
+
+input[type=search] {
+  width: 130px;
+  padding: 8px 20px 8px ;
+  border:#ffffff62 solid 2px;
+  font-size: 18px;
+  border-radius: 25px;
+  background-position: 2% 50%;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-color: transparent;
+  transition: 0.5s all ease-in-out;
+  filter: brightness(170%);
+  text-overflow: ellipsis;
+}
+
+
+input[type=search]:focus,
+input[type=search]:not(:placeholder-shown) {
+  width: 280px;
+  background-color: #fff;
+  filter: brightness(100%);
 }
