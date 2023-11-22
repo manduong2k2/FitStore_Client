@@ -88,46 +88,6 @@ router.get('/logout', (req, res) => {
   }catch (err){
     console.log(err);
   }
-  axios
-    .post("http://jul2nd.ddns.net/account/login", {
-      username: req.body.email,
-      password: req.body.password,
-    })
-    .then((response) => {
-      if (response.message === 401) {
-      } else {
-        var account = JSON.parse(response.data.account);
-        console.log(account);
-        res.cookie("id", account.id);
-        res.cookie("username", account.username);
-        res.cookie("name", account.name);
-        res.cookie("image", account.image);
-        res.cookie("email", account.email);
-        res.cookie("sessionId", response.data.sessionId);
-        res.redirect("/");
-      }
-    })
-    .catch((error) => {
-      const message = "";
-      res.redirect("/signin?message=${encodeURIComponent(message)}");
-    });
-});
-router.get("/logout", (req, res) => {
-  res.clearCookie("sessionId", {
-    SameSite: "None",
-    httpOnly: false,
-    secure: true,
-  });
-  res.clearCookie("id", { SameSite: "None", httpOnly: false, secure: true });
-  res.clearCookie("username", {
-    SameSite: "None",
-    httpOnly: false,
-    secure: true,
-  });
-  res.clearCookie("name", { SameSite: "None", httpOnly: false, secure: true });
-  res.clearCookie("image", { SameSite: "None", httpOnly: false, secure: true });
-  res.clearCookie("email", { SameSite: "None", httpOnly: false, secure: true });
-  res.redirect("/");
 });
 router.get("/protected", async (req, res) => {
   try {
