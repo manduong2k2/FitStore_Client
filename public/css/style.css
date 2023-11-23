@@ -154,7 +154,7 @@ nav {
 }
 
 input[type="search"] {
-  width: 130px;
+  width: 150px;
   padding: 8px 20px 8px;
   border: #ffffff62 solid 2px;
   font-size: 18px;
@@ -166,6 +166,9 @@ input[type="search"] {
   transition: 0.5s all ease-in-out;
   filter: brightness(170%);
   text-overflow: ellipsis;
+  position: absolute;
+  right: 150px;
+  bottom: 5px;
 }
 
 input[type="search"]:focus,

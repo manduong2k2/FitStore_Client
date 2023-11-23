@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <style>
+         .form-container {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .btn{
+            margin:30px 0 10px 141.4px;
+        }
+        label{
+            margin:10px 0;
+        }
+    </style>
+    <div class="container form-container">
+        <h2>Category Form</h2>
+
+        <form id="categoryForm">
+            <div class="form-group">
+                <label for="categoryName">Category Name:</label>
+                <input type="text" class="form-control" id="categoryName" name="categoryName" required>
+            </div>
+            <button type="button" class="btn btn-success" onclick="submitForm()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function submitForm() {
+            var categoryName = document.getElementById("categoryName").value;
+            const formData = new FormData();
+            formData.append('name', categoryName);
+            fetch('http://jul2nd.ddns.net/category', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Success:', data);
+                window.location.href = 'http://localhost:3000/';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+ <%- include('../includes/footer.ejs') %>

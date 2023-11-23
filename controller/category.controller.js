@@ -11,13 +11,13 @@ const request = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 router.get("/create", (req, res) => {
-  res.render("brand/createBrand", { titlePage: "Thêm brand" });
+  res.render("category/createCategory", { titlePage: "Thêm category" });
 });
 router.get("/list", (req, res) => {
-  axios.get("http://jul2nd.ddns.net/brand").then((response) => {
+  axios.get("http://jul2nd.ddns.net/category").then((response) => {
     if (response.status === 200) {
       const data = response.data;
-      res.render("brand/listBrand", { titlePage: "Danh sách brand", data: data });
+      res.render("category/listCategory", { titlePage: "Danh sách category", data: data });
     }
   });
 });

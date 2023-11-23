@@ -29,6 +29,24 @@
         <li class="nav-item nav-main">
           <a class="nav-link" href="/contact">Liên hệ</a>
         </li>
+        <li class="nav-item">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+                Danh mục
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/account/list">Quản lý tài khoản</a>
+                <a class="dropdown-item" href="/product/list">Quản lý sản phẩm</a>
+                <a class="dropdown-item" href="/brand/list">Quản lý brand</a>
+                <a class="dropdown-item" href="/category/list">Quản lý Category</a>
+<!--                  <div class="dropdown-divider"></div>-->
+<!--                  <a class="dropdown-item" href="">Thống kê</a>-->
+              </div>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item nav-main">
           <form action="" medthod="">
             <!-- ko bik m làm s nên t bỏ v tạm nha -->
@@ -67,13 +85,13 @@
               }
             </script>
           </a>
-          <ul class="dropdown-menu">
-            <ul class="dropdown-menu">
+          <ul class="dropdown-menu drop1">
+            <ul class="dropdown-menu drop1">
               <script>
                 document.addEventListener('DOMContentLoaded', function() {
                   const idCookieExists = document.cookie.includes('id=');
           
-                  const dropdownMenu = document.querySelector('.dropdown-menu');
+                  const dropdownMenu = document.querySelector('.drop1');
                   if (idCookieExists) {
                     // Thực hiện logic khi cookie 'id' tồn tại
                     dropdownMenu.innerHTML = `

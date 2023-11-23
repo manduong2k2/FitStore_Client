@@ -2,6 +2,7 @@
 <body>
   <%- include('../includes/navigation.ejs') %>
   <div class="container form-container">
+    <h1>Danh sách Account</h1>
     <table class="table">
         <thead>
           <tr>
@@ -24,8 +25,8 @@
               <!-- Uncomment the following block if you want to include Edit and Delete buttons -->
               
               <td colspan="2">
-                <a class="btn btn-primary" href="/users/edit/<%= item.id %>">Detail</a>
-                <a class="btn btn-danger" href="/users/delete/<%= item.id %>" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                <a class="btn btn-primary" href="/user/edit/<%= item.id %>">Detail</a>
+                <a class="btn btn-danger" href="/user/delete/<%= item.id %>" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
               </td>
              
             </tr>
