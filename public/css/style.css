@@ -177,3 +177,21 @@ input[type="search"]:not(:placeholder-shown) {
   background-color: #fff;
   filter: brightness(100%);
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #000; /* Đường viền 1px, màu xám nhạt */
+  padding: 8px; /* Khoảng cách từ nội dung đến đường viền */
+  text-align: center; /* Căn giữa nội dung trong ô */
+}
+
+th {
+  background-color: #000; /* Màu nền cho phần đầu bảng */
+}
+#height-img td {
+  height: 131px;
+}

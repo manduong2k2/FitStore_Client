@@ -7,16 +7,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th style="width: 10%; text-align: center">Id</th>
-          <th style="width: 20%; text-align: center">Name</th>
-          <th style="width: 20%; text-align: center">Image</th>
-          <th style="width: 30%; text-align: center">Info</th>
+          <th style="width: 5%; text-align: center">Id</th>
+          <th style="width: 10%; text-align: center">Name</th>
+          <th style="width: 15%; text-align: center">Image</th>
+          <th style="width: 50%; text-align: center">Info</th>
           <th style="width: 20%; text-align: center">Danh mục</th>
         </tr>
       </thead>
       <tbody style="text-align: center">
         <% data.forEach(item => { %>
-        <tr>
+        <tr id="height-img">
           <td><%= item.id %></td>
           <td><%= item.name %></td>
           <td>
