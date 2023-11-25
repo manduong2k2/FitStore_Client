@@ -1,15 +1,8 @@
 <nav class="navbar navbar-expand-lg background-radial-gradient">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">FITNESS STORE</a>
-    <button
-      class="navbar-toggler icon-nav"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <button class="navbar-toggler icon-nav" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon "></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -18,22 +11,22 @@
           <a class="nav-link nav-main" aria-current="page" href="/">Trang chủ</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" href="/introduce">Giới thiệu</a>
+          <a class="nav-link" onclick="Introduce()">Giới thiệu</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" href="/product">Sản phẩm</a>
+          <a class="nav-link" onclick="ProductList()">Sản phẩm</a>
         </li>
         <li class="nav-item nav-main">
           <a class="nav-link" href="#">Cộng đồng</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" href="/contact">Liên hệ</a>
+          <a class="nav-link" onclick="Contact()">Liên hệ</a>
         </li>
         <li class="nav-item">
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+                aria-expanded="false">
                 Danh mục
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -41,8 +34,8 @@
                 <a class="dropdown-item" href="/product/list">Quản lý sản phẩm</a>
                 <a class="dropdown-item" href="/brand/list">Quản lý brand</a>
                 <a class="dropdown-item" href="/category/list">Quản lý Category</a>
-<!--                  <div class="dropdown-divider"></div>-->
-<!--                  <a class="dropdown-item" href="">Thống kê</a>-->
+                <!--                  <div class="dropdown-divider"></div>-->
+                <!--                  <a class="dropdown-item" href="">Thống kê</a>-->
               </div>
             </li>
           </ul>
@@ -50,79 +43,19 @@
         <li class="nav-item nav-main">
           <form action="" medthod="">
             <!-- ko bik m làm s nên t bỏ v tạm nha -->
-            <input type="search" placeholder="Tìm kiếm sản phẩm..."> 
+            <input type="search" placeholder="Tìm kiếm sản phẩm...">
           </form>
         </li>
         <li class="nav-item dropdown" id="log">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img id="accountImage" src="/images/account.png" alt="#" style="height: 40px" />
-            <script>
-              function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for(let i = 0; i <ca.length; i++) {
-                  let c = ca[i];
-                  while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                  }
-                  if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                  }
-                }
-                return "";
-              }
-              const accountImage = document.getElementById('accountImage');
-              const imageFromCookie = getCookie('image');
-              if (imageFromCookie) {
-                accountImage.src = decodeURIComponent(imageFromCookie);
-              }
-            </script>
           </a>
           <ul class="dropdown-menu drop1">
             <ul class="dropdown-menu drop1">
-              <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                  const idCookieExists = document.cookie.includes('id=');
-          
-                  const dropdownMenu = document.querySelector('.drop1');
-                  if (idCookieExists) {
-                    // Thực hiện logic khi cookie 'id' tồn tại
-                    dropdownMenu.innerHTML = `
-                      <li><a class="dropdown-item" href="/account/detail">Quản lý tài khoản</a></li>
-                      <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
-                    `;
-                  } else {
-                    // Thực hiện logic khi cookie 'id' không tồn tại
-                    dropdownMenu.innerHTML = `
-                      <li><a class="dropdown-item" href="/signin">Đăng nhập</a></li>
-                      <li><a class="dropdown-item" href="/signup">Đăng ký</a></li>
-                    `;
-                  }
-                });
-              function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for(let i = 0; i <ca.length; i++) {
-                  let c = ca[i];
-                  while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                  }
-                  if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                  }
-                }
-                return "";
-                }
+              <script src="/js/bind.account.info.js">
               </script>
-          </ul>
+              <script src="/js/navigator.js"></script>
+            </ul>
         </li>
       </ul>
     </div>

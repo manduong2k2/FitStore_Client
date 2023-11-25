@@ -195,3 +195,6 @@ th {
 #height-img td {
   height: 131px;
 }
+.nav-item.nav-main{
+  cursor: pointer;
+}
