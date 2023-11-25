@@ -82,6 +82,7 @@ async function ProductDelete(product_id){
     } 
 }
 async function submitProductForm(event,method) {
+    event.preventDefault();
     var productId="";
     var productName = document.getElementById("productName").value;
     var category = document.getElementById("category").value;
