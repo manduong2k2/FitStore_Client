@@ -44,10 +44,8 @@
                     </td>
 
                     <td colspan="2">
-                        <a class="btn btn-success" href="/product/details/<%= item.id %>">Detail</a>
-                        <a class="btn btn-primary" href="/product/edit/<%= item.id %>">Edit</a>
-                        <a class="btn btn-danger" href="/product/delete/<%= item.id %>"
-                            onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                        <a class="btn btn-success" onclick="ProductDetail(<%= item.id %>)">Detail</a>
+                        <a class="btn btn-danger" onclick="ProductDelete(<%= item.id %>)" >Delete</a>
                     </td>
                 </tr>
                 <% }); %>

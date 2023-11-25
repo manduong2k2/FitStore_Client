@@ -5,22 +5,7 @@
 <body>
   <%- include('../includes/navigation.ejs') %>
   <div id="product-container">
-    <h1>Tên sản phẩm: <%= product.name %></h1>
-    <img src="<%= product.image %>" alt="Product Image" height="200px" width="200px">
-    <p><strong>Info:</strong> <%= product.info %></p>
-    <p><strong>Price:</strong> <%= product.price %> VND</p>
-    <p><strong>Stock:</strong> <%= product.stock %></p>
-    <h2>Brand</h2>
-    <p><strong>Name:</strong> <%= product.brand.name %></p>
-    <h2>Category</h2>
-    <p><strong>Name:</strong> <%= product.category.name %></p>
-    <h2>Uses</h2>
-    <ul>
-      <% product.use_id_Uses.forEach(use => { %>
-      <li><strong>Name:</strong> <%= use.name %></li>
-      <% }); %>
-    </ul>
-    <p><strong>Đã bán:</strong> <%= solds %></p>
+    
   </div>
   <%- include('../includes/footer.ejs') %>
 <<<<<<< Updated upstream
