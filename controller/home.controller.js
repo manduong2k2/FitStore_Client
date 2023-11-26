@@ -13,22 +13,6 @@ const request = (...args) => import('node-fetch').then(({default: fetch}) => fet
 router.get("/", (req, res) => {
   res.render("home", { titlePage: "Trang chủ" });
 });
-router.get("/product", async (req, res) => {
-  axios.get("http://jul2nd.ddns.net/product")
-  .then(response => {
-    if (response.status === 200) {
-      const data = response.data;
-      res.render("product", { titlePage: "Sản phẩm", data: data });
-    }
-  })
-  
-});
-router.get("/contact", (req, res) => {
-  res.render("contact", { titlePage: "Liên hệ" });
-});
-router.get("/introduce", (req, res) => {
-  res.render("introduce", { titlePage: "Giới thiệu" });
-});
 router.get("/signup", (req, res) => {
   res.render("signup", { titlePage: "Đăng ký" });
 });
@@ -85,6 +69,7 @@ router.get('/logout', (req, res) => {
     res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('image', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('email', { SameSite: 'None', httpOnly: false, secure: true });
+    res.clearCookie('token', { SameSite: 'None', httpOnly: false, secure: true });
     res.redirect('/');
   }catch (err){
     console.log(err);
