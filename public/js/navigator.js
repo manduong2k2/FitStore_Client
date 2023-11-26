@@ -11,7 +11,7 @@ function Introduce() {
 }
 //Trang sản phẩm
 function ProductList() {
-    var ejsFilePath = '/page/products.ejs';
+    var ejsFilePath = '/page/product/product.list.ejs';
     var root = document.getElementById('root');
     var data;
     axios.get('http://jul2nd.ddns.net/product').then((response) => {
@@ -21,80 +21,12 @@ function ProductList() {
             .then(data => {
                 const renderedHtml = ejs.render(data, { titlePage: 'Sản phẩm', data: response.data });
                 root.innerHTML = renderedHtml;
-                
+                var productController = document.createElement('script');
+                productController.src = '/js/product.controller.js';
+                root.appendChild(productController);
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
-}
-function ProductDetail(product_id) {
-    var ejsFilePath = '/page/product/product.detail.ejs';
-    var root = document.getElementById('root');
-    var data;
-    axios.get('http://jul2nd.ddns.net/product/' + product_id).then((response) => {
-        data = response.data;
-        fetch(ejsFilePath)
-            .then(response => response.text())
-            .then(data => {
-                const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa sản phẩm', product: response.data.product, solds: response.data.solds });
-                root.innerHTML = renderedHtml;
-                var script = document.createElement('script');
-                script.src = '/js/fetchOpt.js';
-                root.appendChild(script);
-            })
-            .catch(error => console.error('Error fetching EJS file:', error));
-    });
-}
-async function ProductDelete(product_id){
-    var result = window.confirm("Bạn có muốn xoá sản phẩm này không?");
-    if (result) {
-        try {
-            await axios.delete('http://jul2nd.ddns.net/product/' + product_id);
-            // Yêu cầu xoá đã được xử lý, sau đó thực hiện ProductList()
-            ProductList();
-            alert("Đã xoá thành công");
-        } catch (error) {
-            console.error("Error deleting product:", error);
-        }
-    } 
-}
-async function submitProductForm(event,method) {
-    event.preventDefault();
-    var productId="";
-    var productName = document.getElementById("productName").value;
-    var category = document.getElementById("category").value;
-    var brand = document.getElementById("brand").value;
-    var productImage = document.getElementById("productImage").files[0];
-    var productPrice = document.getElementById("productPrice").value;
-    var productInfo = document.getElementById("productInfo").value;
-    var productStock = document.getElementById("productStock").value;
-
-    const formData = new FormData();
-    formData.append("name", productName);
-    formData.append("category_id", category);
-    formData.append("brand_id", brand);
-    formData.append("price", productPrice);
-    formData.append("info", productInfo);
-    formData.append("stock", productStock);
-    if(productImage) formData.append("image", productImage);
-    if(method==='PUT'){
-        productId = document.getElementById('productId').value;
-    }
-
-    try {
-        const response = await axios({
-            method: method,
-            url: "http://jul2nd.ddns.net/product/" + productId,
-            data: formData,
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
-
-        console.log("Success:", response.data);
-
-        ProductList();
-        alert('Cập nhật thành công');
-    } catch (error) {
-        console.error("Error:", error);
-    }
 }
 //Trang liên hệ
 function Contact() {

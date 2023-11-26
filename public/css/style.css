@@ -198,3 +198,25 @@ th {
 .nav-item.nav-main{
   cursor: pointer;
 }
+.popup {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  background-color: #2a446d;
+  border-radius: 15px;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  max-height: 80vh; 
+  overflow-y: auto;
+}
+.close-icon {
+  /* Styles for the close icon */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+}
