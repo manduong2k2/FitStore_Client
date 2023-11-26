@@ -40,3 +40,11 @@ function Contact() {
         })
         .catch(error => console.error('Error fetching EJS file:', error));
 }
+
+function changeActiveState(element) {
+    var navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(function (link) {
+        link.classList.remove('active');
+    });
+    element.classList.add('active');
+}

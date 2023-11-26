@@ -11,16 +11,16 @@
           <a class="nav-link nav-main" aria-current="page" href="/">Trang chủ</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="Introduce()">Giới thiệu</a>
+          <a class="nav-link" onclick="Introduce(); changeActiveState(this)">Giới thiệu</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="ProductList()">Sản phẩm</a>
+          <a class="nav-link" onclick="ProductList(); changeActiveState(this)">Sản phẩm</a>
         </li>
         <li class="nav-item nav-main">
           <a class="nav-link" href="#">Cộng đồng</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="Contact()">Liên hệ</a>
+          <a class="nav-link" onclick="Contact(); changeActiveState(this)">Liên hệ</a>
         </li>
         <li class="nav-item">
           <ul class="nav navbar-nav navbar-right">
@@ -40,10 +40,10 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item nav-main">
+        <li class="nav-item search-bar" >
           <form action="" medthod="">
             <!-- ko bik m làm s nên t bỏ v tạm nha -->
-            <input type="search" placeholder="Tìm kiếm sản phẩm...">
+            <input type="search" placeholder="&#128269;Tìm kiếm sản phẩm...">
           </form>
         </li>
         <li class="nav-item dropdown" id="log">

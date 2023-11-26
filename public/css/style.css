@@ -200,8 +200,6 @@ th {
   position: relative;
 }
 
-
-
 .active::after {
   content: '';
   display: block;
