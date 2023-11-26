@@ -1,0 +1,32 @@
+<main>
+  <div class="container-fluid">
+    <div class="row justify-content-center" style="margin: 30px">
+      <h1>Danh sách sản phẩm</h1>
+      <% data.forEach(item => { %>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="panel panel-default product-item">
+          <div class="panel-heading">
+            <img src="<%= item.image %>" alt="#" />
+          </div>
+          <div class="panel-body">
+            <h4><%= item.name %></h4>
+            <p><strong>Giá: <%= item.price %></strong></p>
+          </div>
+          <div class="panel-footer clearfix">
+            <div class="d-flex justify-content-between">
+              <div>
+                <form>
+                  <a class="btn btn-success">Thêm giỏ hàng</a>
+                </form>
+              </div>
+              <div>
+                <a class="btn btn-info" onclick="ProductDetail(<%= item.id %>); changeActiveState(this)">Chi tiết</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+  </div>
+</main>
