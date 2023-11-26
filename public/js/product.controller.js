@@ -6,6 +6,23 @@ function ProductDetail(product_id) {
         fetch(ejsFilePath)
             .then(response => response.text())
             .then(data => {
+                const renderedHtml = ejs.render(data, { titlePage: 'Thônng tin sản phẩm', product: response.data.product, solds: response.data.solds });
+                root.innerHTML = renderedHtml;
+                var script = document.createElement('script');
+                script.src = '/js/fetchOpt.js';
+                root.appendChild(script);
+            })
+            .catch(error => console.error('Error fetching EJS file:', error));
+    });
+}
+function ProductEdit(product_id) {
+    var ejsFilePath = '/page/product/product.edit.ejs';
+    var root = document.getElementById('root');
+    axios.get('http://jul2nd.ddns.net/product/' + product_id).then((response) => {
+        data = response.data;
+        fetch(ejsFilePath)
+            .then(response => response.text())
+            .then(data => {
                 const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa sản phẩm', product: response.data.product, solds: response.data.solds });
                 root.innerHTML = renderedHtml;
                 var script = document.createElement('script');
