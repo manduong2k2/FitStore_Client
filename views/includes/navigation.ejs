@@ -14,7 +14,7 @@
           <a class="nav-link" onclick="Introduce(); changeActiveState(this)">Giới thiệu</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="ProductList(); changeActiveState(this)">Sản phẩm</a>
+          <a class="nav-link" onclick="ProductView(); changeActiveState(this)">Sản phẩm</a>
         </li>
         <li class="nav-item nav-main">
           <a class="nav-link" href="#">Cộng đồng</a>
@@ -30,10 +30,10 @@
                 Danh mục
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/account/list">Quản lý tài khoản</a>
-                <a class="dropdown-item" href="/product/list">Quản lý sản phẩm</a>
-                <a class="dropdown-item" href="/brand/list">Quản lý brand</a>
-                <a class="dropdown-item" href="/category/list">Quản lý Category</a>
+                <a class="dropdown-item" href="/account/list">Tài khoản</a>
+                <a class="dropdown-item" onclick="ProductList(); changeActiveState(this)">Sản phẩm</a>
+                <a class="dropdown-item" onclick="BrandList(); changeActiveState(this)">Nhãn hiệu</a>
+                <a class="dropdown-item" href="/category/list">Loại sản phẩm</a>
                 <!--                  <div class="dropdown-divider"></div>-->
                 <!--                  <a class="dropdown-item" href="">Thống kê</a>-->
               </div>

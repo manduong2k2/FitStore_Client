@@ -154,7 +154,7 @@ nav {
 }
 
 input[type="search"] {
-  width: 150px;
+  width: 170px;
   padding: 8px 20px 8px;
   border: #ffffff62 solid 2px;
   font-size: 18px;
@@ -203,7 +203,8 @@ th {
 .active::after {
   content: '';
   display: block;
-  width: 100%;
+  width: 80%;
+  margin-left: 15%;
   height: 2px;
   background-color: blanchedalmond; 
   position: absolute;
