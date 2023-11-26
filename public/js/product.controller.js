@@ -125,3 +125,26 @@ async function submitProductForm(event,method) {
         console.error("Error:", error);
     }
 }
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+async function AddToCart(product_id){
+    const account_id=getCookie('id');
+    const response = await axios({
+        method: 'PUT',
+        url: "http://jul2nd.ddns.net/cart/" + product_id +'/'+account_id,
+    });
+    console.log(response.data);
+}
