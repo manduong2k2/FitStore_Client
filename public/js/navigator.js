@@ -21,6 +21,7 @@ function ProductList() {
             .then(data => {
                 const renderedHtml = ejs.render(data, { titlePage: 'Sản phẩm', data: response.data });
                 root.innerHTML = renderedHtml;
+                
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
@@ -36,36 +37,11 @@ function ProductDetail(product_id) {
             .then(data => {
                 const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa sản phẩm', product: response.data.product, solds: response.data.solds });
                 root.innerHTML = renderedHtml;
-                fetch("http://jul2nd.ddns.net/category")
-                    .then((res) => res.json())
-                    .then((data) => {
-                        // Bind data to the category select element
-                        const categorySelect = document.getElementById("category");
-                        data.forEach((category) => {
-                            const option = document.createElement("option");
-                            option.value = category.id;
-                            option.textContent = category.name;
-                            categorySelect.appendChild(option);
-                        });
-                    })
-                    .catch((error) => console.error("Error fetching categories:", error));
-
-                fetch("http://jul2nd.ddns.net/brand")
-                    .then((res) => res.json())
-                    .then((data) => {
-                        // Bind data to the brand select element
-                        const brandSelect = document.getElementById("brand");
-                        data.forEach((brand) => {
-                            const option = document.createElement("option");
-                            option.value = brand.id;
-                            option.textContent = brand.name;
-                            brandSelect.appendChild(option);
-                        });
-                    })
-                    .catch((error) => console.error("Error fetching brands:", error));
+                var script = document.createElement('script');
+                script.src = '/js/fetchOpt.js';
+                root.appendChild(script);
             })
             .catch(error => console.error('Error fetching EJS file:', error));
-
     });
 }
 async function ProductDelete(product_id){
@@ -114,7 +90,6 @@ async function submitProductForm(event,method) {
 
         console.log("Success:", response.data);
 
-        // Yêu cầu đã được xử lý, sau đó thực hiện ProductList()
         ProductList();
         alert('Cập nhật thành công');
     } catch (error) {

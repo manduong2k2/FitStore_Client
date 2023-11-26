@@ -25,11 +25,15 @@
     </div>
     <div class="form-group">
         <label for="category">Category:</label>
-        <select id="category" class="form-control" name="category" required></select><br />
+        <select id="category"  class="form-control" name="category" required>
+            <option value="<%=product.category.id %>"><%=product.category.name %></option>
+        </select><br />
     </div>
     <div class="form-group">
         <label for="brand">Brand:</label>
-        <select id="brand" class="form-control" name="brand" required></select><br />
+        <select id="brand" class="form-control" name="brand" required>
+            <option value="<%=product.brand.id %>"><%=product.brand.name %></option>
+        </select><br />
     </div>
 
     <div class="form-group">
