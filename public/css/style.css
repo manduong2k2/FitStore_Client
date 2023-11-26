@@ -170,7 +170,9 @@ input[type="search"] {
   right: 150px;
   bottom: 5px;
 }
-
+label{
+  font-weight: bold;
+}
 input[type="search"]:focus,
 input[type="search"]:not(:placeholder-shown) {
   width: 280px;
