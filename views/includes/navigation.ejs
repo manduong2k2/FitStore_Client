@@ -30,10 +30,10 @@
                 Danh mục
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/account/list">Tài khoản</a>
+                <a class="dropdown-item" onclick="AccountList(); changeActiveState(this)">Tài khoản</a>
                 <a class="dropdown-item" onclick="ProductList(); changeActiveState(this)">Sản phẩm</a>
                 <a class="dropdown-item" onclick="BrandList(); changeActiveState(this)">Nhãn hiệu</a>
-                <a class="dropdown-item" href="/category/list">Loại sản phẩm</a>
+                <a class="dropdown-item" onclick="CategoryList(); changeActiveState(this)">Loại sản phẩm</a>
                 <!--                  <div class="dropdown-divider"></div>-->
                 <!--                  <a class="dropdown-item" href="">Thống kê</a>-->
               </div>
@@ -46,6 +46,13 @@
             <input type="search" placeholder="&#128269;Tìm kiếm sản phẩm...">
           </form>
         </li>
+        <li class="nav-item nav-main" id="li-cart">
+          <a class="nav-link" id="cart">
+            <img src="/images/cart.png" alt="" style="height:28px;">
+          </a>
+          <i id="num-cart">0</i>
+        </li>
+        
         <li class="nav-item dropdown" id="log">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img id="accountImage" src="/images/account.png" alt="#" style="height: 40px" />

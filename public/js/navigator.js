@@ -86,3 +86,41 @@ function BrandList() {
             .catch(error => console.error('Error fetching EJS file:', error));
     });
 }
+//trang category admin
+function CategoryList() {
+    var ejsFilePath = '/page/category/category.list.ejs';
+    var root = document.getElementById('root');
+    var data;
+    axios.get('http://jul2nd.ddns.net/category').then((response) => {
+        data = response.data;
+        fetch(ejsFilePath)
+            .then(response => response.text())
+            .then(data => {
+                const renderedHtml = ejs.render(data, { titlePage: 'Loại sản phẩm', data: response.data });
+                root.innerHTML = renderedHtml;
+                var categoryController = document.createElement('script');
+                categoryController.src = '/js/category.controller.js';
+                root.appendChild(categoryController);
+            })
+            .catch(error => console.error('Error fetching EJS file:', error));
+    });
+}
+//trang account admin
+function AccountList() {
+    var ejsFilePath = '/page/account/account.list.ejs';
+    var root = document.getElementById('root');
+    var data;
+    axios.get('http://jul2nd.ddns.net/account').then((response) => {
+        data = response.data;
+        fetch(ejsFilePath)
+            .then(response => response.text())
+            .then(data => {
+                const renderedHtml = ejs.render(data, { titlePage: 'Tài khoản', data: response.data });
+                root.innerHTML = renderedHtml;
+                var accountController = document.createElement('script');
+                accountController.src = '/js/account.controller.js';
+                root.appendChild(accountController);
+            })
+            .catch(error => console.error('Error fetching EJS file:', error));
+    });
+}

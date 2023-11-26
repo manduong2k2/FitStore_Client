@@ -75,45 +75,6 @@ function BrandEdit(brand_id) {
           .catch(error => console.error('Error fetching EJS file:', error));
   });
 }
-async function submitBrandForm(event,method) {
-    event.preventDefault();
-    var brandId="";
-    var brandName = document.getElementById("brandName").value;
-    var brandImage = document.getElementById("brandImage").files[0];
-    var brandInfo = document.getElementById("brandInfo").value;
-
-    const formData = new FormData();
-    formData.append("name", brandName);
-    formData.append("info", brandInfo);
-    if(brandImage) formData.append("image", brandImage);
-    if(method==='PUT'){
-        brandId = document.getElementById('brandId').value;
-    }
-
-    try {
-        const response = await axios({
-            method: method,
-            url: "http://jul2nd.ddns.net/brand/" + brandId,
-            data: formData,
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
-
-        console.log("Success:", response.data);
-
-        if(method === 'PUT') {
-            BrandList();
-            alert('Cập nhật thành công');
-        }
-        if(method === 'POST'){
-            closeCreatePopup();
-            BrandList();
-            alert('Thêm sản phẩm thành công');
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
 async function BrandDelete(brand_id){
   var result = window.confirm("Bạn có muốn xoá nhãn hiệu này không?");
   if (result) {
