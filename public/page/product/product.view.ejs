@@ -6,10 +6,10 @@
       <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
         <div class="panel panel-default product-item">
           <div class="panel-heading">
-            <img src="<%= item.image %>" alt="#" />
+            <img style="height: 250px; width: 250px;" src="<%= item.image %>" alt="#" />
           </div>
           <div class="panel-body">
-            <h4><%= item.name %></h4>
+            <h4  style="white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><%= item.name %></h4>
             <p><strong>Giá: <%= item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
           </div>
           <div class="panel-footer clearfix">

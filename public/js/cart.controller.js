@@ -11,6 +11,7 @@ async function IncreaseByOne(product_id,product_price){
     updateTotal+=parseInt(product_price);
     document.getElementById('hiddenBillTotal').value=updateTotal;
     document.getElementById('billTotal').innerText=updateTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    checkItemNumber(product_id);
 }
 async function DecreaseByOne(product_id,product_price){
     const account_id=getCookie('id');
@@ -25,6 +26,7 @@ async function DecreaseByOne(product_id,product_price){
     updateTotal-=parseInt(product_price);
     document.getElementById('hiddenBillTotal').value=updateTotal;
     document.getElementById('billTotal').innerText=updateTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    checkItemNumber(product_id);
 }
 async function RemoveItem(product_id,product_price){
     var userResponse = confirm("Bạn có chắc muốn xoá sản phẩm này không?");
@@ -55,4 +57,11 @@ async function RemoveAllItem(){
         CartList();
         alert("Đã xoá tất cả sản phẩm khỏi giỏ hàng");
     }   
+}
+function checkItemNumber(product_id){
+    console.log('change detected');
+    var number = document.getElementById('product'+product_id+'number').value;
+    var button = document.getElementById('product'+product_id+'button');
+    if(number === '1') button.classList.add('disable-btn');
+    else button.classList.remove('disable-btn');
 }
