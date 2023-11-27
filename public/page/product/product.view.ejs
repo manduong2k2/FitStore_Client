@@ -10,7 +10,7 @@
           </div>
           <div class="panel-body">
             <h4><%= item.name %></h4>
-            <p><strong>Giá: <%= item.price %></strong></p>
+            <p><strong>Giá: <%= item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
           </div>
           <div class="panel-footer clearfix">
             <div class="d-flex justify-content-between">

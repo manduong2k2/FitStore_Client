@@ -34,7 +34,7 @@
                         <img src="http://jul2nd.ddns.net/resource/products/<%= item.id %>/<%= item.id %>.jpg" alt="#" style="height: 100px; border-radius: 60px" />
                     </td>
                     <td>
-                        <%= item.price %>
+                        <%= item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫
                     </td>
                     <td>
                         <%= item.stock %>

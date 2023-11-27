@@ -189,6 +189,7 @@ td {
   border: 1px solid #000; /* Đường viền 1px, màu xám nhạt */
   padding: 8px; /* Khoảng cách từ nội dung đến đường viền */
   text-align: center; /* Căn giữa nội dung trong ô */
+  vertical-align: middle;
 }
 
 th {

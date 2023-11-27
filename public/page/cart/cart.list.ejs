@@ -27,8 +27,9 @@
       </tr>
     </thead>
     <tbody>
-      <% data.forEach(item => { %>
-      <tr>
+      <% let toTal = 0; %>
+      <% data.forEach(item => { toTal+=item.quantity * item.product.price %>
+      <tr id="product<%=item.product.id%>item" class="productItem">
         <td><%=item.product.name%></td>
         <td>
           <img
@@ -38,32 +39,34 @@
           />
         </td>
         <td>
-          <label>
-            <input
+          <div style="display: inline-flex;">
+            <button onclick="DecreaseByOne(<%=item.product.id%>,<%=item.product.price%>)" class="btn btn-danger">-</button>
+            <input id="product<%=item.product.id%>number" style="width: 80px;"
               type="number"
               min="1"
               value="<%=item.quantity%>"
               attr="data-id= <%=item.product_id%>"
               class="form-control quantity"
             />
-            <button>+</button>
-            <button>-</button>
+            <button onclick="IncreaseByOne(<%=item.product.id%>,<%=item.product.price%>)" class="btn btn-success">+</button>
+          </div>
+        </td>
+        <td>
+          <label>
+            <span readonly><%=(item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%></span>
+            <span>₫</span>
           </label>
         </td>
         <td>
           <label>
-            <p readonly><%=item.product.price%></p>
-          </label>
-        </td>
-        <td>
-          <label>
-            <p readonly><%=item.quantity*item.product.price%></p>
+            <span id="product<%=item.product.id%>total" class="itemTotal" ><%=(item.quantity*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%></span>
+            <span>₫</span>
           </label>
         </td>
         <td>
           <a
             class="btn btn-danger"
-            href="@{/cart/removeFromCart/{id}(id=${item.getDienthoaiId()})}"
+            onclick="RemoveItem(<%=item.product.id%>,<%=item.product.price%>)"
           >
             Remove
           </a>
@@ -75,15 +78,17 @@
   <div class="row">
     <div class="col-md-12">
       <h3>
-        Total:
-        <span
-          th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 2, 'POINT')}"
-        ></span>
+        Tổng hoá đơn:
+        <input id="hiddenBillTotal" type="number" style="display: none;" value="<%=toTal%>">
+        <span id="billTotal">
+          <%=toTal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %>
+        </span>
+        <span>₫</span>
       </h3>
     </div>
     <div class="col-md-12 text-center" style="margin: 10px 0">
       <a class="btn btn-success" style="margin: 0px 15px">Checkout</a>
-      <a class="btn btn-danger">Clear Cart</a>
+      <a onclick="RemoveAllItem()" class="btn btn-danger">Clear Cart</a>
     </div>
   </div>
 </div>
