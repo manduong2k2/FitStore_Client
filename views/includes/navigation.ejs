@@ -25,7 +25,7 @@
         <li  class="nav-item nav-main">
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item dropdown">
-              <a id="dropdownContainer" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown"
+              <a id="dropdownContainer" class="nav-link text-white" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Danh mục
               </a>
@@ -47,7 +47,7 @@
           </form>
         </li>
         <li class="nav-item nav-main" id="li-cart">
-          <a class="nav-link" id="cart">
+          <a class="nav-link" id="cart" onclick="CartList(); changeActiveState(this)">
             <img src="/images/cart.png" title="Giỏ hàng" style="height:28px;">
           </a>
           <i id="num-cart">0</i>
