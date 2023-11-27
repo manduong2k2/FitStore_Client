@@ -163,5 +163,6 @@ async function AddToCart(product_id){
         method: 'PUT',
         url: "http://jul2nd.ddns.net/cart/" + product_id +'/'+account_id,
     });
+    getCartNumber();
     console.log(response.data);
 }
