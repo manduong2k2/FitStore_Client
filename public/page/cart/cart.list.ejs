@@ -1,7 +1,7 @@
 <%if(data.length == 0){%>
 <div class="container text-center text-black">
   <div class="row">
-    <div class="col-md-6 offset-md-3 ">
+    <div class="col-md-6 offset-md-3">
       <h3 class="mt-5">Your cart is empty</h3>
       <p class="lead" style="margin: 30px auto">
         Please add some product to your cart
@@ -46,6 +46,8 @@
               attr="data-id= <%=item.product_id%>"
               class="form-control quantity"
             />
+            <button>+</button>
+            <button>-</button>
           </label>
         </td>
         <td>
@@ -79,13 +81,13 @@
         ></span>
       </h3>
     </div>
-    <div class="col-md-12 text-center" style="margin:10px 0">
-      <a class="btn btn-success" style="margin:0px 15px">Checkout</a>
+    <div class="col-md-12 text-center" style="margin: 10px 0">
+      <a class="btn btn-success" style="margin: 0px 15px">Checkout</a>
       <a class="btn btn-danger">Clear Cart</a>
     </div>
   </div>
 </div>
 <% } %>
 <script>
-    console.log(data);
+  console.log(data);
 </script>
