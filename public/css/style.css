@@ -286,3 +286,6 @@ th {
   border: 0.5px solid white;
   border-radius: 50px;
 }
+.cartIcon:hover{
+  transform: scale(1.5);
+}

@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a class="dropdown-item" href="/signup">Đăng ký</a></li>
       `;
     }
+    getCartNumber();
   });
   function getCookie(cname) {
     let name = cname + "=";
@@ -34,4 +35,21 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     return "";
+  }
+  function getCartNumber(){
+    var account_id=getCookie('id');
+    fetch('http://jul2nd.ddns.net/cart/'+account_id,{
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        Authorization: getCookie('token')
+      }
+    })
+    .then(response => response.json())
+    .then(data =>{
+      document.getElementById('num-cart').innerHTML=data.length;
+    })   
+    .catch(error =>{
+      console.log(error);
+    });
   }
