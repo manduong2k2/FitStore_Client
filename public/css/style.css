@@ -283,3 +283,6 @@ th {
   pointer-events: none;
   opacity: 0.5;
 }
+.product-item:hover{
+  transform: scale(1.1);
+}

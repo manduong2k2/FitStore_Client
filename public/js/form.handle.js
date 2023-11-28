@@ -59,7 +59,7 @@ function switchToForm2(event) {
         .then((res) => res.json())
         .then((data) => {
           console.log("Success:", data);
-          if(method === 'POST') window.location.href = "http://localhost:3000/signin";
+          if(method === 'POST') window.location.href = "/signin";
           else window.location.reload();
         })
         .catch((error) => {
