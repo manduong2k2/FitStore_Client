@@ -140,7 +140,7 @@ function AccountList() {
   });
 }
 //trang cart
- function CartList() {
+function CartList() {
   var ejsFilePath = "/page/cart/cart.list.ejs";
   var root = document.getElementById("root");
   var data;
@@ -164,17 +164,30 @@ function AccountList() {
     });
 }
 function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+//blog??
+function Blog() {
+  var ejsFilePath = "/page/blog/blog.view.ejs";
+  var root = document.getElementById("root");
+  fetch(ejsFilePath)
+    .then((response) => response.text())
+    .then((data) => {
+      const renderedHtml = ejs.render(data, { titlePage: "Blog" });
+      root.innerHTML = renderedHtml;
+    })
+    .catch((error) => console.error("Error fetching EJS file:", error));
 }
