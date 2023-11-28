@@ -140,7 +140,7 @@ function AccountList() {
   });
 }
 //trang cart
- function CartList() {
+function CartList() {
   var ejsFilePath = "/page/cart/cart.list.ejs";
   var root = document.getElementById("root");
   var data;
@@ -164,17 +164,43 @@ function AccountList() {
     });
 }
 function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+
+//trang post
+function PostList() {
+  var ejsFilePath = "/page/post/post.list.ejs";
+  var root = document.getElementById("root");
+  var data;
+  axios
+    .get("http://jul2nd.ddns.net/post")
+    .then(response => {
+      data = response.data;
+      fetch(ejsFilePath)
+        .then(response => response.text())
+        .then(data => {
+          const renderedHtml = ejs.render(data, {
+            titlePage: "Post",
+            data: response.data,
+          });
+          root.innerHTML = renderedHtml;
+          var postController = document.createElement("script");
+          postController.src = "/js/post.controller.js";
+          root.appendChild(postController);
+        })
+        .catch((error) => console.error("Error fetching EJS file:", error));
+    });
 }
