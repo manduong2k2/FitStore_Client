@@ -1,0 +1,135 @@
+<style>
+  .form-container {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+  }
+  .left {
+    margin-right: 80px;
+  }
+  .btn {
+    margin: 5px 0 5px 241.4px;
+  }
+
+  label {
+    margin: 10px 0;
+  }
+</style>
+<div class="container form-container">
+  <form id="postForm" class="left">
+    <h2>Đăng bài</h2>
+    <!-- account id lấy tù cokkie, bỏ vào 1 cái input type hidden -->
+    <input type="hidden" id="" name="authorId" value="" />
+
+    <div class="form-group">
+      <label for="articleTitle">Tiêu đề bài viết:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postTitle"
+        name="postTitle"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <img
+        id="backgroundImage"
+        name="postImage"
+        src="#"
+        alt="#"
+        style="height: 80px; border-radius: 60px; margin-left: 140px"
+      />
+      <input
+        type="file"
+        id="postImage"
+        name="postImage"
+        accept="image/*"
+        class="form-control"
+        required
+      />
+    </div>
+    <!-- <div class="form-group">
+      <label for="articleTitle">Tác giả:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postAuthor"
+        name="postAuthor"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="articleDate">Ngày:</label>
+      <input
+        type="date"
+        class="form-control"
+        id="postDate"
+        name="postDate"
+        required
+      />
+    </div> -->
+    <button
+      type="button"
+      onclick=""
+      class="btn btn-success"
+      style="margin-left: 180.4px"
+    >
+      Submit
+    </button>
+  </form>
+  <form class="right">
+    <div class="form-group">
+      <label for="articleTitle">Tiêu đề bài viết:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postTitle"
+        name="postTitle"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="articleTitle">Tác giả:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postAuthor"
+        name="postAuthor"
+        required
+      />
+    </div>
+    <button
+      type="button"
+      onclick=""
+      class="btn btn-success"
+      style="margin-left: 180.4px"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<script>
+  function triggerFileInput() {
+    document.getElementById("postImage").click();
+  }
+  document
+    .getElementById("backgroundImage")
+    .addEventListener("click", triggerFileInput);
+  document.getElementById("postImage").addEventListener("change", function (e) {
+    var file = e.target.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+
+      reader.onload = function (readerEvent) {
+        document.getElementById("backgroundImage").src =
+          readerEvent.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  });
+</script>

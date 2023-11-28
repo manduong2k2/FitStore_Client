@@ -179,15 +179,28 @@ function getCookie(cname) {
   return "";
 }
 
-//blog??
-function Blog() {
-  var ejsFilePath = "/page/blog/blog.view.ejs";
+
+//trang post
+function PostList() {
+  var ejsFilePath = "/page/post/post.list.ejs";
   var root = document.getElementById("root");
-  fetch(ejsFilePath)
-    .then((response) => response.text())
-    .then((data) => {
-      const renderedHtml = ejs.render(data, { titlePage: "Blog" });
-      root.innerHTML = renderedHtml;
-    })
-    .catch((error) => console.error("Error fetching EJS file:", error));
+  var data;
+  axios
+    .get("http://jul2nd.ddns.net/post")
+    .then(response => {
+      data = response.data;
+      fetch(ejsFilePath)
+        .then(response => response.text())
+        .then(data => {
+          const renderedHtml = ejs.render(data, {
+            titlePage: "Post",
+            data: response.data,
+          });
+          root.innerHTML = renderedHtml;
+          var postController = document.createElement("script");
+          postController.src = "/js/post.controller.js";
+          root.appendChild(postController);
+        })
+        .catch((error) => console.error("Error fetching EJS file:", error));
+    });
 }
