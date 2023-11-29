@@ -1,0 +1,33 @@
+<div class="container form-container" style="margin: auto">
+  <div class="title" style="display: flex">
+    <h1 style="width: 70%;"><%= data.title%></h1>
+</div>
+<div class="author" style="display: flex">
+    <img
+    src="<%= data.author.image %>"
+    alt="#"
+    style="height: 60px; border-radius: 60px; margin-right: 10px;"
+    />
+    <div style="display: block; flex-direction: column;">
+        <h6 style="color: #2d67ad; margin-top: 5px"><%= data.author.name %></h6>
+        <p style=""><%= data.date %></p>
+    </div>
+  </div>
+  <hr />
+  <strong> <%= data.intro %> </strong>
+  <img
+    src="<%= data.background %>"
+    alt="#"
+    style="height: 500px; width: 760px"
+  />
+  <br>
+  <% data.Post_Contents.forEach(item => { %>
+    <strong> <%= item.subheading %> </strong>
+    <br>
+    <p><%= item.contents%></p>
+    <br>
+    <img src="<%= item.image%>" alt="#" style="height: 500px; width: 760px">
+    <br>
+    <i><%= item.imageNote%></i>
+    <% }); %>
+</div>

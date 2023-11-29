@@ -1,4 +1,40 @@
-<div class="container form-container">
-  <h1>Các bài viết</h1>
+<main>
+  <h1>Cộng đồng</h1>
   <a class="btn btn-success" onclick="PostCreate()">Thêm bài viết mới</a>
+  <div class="container-fluid" >
+    <div class="row justify-content-center" style="margin: 30px;">
+        <% data.forEach(item => { %>
+          <div onclick="PostDetail('<%= item.id %>')"
+            style="cursor: pointer"
+            class="panel panel-default post-item">
+            <div class="panel-heading" style="display: flex;">
+              <img
+                style="height: 120px; width: 10%;"
+                src="<%= item.background %>"
+                alt="#"
+              />
+              <div class="right-post" style="display: grid; margin-left: 15px;">
+                <h4>
+                  <%= item.title %>
+                </h4>
+                <i style="text-decoration: underline;"><%= item.author.name %></i>
+                <p
+                  style="
+                  /* white-space: nowrap; */
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                  "
+                >
+                  <%= item.intro %>
+                </p>
+                <i><%= item.date %></i>
+              </div>
+            </div>
+            <div>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+  </main>
 </div>

@@ -16,7 +16,7 @@ h1 {
   width: 20%;
 }
 
-.product-item {
+.product-item, .post-item {
   margin-bottom: 20px;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -31,8 +31,7 @@ h1 {
   height: 250px;
   border-radius: 5px;
 }
-
-.product-item h2 {
+.product-item h2, .right-post h4 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
