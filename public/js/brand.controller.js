@@ -66,11 +66,9 @@ function BrandEdit(brand_id) {
       fetch(ejsFilePath)
           .then(response => response.text())
           .then(data => {
-              const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa nhãn hiệu', brand: response.data});
+              const renderedHtml = ejs.render(data, { brand: response.data});
               root.innerHTML = renderedHtml;
-              // var script = document.createElement('script');
-              // script.src = '/js/fetchOpt.js';
-              // root.appendChild(script);
+              document.getElementById('titlePage').innerHTML='Chỉnh sửa nhãn hiệu';
           })
           .catch(error => console.error('Error fetching EJS file:', error));
   });

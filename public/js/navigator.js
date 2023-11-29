@@ -6,6 +6,7 @@ function Introduce() {
     .then((response) => response.text())
     .then((data) => {
       targetElement.innerHTML = data;
+      document.getElementById('titlePage').innerHTML='Giới thiệu';
     })
     .catch((error) => console.error("Error fetching HTML file:", error));
 }
@@ -27,6 +28,7 @@ function ProductList() {
         var productController = document.createElement("script");
         productController.src = "/js/product.controller.js";
         root.appendChild(productController);
+        document.getElementById('titlePage').innerHTML='Quản lý sản phẩm';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -42,13 +44,13 @@ function ProductView() {
       .then((response) => response.text())
       .then((data) => {
         const renderedHtml = ejs.render(data, {
-          titlePage: "Sản phẩm",
           data: response.data,
         });
         root.innerHTML = renderedHtml;
         var productController = document.createElement("script");
         productController.src = "/js/product.controller.js";
         root.appendChild(productController);
+        document.getElementById('titlePage').innerHTML='Sản phẩm';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -60,8 +62,9 @@ function Contact() {
   fetch(ejsFilePath)
     .then((response) => response.text())
     .then((data) => {
-      const renderedHtml = ejs.render(data, { titlePage: "Liên hệ" });
+      const renderedHtml = ejs.render(data,);
       root.innerHTML = renderedHtml;
+      document.getElementById('titlePage').innerHTML='Liên hệ';
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
 }
@@ -91,6 +94,7 @@ function BrandList() {
         var brandController = document.createElement("script");
         brandController.src = "/js/brand.controller.js";
         root.appendChild(brandController);
+        document.getElementById('titlePage').innerHTML='Nhãn hiệu';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -113,6 +117,7 @@ function CategoryList() {
         var categoryController = document.createElement("script");
         categoryController.src = "/js/category.controller.js";
         root.appendChild(categoryController);
+        document.getElementById('titlePage').innerHTML='Thể loại';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -135,6 +140,7 @@ function AccountList() {
         var accountController = document.createElement("script");
         accountController.src = "/js/account.controller.js";
         root.appendChild(accountController);
+        document.getElementById('titlePage').innerHTML='Tài khoản';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -159,6 +165,7 @@ function CartList() {
           var cartController = document.createElement("script");
           cartController.src = "/js/cart.controller.js";
           root.appendChild(cartController);
+          document.getElementById('titlePage').innerHTML='Giỏ hàng';
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
     });
@@ -200,6 +207,7 @@ function PostList() {
           var postController = document.createElement("script");
           postController.src = "/js/post.controller.js";
           root.appendChild(postController);
+          document.getElementById('titlePage').innerHTML='Bài viết';
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
     });

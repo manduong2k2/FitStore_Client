@@ -1,135 +1,36 @@
-<style>
-  .form-container {
-    margin: 30px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    display: flex;
-  }
-  .left {
-    margin-right: 80px;
-  }
-  .btn {
-    margin: 5px 0 5px 241.4px;
-  }
-
-  label {
-    margin: 10px 0;
-  }
-</style>
-<div class="container form-container">
-  <form id="postForm" class="left">
-    <h2>Đăng bài</h2>
-    <!-- account id lấy tù cokkie, bỏ vào 1 cái input type hidden -->
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;"
+  class="container form-container">
+  <h2>Tạo bài viết mới</h2>
+  <form style="width: 800px;" id="postForm">
     <input type="hidden" id="" name="authorId" value="" />
-
+    <div class="form-group">
+      <label for="postImage" style="cursor: pointer;">
+        <img id="backgroundImage" name="postImage" src="/images/background.jpg" alt="#"
+          style="height: 300px; width: 400px ; border-radius: 15px; " />
+      </label>
+      <input type="file" id="postImage" name="postImage" accept="image/*" class="form-control" style="display: none;"
+        onchange="PreviewImage(this,'backgroundImage')" required />
+    </div>
+    <i>Nhấn vào để thay đổi ảnh nền bài viết</i>
+    </br>
     <div class="form-group">
       <label for="articleTitle">Tiêu đề bài viết:</label>
-      <input
-        type="text"
-        class="form-control"
-        id="postTitle"
-        name="postTitle"
-        required
-      />
-    </div>
+      <input type="text" class="form-control" id="postTitle" placeholder="Nhập tiêu đề bài viết" name="postTitle"
+        required />
+    </div></br>
     <div class="form-group">
-      <img
-        id="backgroundImage"
-        name="postImage"
-        src="#"
-        alt="#"
-        style="height: 80px; border-radius: 60px; margin-left: 140px"
-      />
-      <input
-        type="file"
-        id="postImage"
-        name="postImage"
-        accept="image/*"
-        class="form-control"
-        required
-      />
+      <label for="articleTitle">Giới thiệu bài viết:</label>
+      <textarea type="text" class="form-control" id="postIntro" placeholder="Nhập phần giới thiệu bài viết"
+        name="postIntro" required></textarea>
     </div>
-    <!-- <div class="form-group">
-      <label for="articleTitle">Tác giả:</label>
-      <input
-        type="text"
-        class="form-control"
-        id="postAuthor"
-        name="postAuthor"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="articleDate">Ngày:</label>
-      <input
-        type="date"
-        class="form-control"
-        id="postDate"
-        name="postDate"
-        required
-      />
-    </div> -->
-    <button
-      type="button"
-      onclick=""
-      class="btn btn-success"
-      style="margin-left: 180.4px"
-    >
-      Submit
-    </button>
   </form>
-  <form class="right">
-    <div class="form-group">
-      <label for="articleTitle">Tiêu đề bài viết:</label>
-      <input
-        type="text"
-        class="form-control"
-        id="postTitle"
-        name="postTitle"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="articleTitle">Tác giả:</label>
-      <input
-        type="text"
-        class="form-control"
-        id="postAuthor"
-        name="postAuthor"
-        required
-      />
-    </div>
-    <button
-      type="button"
-      onclick=""
-      class="btn btn-success"
-      style="margin-left: 180.4px"
-    >
-      Submit
-    </button>
-  </form>
+  </br>
+  <label for="articleTitle">Nội dung bài viết:</label>
+  <br>
+  <div id="contents">
+  </div>
+  <br>
+  <button type="button" onclick="AddContent()" class="btn btn-success">Thêm nội dung</button>
+  <br>
+  <button type="button" onclick="submitPostForm(event,'POST')" class="btn btn-success"> Hoàn tất </button>
 </div>
-<script>
-  function triggerFileInput() {
-    document.getElementById("postImage").click();
-  }
-  document
-    .getElementById("backgroundImage")
-    .addEventListener("click", triggerFileInput);
-  document.getElementById("postImage").addEventListener("change", function (e) {
-    var file = e.target.files[0];
-
-    if (file) {
-      var reader = new FileReader();
-
-      reader.onload = function (readerEvent) {
-        document.getElementById("backgroundImage").src =
-          readerEvent.target.result;
-      };
-
-      reader.readAsDataURL(file);
-    }
-  });
-</script>

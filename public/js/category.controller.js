@@ -67,11 +67,9 @@ function showCreatePopup() {
         fetch(ejsFilePath)
             .then(response => response.text())
             .then(data => {
-                const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa loại sản phẩm', category: response.data});
+                const renderedHtml = ejs.render(data, { category: response.data});
                 root.innerHTML = renderedHtml;
-                // var script = document.createElement('script');
-                // script.src = '/js/fetchOpt.js';
-                // root.appendChild(script);
+                document.getElementById('titlePage').innerHTML='Chỉnh sửa loại sản phẩm';
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
@@ -115,7 +113,7 @@ function showCreatePopup() {
     }
 }
 async function CategoryDelete(category_id){
-    var result = window.confirm("Bạn có muốn xoá nhãn hiệu này không?");
+    var result = window.confirm("Bạn có muốn xoá thể loại này không?");
     if (result) {
         try {
             await axios.delete('http://jul2nd.ddns.net/category/' + category_id);

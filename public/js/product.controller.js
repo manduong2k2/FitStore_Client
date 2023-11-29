@@ -6,11 +6,12 @@ function ProductDetail(product_id) {
         fetch(ejsFilePath)
             .then(response => response.text())
             .then(data => {
-                const renderedHtml = ejs.render(data, { titlePage: 'Thônng tin sản phẩm', product: response.data.product, solds: response.data.solds });
+                const renderedHtml = ejs.render(data, { product: response.data.product, solds: response.data.solds });
                 root.innerHTML = renderedHtml;
                 var script = document.createElement('script');
                 script.src = '/js/fetchOpt.js';
                 root.appendChild(script);
+                document.getElementById('titlePage').innerHTML='Chi tiết sản phẩm';
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
@@ -23,11 +24,12 @@ function ProductEdit(product_id) {
         fetch(ejsFilePath)
             .then(response => response.text())
             .then(data => {
-                const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa sản phẩm', product: response.data.product, solds: response.data.solds });
+                const renderedHtml = ejs.render(data, { product: response.data.product, solds: response.data.solds });
                 root.innerHTML = renderedHtml;
                 var script = document.createElement('script');
                 script.src = '/js/fetchOpt.js';
                 root.appendChild(script);
+                document.getElementById('titlePage').innerHTML='Chỉnh sửa sản phẩm';
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
