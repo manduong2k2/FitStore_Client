@@ -59,7 +59,6 @@ async function RemoveAllItem(){
     }   
 }
 function checkItemNumber(product_id){
-    console.log('change detected');
     var number = document.getElementById('product'+product_id+'number').value;
     var button = document.getElementById('product'+product_id+'button');
     if(number === '1') button.classList.add('disable-btn');

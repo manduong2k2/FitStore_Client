@@ -22,10 +22,9 @@
               <!-- Uncomment the following block if you want to include Edit and Delete buttons -->
               
               <td colspan="2">
-                <a class="btn btn-primary" onclick="AccountEdit(<%= item.id %>)"">Edit</a>
-                <a class="btn btn-danger" onclick="AccountDelete(<%= item.id %>)"onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
+                <a class="btn btn-primary" onclick="AccountEdit('<%= item.id %>')"">Edit</a>
+                <a class="btn btn-danger" onclick="AccountDelete('<%= item.id %>')"onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
               </td>
-             
             </tr>
           <% }); %>
         </tbody>
