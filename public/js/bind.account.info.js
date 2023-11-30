@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const dropdownMenu = document.querySelector('.drop1');
     if (idCookieExists) {
+      getCartNumber();
       // Thực hiện logic khi cookie 'id' tồn tại
       dropdownMenu.innerHTML = `
         <li><a class="dropdown-item" href="/account/detail">Quản lý tài khoản</a></li>
@@ -19,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
         <li><a class="dropdown-item" href="/signup">Đăng ký</a></li>
       `;
     }
-    getCartNumber();
   });
   function getCookie(cname) {
     let name = cname + "=";

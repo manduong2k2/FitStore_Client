@@ -147,11 +147,17 @@ function AccountList() {
 }
 //trang cart
 function CartList() {
+  var account_id = getCookie('id');
+  if(!account_id){
+    if (confirm("Để tiếp tục bạn cần đăng nhập hoặc đăng ký, bạn có muốn đăng nhập không?")) {
+        window.location.href="/signin";
+    }
+  }
   var ejsFilePath = "/page/cart/cart.list.ejs";
   var root = document.getElementById("root");
   var data;
   axios
-    .get("http://jul2nd.ddns.net/cart/" + getCookie("id"))
+    .get("http://jul2nd.ddns.net/cart/" + account_id)
     .then(response => {
       data = response.data;
       fetch(ejsFilePath)

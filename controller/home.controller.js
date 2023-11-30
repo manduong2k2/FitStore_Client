@@ -36,10 +36,8 @@ router.post('/login', (req, res) => {
       var account = JSON.parse(response.data.account);
       console.log(account);
       res.cookie('id', account.id );
-      res.cookie('username', account.username);
       res.cookie('name', account.name);
       res.cookie('image', account.image);
-      res.cookie('email', account.email);
       res.cookie('token', response.data.token);
       localStorage.setItem('token',response.data.token);
       res.redirect('/');
@@ -65,10 +63,8 @@ router.get('/logout', (req, res) => {
       console.log(error);
     });
     res.clearCookie('id', { SameSite: 'None', httpOnly: false, secure: true });
-    res.clearCookie('username', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('image', { SameSite: 'None', httpOnly: false, secure: true });
-    res.clearCookie('email', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('token', { SameSite: 'None', httpOnly: false, secure: true });
     res.redirect('/');
   }catch (err){

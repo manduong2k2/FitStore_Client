@@ -11,7 +11,7 @@ function ProductDetail(product_id) {
                 var script = document.createElement('script');
                 script.src = '/js/fetchOpt.js';
                 root.appendChild(script);
-                document.getElementById('titlePage').innerHTML='Chi tiết sản phẩm';
+                document.getElementById('titlePage').innerHTML = 'Chi tiết sản phẩm';
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
@@ -29,42 +29,53 @@ function ProductEdit(product_id) {
                 var script = document.createElement('script');
                 script.src = '/js/fetchOpt.js';
                 root.appendChild(script);
-                document.getElementById('titlePage').innerHTML='Chỉnh sửa sản phẩm';
+                document.getElementById('titlePage').innerHTML = 'Chỉnh sửa sản phẩm';
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });
 }
-async function ProductDelete(product_id){
+async function ProductDelete(product_id) {
     var result = window.confirm("Bạn có muốn xoá sản phẩm này không?");
     if (result) {
         try {
-            await axios.delete('http://jul2nd.ddns.net/product/' + product_id);
-            // Yêu cầu xoá đã được xử lý, sau đó thực hiện ProductList()
-            ProductList();
-            alert("Đã xoá thành công");
+            const response = await fetch('http://jul2nd.ddns.net/product/' + product_id, {
+                method: 'DELETE',
+                withCredentials: true,
+                headers: {
+                    Authorization: getCookie('token')
+                }
+            });
+            if (response.status !== 200) {
+                const errorData = await response.json();
+                alert(errorData.message);
+                ProductList();
+            } else {
+                ProductList();
+                alert("Đã xoá thành công");
+            }
         } catch (error) {
             console.error("Error deleting product:", error);
         }
-    } 
+    }
 }
-function showCreatePopup(){
+function showCreatePopup() {
     var ejsFilePath = '/page/product/product.create.ejs';
     var root = document.getElementById('root');
     fetch(ejsFilePath)
-            .then(response => response.text())
-            .then(data => {
-                const renderedHtml = ejs.render(data);
-                var popup = document.createElement('div');
-                popup.id="popupContainer";
-                popup.innerHTML = renderedHtml;
-                root.appendChild(popup);
-                fetchOptions();
-            })
-            .catch(error => console.error('Error fetching EJS file:', error));
+        .then(response => response.text())
+        .then(data => {
+            const renderedHtml = ejs.render(data);
+            var popup = document.createElement('div');
+            popup.id = "popupContainer";
+            popup.innerHTML = renderedHtml;
+            root.appendChild(popup);
+            fetchOptions();
+        })
+        .catch(error => console.error('Error fetching EJS file:', error));
 }
-function closeCreatePopup(){
+function closeCreatePopup() {
     var root = document.getElementById('root');
-    var popup = document.getElementById('popupContainer'); 
+    var popup = document.getElementById('popupContainer');
 
     if (popup) {
         root.removeChild(popup);
@@ -98,9 +109,9 @@ function fetchOptions() {
         })
         .catch((error) => console.error("Error fetching brands:", error));
 }
-async function submitProductForm(event,method) {
+async function submitProductForm(event, method) {
     event.preventDefault();
-    var productId="";
+    var productId = "";
     var productName = document.getElementById("productName").value;
     var category = document.getElementById("category").value;
     var brand = document.getElementById("brand").value;
@@ -116,29 +127,35 @@ async function submitProductForm(event,method) {
     formData.append("price", productPrice);
     formData.append("info", productInfo);
     formData.append("stock", productStock);
-    if(productImage) formData.append("image", productImage);
-    if(method==='PUT'){
+    if (productImage) formData.append("image", productImage);
+    if (method === 'PUT') {
         productId = document.getElementById('productId').value;
     }
 
     try {
-        const response = await axios({
+        const response = await fetch('http://jul2nd.ddns.net/product/' + productId, {
             method: method,
-            url: "http://jul2nd.ddns.net/product/" + productId,
             data: formData,
-            headers: { 'Content-Type': 'multipart/form-data' },
+            withCredentials: true,
+            headers: {
+                Authorization: getCookie('token')
+            }
         });
-
-        console.log("Success:", response.data);
-
-        if(method === 'PUT') {
+        if (response.status !== 200) {
+            const errorData = await response.json();
+            alert(errorData.message);
             ProductList();
-            alert('Cập nhật thành công');
         }
-        if(method === 'POST'){
-            closeCreatePopup();
-            ProductList();
-            alert('Thêm sản phẩm thành công');
+        else {
+            if (method === 'PUT') {
+                ProductList();
+                alert('Cập nhật thành công');
+            }
+            if (method === 'POST') {
+                closeCreatePopup();
+                ProductList();
+                alert('Thêm sản phẩm thành công');
+            }
         }
     } catch (error) {
         console.error("Error:", error);
@@ -149,22 +166,32 @@ function getCookie(cname) {
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
     for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
     return "";
 }
-async function AddToCart(product_id){
-    const account_id=getCookie('id');
-    const response = await axios({
-        method: 'PUT',
-        url: "http://jul2nd.ddns.net/cart/" + product_id +'/'+account_id,
-    });
-    getCartNumber();
-    console.log(response.data);
+async function AddToCart(product_id) {
+    const account_id = getCookie('id');
+    if (!account_id) {
+        if (confirm("Để tiếp tục bạn cần đăng nhập hoặc đăng ký, bạn có muốn đăng nhập không?")) {
+            window.location.href = "/signin";
+        }
+    }
+    else {
+        const response = await fetch('http://jul2nd.ddns.net/cart/' + product_id + '/' + account_id, {
+            method: 'PUT',
+            withCredentials: true,
+            headers: {
+                Authorization: getCookie('token')
+            }
+        });
+        getCartNumber();
+        console.log(response.data);
+    }
 }

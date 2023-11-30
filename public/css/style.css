@@ -285,3 +285,15 @@ th {
 .product-item:hover{
   transform: scale(1.1);
 }
+.overlay {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  font-size: 24px;
+}
+
+/* CSS để tạo hiệu ứng mờ cho phần overlay */
