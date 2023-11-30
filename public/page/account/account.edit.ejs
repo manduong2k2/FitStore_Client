@@ -30,27 +30,20 @@
         <label for="accountEmail">Địa chỉ:</label>
         <div class="form-outline mb-4">
           <select class="form-control" id="provinces" onchange="fetchDistricts()">
-            <option><%=data.ward_code_ward.district_code_district.province_code_province.full_name%></option>
+            <option><%= (data.ward_code_ward!==null) ? data.ward_code_ward.district_code_district.province_code_province.full_name : 'Không có thông tin Tỉnh/TP'%></option>
             
           </select>
         </div>
         <div class="form-outline mb-4">
           <select class="form-control" id="districts" onchange="fetchWards()">
-            <option><%=data.ward_code_ward.district_code_district.full_name%></option>
+            <option><%=(data.ward_code_ward!==null) ? data.ward_code_ward.district_code_district.full_name : 'Không có thông tin quận/huyện'%></option>
           </select>
         </div>
         <div class="form-outline mb-4">
           <select class="form-control" id="wards">
-            <option value="<%=data.ward_code_ward.code%>"><%=data.ward_code_ward.full_name%></option>
+            <option value="<%=(data.ward_code_ward!==null)? data.ward_code_ward.code : ''%>"><%=(data.ward_code_ward!==null)? data.ward_code_ward.full_name : 'Không có thông tin phường/xã'%></option>
           </select>
         </div>
-      </div>
-      <div style="display: flex; justify-content: space-between" class="">
-        <button onclick="Edit()" id="btnEdit" type="button" class="btn btn-primary">Chỉnh sửa</button>
-        <button onclick="CancelEdit()" id="btnCancel" type="button" class="btn btn-danger" style="display: none">Huỷ</button>
-        <button onclick="submitForm(event,'PUT')" id="btnSubmit" type="button" class="btn btn-success"style="display: none">
-          Submit
-        </button>
       </div>
     </form>
   </div>

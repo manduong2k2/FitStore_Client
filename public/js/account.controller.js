@@ -40,11 +40,8 @@ async function submitAccountForm(event, method) {
         fetch(ejsFilePath)
             .then(response => response.text())
             .then(data => {
-                const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa tài khoản', account: response.data});
+                const renderedHtml = ejs.render(data, { titlePage: 'Chỉnh sửa tài khoản', account: response.data });
                 root.innerHTML = renderedHtml;
-                var script = document.createElement('script');
-                script.src = '/js/fetch.address.js';
-                root.appendChild(script);
             })
             .catch(error => console.error('Error fetching EJS file:', error));
     });

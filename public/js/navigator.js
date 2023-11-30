@@ -190,14 +190,14 @@ function getCookie(cname) {
 }
 //trang quản lý tài khoản
 function PersonalAccountEdit(){
-  var ejsFilePath = "/page/account/account.edit.ejs";
+  var ejsFilePath = "/page/account/personal.account.ejs";
   var root = document.getElementById("root");
   axios.get("http://jul2nd.ddns.net/account/"+getCookie('id')).then((response) => {
     const account = response.data;
     fetch(ejsFilePath)
     .then((response) => response.text())
     .then((data) => {
-      const renderedHtml = ejs.render(data, { titlePage: "Tài khoản", data: account, });
+      const renderedHtml = ejs.render(data, { data: account });
       root.innerHTML = renderedHtml;
       var script1 = document.createElement("script");
       script1.src = "/js/account/edit.account.js";
