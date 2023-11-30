@@ -22,6 +22,7 @@
         <li class="nav-item nav-main">
           <a class="nav-link" onclick="Contact(); changeActiveState(this)">Liên hệ</a>
         </li>
+        <% if (isAdmin) { %>
         <li  class="nav-item nav-main">
           <ul class="nav navbar-nav navbar-right">
             <li class="nav-item dropdown">
@@ -40,6 +41,7 @@
             </li>
           </ul>
         </li>
+        <% } %>
         <li class="nav-item search-bar" >
           <form action="" medthod="">
             <!-- ko bik m làm s nên t bỏ v tạm nha -->

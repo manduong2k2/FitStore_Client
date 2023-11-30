@@ -132,10 +132,7 @@ function AccountList() {
     fetch(ejsFilePath)
       .then((response) => response.text())
       .then((data) => {
-        const renderedHtml = ejs.render(data, {
-          titlePage: "Tài khoản",
-          data: response.data,
-        });
+        const renderedHtml = ejs.render(data, { titlePage: "Tài khoản", data: response.data, });
         root.innerHTML = renderedHtml;
         var accountController = document.createElement("script");
         accountController.src = "/js/account.controller.js";
@@ -191,16 +188,39 @@ function getCookie(cname) {
   }
   return "";
 }
-
-
+//trang quản lý tài khoản
+function PersonalAccountEdit(){
+  var ejsFilePath = "/page/account/account.edit.ejs";
+  var root = document.getElementById("root");
+  axios.get("http://jul2nd.ddns.net/account/"+getCookie('id')).then((response) => {
+    const account = response.data;
+    fetch(ejsFilePath)
+    .then((response) => response.text())
+    .then((data) => {
+      const renderedHtml = ejs.render(data, { titlePage: "Tài khoản", data: account, });
+      root.innerHTML = renderedHtml;
+      var script1 = document.createElement("script");
+      script1.src = "/js/account/edit.account.js";
+      var script2 = document.createElement("script");
+      script2.src = "/js/form.handle.js";
+      var script3 = document.createElement("script");
+      script3.src = "/js/fetch.address.js";
+      script1.onload="fetchAccountDetails()";
+      root.appendChild(script1);
+      root.appendChild(script2);
+      root.appendChild(script3);
+      document.getElementById('titlePage').innerHTML='Quản lý tài khoản';
+    })
+    .catch((error) => console.error("Error fetching HTML file:", error));
+  });
+  
+}
 //trang post
 function PostList() {
   var ejsFilePath = "/page/post/post.list.ejs";
   var root = document.getElementById("root");
   var data;
-  axios
-    .get("http://jul2nd.ddns.net/post")
-    .then(response => {
+  axios.get("http://jul2nd.ddns.net/post").then(response => {
       data = response.data;
       fetch(ejsFilePath)
         .then(response => response.text())

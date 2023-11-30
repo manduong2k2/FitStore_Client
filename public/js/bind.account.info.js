@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
       getCartNumber();
       // Thực hiện logic khi cookie 'id' tồn tại
       dropdownMenu.innerHTML = `
-        <li><a class="dropdown-item" href="/account/detail">Quản lý tài khoản</a></li>
+        <li><a class="dropdown-item" style="cursor:pointer" onclick="PersonalAccountEdit()">Quản lý tài khoản</a></li>
         <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
       `;
     } else {

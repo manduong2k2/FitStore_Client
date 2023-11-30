@@ -113,30 +113,7 @@
             accountName.readOnly = false;
           });
 
-          document
-            .getElementById("btnCancel")
-            .addEventListener("click", function () {
-              const accountEmail = document.querySelector("#accountEmail");
-              const accountName = document.querySelector("#accountName");
-              const btnEdit = document.getElementById("btnEdit");
-              const btnCancel = document.getElementById("btnCancel");
-              const btnSubmit = document.getElementById("btnSubmit");
-              const img = document.getElementById("Avt");
-              const text = document.getElementById("text");
-
-              // Restore the previous values
-              fetchAccountDetails();
-              // Toggle button visibility
-              text.style.display = "none";
-              btnSubmit.style.display = "none";
-              btnEdit.style.display = "inline-block";
-              btnCancel.style.display = "none";
-              img.style.cursor = "none";
-
-              // Disable editing
-              accountEmail.readOnly = true;
-              accountName.readOnly = true;
-            });
+          
         });
         function fetchAccountDetails() {
           const id = getCookie("id");

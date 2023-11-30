@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
 router.use(express.json());
 const cookieParser = require('cookie-parser');
 var LocalStorage = require('node-localstorage').LocalStorage;
@@ -11,7 +12,10 @@ router.use(express.urlencoded({ extended: true }));
 const request = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 router.get("/", (req, res) => {
-  res.render("home", { titlePage: "Trang chủ" });
+  var token = localStorage.getItem('token');
+  decodedToken = jwt.verify(token, 'ABC'); 
+  const { roles } = decodedToken;
+  res.render("home", { titlePage: "Trang chủ" ,isAdmin: roles.some((role) => [1, 2].includes(role.id))});
 });
 router.get("/signup", (req, res) => {
   res.render("signup", { titlePage: "Đăng ký" });

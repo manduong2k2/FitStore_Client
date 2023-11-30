@@ -60,7 +60,7 @@ function switchToForm2(event) {
         .then((data) => {
           console.log("Success:", data);
           if(method === 'POST') window.location.href = "/signin";
-          else window.location.reload();
+          else PersonalAccountEdit();
         })
         .catch((error) => {
           console.error("Error:", error);
