@@ -75,12 +75,4 @@ router.get('/logout', (req, res) => {
     console.log(err);
   }
 });
-router.get('/protected', async (req, res) => {
-    try {
-      const response = await axios.get('http://jul2nd.ddns.net/account/protected', { withCredentials: true });
-      res.json(response.data);
-    } catch (error) {
-      res.status(error.response.status).json({ message: error.response.data.message });
-    }
-});
 module.exports = router;
