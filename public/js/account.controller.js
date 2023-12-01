@@ -13,7 +13,6 @@ async function submitAccountForm(event, method) {
     if (method === "PUT") {
       accountId = document.getElementById("accountId").value;
     }
-  
     try {
       const response = await axios({
         method: method,
