@@ -98,3 +98,21 @@ function PostDetail(post_id) {
           .catch(error => console.error('Error fetching EJS file:', error));
   });
 }
+function PostEdit(post_id) {
+  var ejsFilePath = '/page/post/post.edit.ejs';
+  var root = document.getElementById('root');
+  axios.get('http://jul2nd.ddns.net/post/' + post_id).then((response) => {
+      data = response.data;
+      fetch(ejsFilePath)
+          .then(response => response.text())
+          .then(data => {
+              const renderedHtml = ejs.render(data, { post: response.data});
+              root.innerHTML = renderedHtml;
+              // var script = document.createElement('script');
+              // script.src = '/js/fetchOpt.js';
+              // root.appendChild(script);
+              document.getElementById('titlePage').innerHTML='post';
+          })
+          .catch(error => console.error('Error fetching EJS file:', error));
+  });
+}

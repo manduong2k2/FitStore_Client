@@ -1,33 +1,43 @@
+<style>
+  .content img {
+    height: 500px;
+    width: 760px;
+    margin: 20px 0 20px 25%;
+  }
+</style>
+<a class="btn btn-primary" onclick="PostEdit('<%= data.id %>')">edit</a>
 <div class="container form-container" style="margin: auto">
   <div class="title" style="display: flex">
-    <h1 style="width: 70%;"><%= data.title%></h1>
-</div>
-<div class="author" style="display: flex">
+    <h1><%= data.title%></h1>
+  </div>
+  <div class="author" style="display: flex">
     <img
-    src="<%= data.author.image %>"
-    alt="#"
-    style="height: 60px; border-radius: 60px; margin-right: 10px;"
+      src="<%= data.author.image %>"
+      alt="#"
+      style="height: 60px; border-radius: 60px; margin-right: 10px"
     />
-    <div style="display: block; flex-direction: column;">
-        <h6 style="color: #2d67ad; margin-top: 5px"><%= data.author.name %></h6>
-        <p style=""><%= data.date %></p>
+    <div style="display: block; flex-direction: column">
+      <h6 style="color: #2d67ad; margin-top: 5px"><%= data.author.name %></h6>
+      <p style=""><%= data.date %></p>
     </div>
   </div>
   <hr />
-  <strong> <%= data.intro %> </strong>
+  <h4><%= data.intro %></h4>
+  <div class="content">
+
   <img
     src="<%= data.background %>"
     alt="#"
-    style="height: 500px; width: 760px"
   />
-  <br>
+  <br />
   <% data.Post_Contents.forEach(item => { %>
-    <strong> <%= item.subheading %> </strong>
-    <br>
-    <p><%= item.contents%></p>
-    <br>
-    <img src="<%= item.image%>" alt="#" style="height: 500px; width: 760px">
-    <br>
-    <i><%= item.imageNote%></i>
-    <% }); %>
+  <h3 style="text-align: center; text-decoration: underline; text-transform: uppercase; "><%= item.subheading %></h3>
+  <br />
+  <p><%= item.contents%></p>
+  <br />
+  <img src="<%= item.image%>" alt="#" />
+  <br />
+  <p style="text-align: center"><i><%= item.imageNote%></i></p>
+  <% }); %>
+</div>
 </div>
