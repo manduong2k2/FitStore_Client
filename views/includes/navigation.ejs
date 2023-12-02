@@ -6,7 +6,7 @@
       <span class="navbar-toggler-icon "></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" id="navMain">
         <li class="nav-item">
           <a class="nav-link nav-main" aria-current="page" href="/">Trang chủ</a>
         </li>
@@ -25,7 +25,7 @@
         <% if (isAdmin) { %>
         <li  class="nav-item nav-main">
           <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" >
               <a id="dropdownContainer" class="nav-link text-white" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Quản lý
@@ -48,8 +48,8 @@
             <input type="search" placeholder="&#128269;Tìm kiếm sản phẩm...">
           </form>
         </li>
-        <li class="nav-item nav-main" id="li-cart">
-          <a class="nav-link" id="cart" onclick="CartList(); changeActiveState(this)">
+        <li class="nav-item nav-main" id="li-cart" style="width:80px">
+          <a class="nav-link" id="cart" onclick="CartList();">
             <img src="/images/cart.png" title="Giỏ hàng" style="height:28px;">
           </a>
           <i id="num-cart">0</i>

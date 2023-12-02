@@ -99,6 +99,7 @@ nav {
 
 .dropdown-menu {
   transform: translate(-50px);
+  width: 150px;
   min-width: auto;
 }
 
@@ -200,6 +201,7 @@ th {
 .nav-item.nav-main {
   cursor: pointer;
   position: relative;
+  text-align: center;
 }
 
 .close-icon {
@@ -213,18 +215,20 @@ th {
 
 }
 
-.active::after {
-  content: "";
+.active {
+  /* content: "";
   display: block;
-  width: 80%;
+  width: 96px;
   margin-left: 15%;
-  height: 2px;
-  background-color: blanchedalmond;
-  position: absolute;
+  height: 2px; */
+  background-color: #000;
+  border-radius: 20px;
+  text-decoration: underline;
+  /* position: absolute;
   bottom: 0;
   left: 0;
   transform-origin: 50% 100%;
-  transform: scaleX(1);
+  transform: scaleX(1); */
 }
 
 .popup {
@@ -269,7 +273,6 @@ th {
   display: flex;
   position: absolute;
   right: 140px;
-  width: 80px;
 }
 #li-cart:hover {
   border: 0.5px solid white;
@@ -295,5 +298,7 @@ th {
   text-align: center;
   font-size: 24px;
 }
-
+#navMain li {
+  width: 120px;
+}
 /* CSS để tạo hiệu ứng mờ cho phần overlay */

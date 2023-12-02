@@ -13,16 +13,21 @@ const request = (...args) => import('node-fetch').then(({default: fetch}) => fet
 
 router.get("/", (req, res) => {
   var token = localStorage.getItem('token');
-  decodedToken = jwt.verify(token, 'ABC'); 
-  const { roles } = decodedToken;
-  res.render("home", { titlePage: "Trang chủ" ,isAdmin: roles.some((role) => [1, 2].includes(role.id))});
+  if(token){
+    decodedToken = jwt.verify(token, 'ABC'); 
+    const { roles } = decodedToken;
+    res.render("home", { titlePage: "Trang chủ" ,isAdmin: roles.some((role) => [1, 2].includes(role.id))});
+  }
+  else{
+    res.render("home", { titlePage: "Trang chủ" ,isAdmin: false});
+  }
 });
 router.get("/signup", (req, res) => {
-  res.render("signup", { titlePage: "Đăng ký" });
+  res.render("signup", { titlePage: "Đăng ký" , isAdmin: false});
 });
 router.get("/signin", (req, res) => {
   const message = req.query.message ;
-  res.render("signin", { titlePage: "Đăng nhập" , message});
+  res.render("signin", { titlePage: "Đăng nhập" , message, isAdmin: false});
 })
 //
 router.use(cookieParser());
@@ -70,6 +75,7 @@ router.get('/logout', (req, res) => {
     res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('image', { SameSite: 'None', httpOnly: false, secure: true });
     res.clearCookie('token', { SameSite: 'None', httpOnly: false, secure: true });
+    localStorage.removeItem('token');
     res.redirect('/');
   }catch (err){
     console.log(err);

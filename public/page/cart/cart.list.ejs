@@ -47,6 +47,7 @@
               value="<%=item.quantity%>"
               attr="data-id= <%=item.product_id%>"
               class="form-control quantity"
+              readonly
             />
             <button onclick="IncreaseByOne('<%=item.product.id%>','<%=item.product.price%>')" class="btn btn-success">+</button>
           </div>
