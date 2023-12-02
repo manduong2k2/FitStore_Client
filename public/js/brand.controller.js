@@ -26,63 +26,66 @@ async function submitBrandForm(event, method) {
   var brandName = document.getElementById("brandName").value;
   var brandImage = document.getElementById("brandImage").files[0];
   var brandInfo = document.getElementById("brandInfo").value;
-
-  const formData = new FormData();
-  formData.append("name", brandName);
-  formData.append("info", brandInfo);
-  if (brandImage) formData.append("image", brandImage);
-  if (method === "PUT") {
-    brandId = document.getElementById("brandId").value;
-  }
-
-  try {
-    const response = await axios({
-      method: method,
-      url: "http://jul2nd.ddns.net/brand/" + brandId,
-      data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-
-    console.log("Success:", response.data);
-
+  if (!brandName || !brandImage || !brandInfo) {
+    alert("Vui lòng nhập đầy đủ thông tin");
+  } else {
+    const formData = new FormData();
+    formData.append("name", brandName);
+    formData.append("info", brandInfo);
+    if (brandImage) formData.append("image", brandImage);
     if (method === "PUT") {
-      BrandList();
-      alert("Cập nhật thành công");
+      brandId = document.getElementById("brandId").value;
     }
-    if (method === "POST") {
-      closeCreatePopup();
-      BrandList();
-      alert("Thêm nhãn hiệu thành công");
+
+    try {
+      const response = await axios({
+        method: method,
+        url: "http://jul2nd.ddns.net/brand/" + brandId,
+        data: formData,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("Success:", response.data);
+
+      if (method === "PUT") {
+        BrandList();
+        alert("Cập nhật thành công");
+      }
+      if (method === "POST") {
+        closeCreatePopup();
+        BrandList();
+        alert("Thêm nhãn hiệu thành công");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-  } catch (error) {
-    console.error("Error:", error);
   }
 }
 function BrandEdit(brand_id) {
-  var ejsFilePath = '/page/brand/brand.edit.ejs';
-  var root = document.getElementById('root');
-  axios.get('http://jul2nd.ddns.net/brand/' + brand_id).then((response) => {
-      data = response.data;
-      fetch(ejsFilePath)
-          .then(response => response.text())
-          .then(data => {
-              const renderedHtml = ejs.render(data, { brand: response.data});
-              root.innerHTML = renderedHtml;
-              document.getElementById('titlePage').innerHTML='Chỉnh sửa nhãn hiệu';
-          })
-          .catch(error => console.error('Error fetching EJS file:', error));
+  var ejsFilePath = "/page/brand/brand.edit.ejs";
+  var root = document.getElementById("root");
+  axios.get("http://jul2nd.ddns.net/brand/" + brand_id).then((response) => {
+    data = response.data;
+    fetch(ejsFilePath)
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data, { brand: response.data });
+        root.innerHTML = renderedHtml;
+        document.getElementById("titlePage").innerHTML = "Chỉnh sửa nhãn hiệu";
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
   });
 }
-async function BrandDelete(brand_id){
+async function BrandDelete(brand_id) {
   var result = window.confirm("Bạn có muốn xoá nhãn hiệu này không?");
   if (result) {
-      try {
-          await axios.delete('http://jul2nd.ddns.net/brand/' + brand_id);
-          // Yêu cầu xoá đã được xử lý, sau đó thực hiện BrandList()
-          BrandList();
-          alert("Đã xoá thành công");
-      } catch (error) {
-          console.error("Error deleting brand:", error);
-      }
-  } 
+    try {
+      await axios.delete("http://jul2nd.ddns.net/brand/" + brand_id);
+      // Yêu cầu xoá đã được xử lý, sau đó thực hiện BrandList()
+      BrandList();
+      alert("Đã xoá thành công");
+    } catch (error) {
+      console.error("Error deleting brand:", error);
+    }
+  }
 }

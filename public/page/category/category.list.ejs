@@ -6,6 +6,7 @@
         <tr>
           <th style="text-align: center">Id</th>
           <th style="text-align: center">Name</th>
+          <th style="text-align: center">Info</th>
           <th style="text-align: center">Danh mục</th>
         </tr>
       </thead>
@@ -14,7 +15,7 @@
         <tr id="height-img">
           <td><%= item.id %></td>
           <td><%= item.name %></td>
-
+          <td><%= item.info %></td>
           <td colspan="2">
             <a class="btn btn-primary" onclick="CategoryEdit('<%= item.id %>')"
               >Edit</a

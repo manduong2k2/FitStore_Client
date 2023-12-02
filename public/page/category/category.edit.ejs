@@ -24,6 +24,10 @@
             <input id="categoryId" type="hidden" value="<%= category.id %>">
             <input type="text" value="<%= category.name %>" class="form-control" id="categoryName" name="categoryName" required />
         </div>
+        <div class="form-group">
+            <label for="categoryName">category Info:</label>
+            <input type="text" value="<%= category.info %>" class="form-control" id="categoryInfo" name="categoryInfo" required />
+        </div>
         <button onclick="submitCategoryForm(event,'PUT')" class="btn btn-success">
             Submit
         </button>
