@@ -218,6 +218,7 @@ th {
 
 .active {
   background-color: #000;
+  transform: scale(1.1);
 }
 
 .popup {
@@ -232,12 +233,12 @@ th {
   transform: translate(-50%, -50%);
   max-height: 80vh;
   overflow-y: auto;
-  animation: zoom 0.4s ;
+  animation: zoom 0.5s ;
   animation-timing-function:linear;
 }
 @keyframes zoom {
   0% {
-    transform: translate(-50%, -50%) scale(0.2);
+    transform: translate(-50%, -50%) scale(0);
   }
   50% {
     transform: translate(-50%, -50%) scale(1.2);
