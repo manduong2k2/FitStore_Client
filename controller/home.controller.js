@@ -30,7 +30,6 @@ router.get("/signin", (req, res) => {
   res.render("signin", { titlePage: "Đăng nhập" , message, isAdmin: false});
 })
 router.get("/forgot", (req, res) => {
-  const message = req.query.message ;
   res.render("forgotPassword", { titlePage: "Quên mật khẩu" , isAdmin: false});
 })
 //
