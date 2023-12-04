@@ -148,7 +148,7 @@ nav {
 }
 
 .bg-glass {
-  height: 550px;
+  height: auto;
   border-radius: 20px;
   background-color: transparent !important;
   backdrop-filter: saturate(200%) blur(15px);
