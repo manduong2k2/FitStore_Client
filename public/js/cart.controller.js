@@ -1,4 +1,3 @@
-
 async function IncreaseByOne(product_id, product_price) {
   const account_id = getCookie("id");
   const response = await axios({
@@ -129,4 +128,29 @@ function getCookie(cname) {
     }
   }
   return "";
+}
+async function SubmitOrder(event){
+  event.preventDefault();
+  var account_id = getCookie('id');
+  var total = document.getElementById('hiddenBillTotal').value;
+  var ward_code = document.getElementById('wards').value;
+  var formData = new FormData();
+  formData.append('account_id',account_id);
+  formData.append('total',total);
+  formData.append('ward_code',ward_code);
+  await axios('http://jul2nd.ddns.net/order/' ,{
+    method:'POST',
+    data:formData,
+    headers:{
+      Authorization: getCookie('token'),
+      "Content-Type": "application/json"
+    }
+  }).then(response =>{
+    if(response.status===201){
+      alert('Ordered successfully');
+      
+    }
+  }).catch(err=>{
+    console.log(err);
+  });
 }

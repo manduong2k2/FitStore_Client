@@ -29,6 +29,7 @@ function switchToForm2(event) {
     var checkPassword = document.getElementById("checkPassword").value;}
     var accountImage = document.getElementById("profileImage").files[0];
     var accountEmail = document.getElementById("accountEmail").value;
+    var accountPhone = document.getElementById("accountPhone").value;
     var accountName = document.getElementById("accountName").value;
     var accountWard = document.getElementById("wards").value;
     if (accountPassword !== checkPassword) {
@@ -46,6 +47,7 @@ function switchToForm2(event) {
       if(accountImage) formData.append("image", accountImage);
       else formData.append("image", document.getElementById("Avt").src);
       formData.append("email", accountEmail);
+      formData.append("phone", accountPhone);
       formData.append("name", accountName);
       formData.append("ward_code",accountWard);
       if(method==='PUT'){

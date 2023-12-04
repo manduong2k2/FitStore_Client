@@ -107,17 +107,9 @@
   </table>
   <div class="row">
     <div class="col-md-12">
-      <h3>
-        Tổng hoá đơn:
-        <input
-          id="hiddenBillTotal"
-          type="number"
-          style="display: none"
-          value="<%=toTal%>"
-        />
-        <span id="billTotal">
-          <%=toTal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %>
-        </span>
+      <h3> Tổng hoá đơn: 
+        <input id="hiddenBillTotal" type="number" style="display: none" value="<%=toTal%>" />
+        <span id="billTotal"> <%=toTal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> </span>
         <span>₫</span>
       </h3>
     </div>
@@ -125,22 +117,9 @@
       <a onclick="RemoveAllItem()" class="btn btn-danger"
         >Xoá toàn bộ sản phẩm</a
       >
-      <a
-        class="btn btn-success"
-        onclick="Payment(); changeActiveState(this)"
-        style="margin: 0px 15px"
-        >Đặt hàng
-        <svg
-          fill="white"
-          width="24"
-          height="24"
-          xmlns="http://www.w3.org/2000/svg"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-        >
-          <path
-            d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"
-          />
+      <a class="btn btn-success" onclick="Payment()" style="margin: 0px 15px" >Xác nhận đơn hàng
+        <svg fill="white" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" >
+          <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
         </svg>
       </a>
     </div>

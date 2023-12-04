@@ -16,6 +16,7 @@ document.getElementById("profileImage").addEventListener("change", function (e) 
 
 function Edit() {
     const accountEmail = document.querySelector("#accountEmail");
+    const accountPhone = document.querySelector("#accountPhone");
     const accountName = document.querySelector("#accountName");
     const btnEdit = document.getElementById("btnEdit");
     const btnCancel = document.getElementById("btnCancel");
@@ -31,6 +32,7 @@ function Edit() {
     text.style.display = "inherit";
     // Enable editing
     accountEmail.readOnly = false;
+    accountPhone.readOnly = false;
     accountName.readOnly = false;
 }
 
