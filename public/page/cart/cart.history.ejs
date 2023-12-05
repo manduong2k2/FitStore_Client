@@ -5,10 +5,10 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Mã đơn hàng</th>
-            <th>Ngày đặt hàng</th>
-            <th>Tổng tiền</th>
-            <th>Chi tiết</th>
+            <th>Mã đơn hàng &#127380;</th>
+            <th>Ngày đặt hàng &#128340;</th>
+            <th>Tổng tiền &#128184;</th>
+            <th>Chi tiết &#9432;</th>
           </tr>
         </thead>
         <tbody>
@@ -16,7 +16,7 @@
           <tr class="productItem">
             <td><%=item.id%></td>
             <td><%=item.date%></td>
-            <td><%=item.total%></td>
+            <td><%=item.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%> <span>₫</span></td>
             <td>
               <table class="table">
                 <thead>
@@ -32,17 +32,11 @@
                 <tbody>
                   <% item.Items.forEach(it => { %>
                   <tr>
+                    <td><img src="<%=it.product.image%>" style="height: 100px" alt="" /></td>
                     <td><%=it.product.name%></td>
-                    <td>
-                      <img
-                        src="<%=it.product.image%>"
-                        style="height: 100px"
-                        alt=""
-                      />
-                    </td>
-                    <td><%=it.product.price%></td>
+                    <td><%=it.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%><span>₫</span></td>
                     <td><%=it.quantity%></td>
-                    <td><%=it.cost%></td>
+                    <td><%=it.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%><span>₫</span></td>
                     <td><%=it.rating%></td>
                   </tr>
                   <% }); %>

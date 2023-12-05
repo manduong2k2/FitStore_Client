@@ -5,9 +5,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 router.use(express.json());
 const cookieParser = require('cookie-parser');
-var LocalStorage = require('node-localstorage').LocalStorage;
 router.use(cookieParser());
-localStorage = new LocalStorage('./scratch');
 
 router.use(express.urlencoded({ extended: true }));
 const request = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));

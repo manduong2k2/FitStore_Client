@@ -114,7 +114,7 @@
             <input type="email" id="email" value="<%=account.email%>" readonly name="email" required />
 
             <label for="phone">Số Điện Thoại:</label>
-            <input type="tel" id="phone" name="phone" required />
+            <input type="tel" id="phone" value="<%=account.phone%>" name="phone" required />
 
             <div class="form-group">
                 <label for="accountEmail">Địa chỉ:</label>
@@ -138,7 +138,7 @@
                 </div>
               </div>
 
-            <button type="submit">Hoàn Thành Đơn Hàng</button>
+            <button onclick="SubmitOrder(event)">Hoàn Thành Đơn Hàng</button>
           </form>
         </div>
       </div>

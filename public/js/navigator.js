@@ -6,7 +6,7 @@ function Introduce() {
     .then((response) => response.text())
     .then((data) => {
       targetElement.innerHTML = data;
-      document.getElementById('titlePage').innerHTML='Giới thiệu';
+      document.getElementById('titlePage').innerHTML = 'Giới thiệu';
     })
     .catch((error) => console.error("Error fetching HTML file:", error));
 }
@@ -28,7 +28,7 @@ function ProductList() {
         var productController = document.createElement("script");
         productController.src = "/js/product.controller.js";
         root.appendChild(productController);
-        document.getElementById('titlePage').innerHTML='Quản lý sản phẩm';
+        document.getElementById('titlePage').innerHTML = 'Quản lý sản phẩm';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -50,7 +50,7 @@ function ProductView() {
         var productController = document.createElement("script");
         productController.src = "/js/product.controller.js";
         root.appendChild(productController);
-        document.getElementById('titlePage').innerHTML='Sản phẩm';
+        document.getElementById('titlePage').innerHTML = 'Sản phẩm';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -64,16 +64,17 @@ function Contact() {
     .then((data) => {
       const renderedHtml = ejs.render(data,);
       root.innerHTML = renderedHtml;
-      document.getElementById('titlePage').innerHTML='Liên hệ';
+      document.getElementById('titlePage').innerHTML = 'Liên hệ';
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
 }
 
-function changeActiveState(element) {
+function changeActiveState(id) {
   var navLinks = document.querySelectorAll(".nav-link");
   navLinks.forEach(function (link) {
     link.classList.remove("active");
   });
+  var element = document.getElementById(id);
   element.classList.add("active");
 }
 //trang nhãn hiệu admin
@@ -94,7 +95,7 @@ function BrandList() {
         var brandController = document.createElement("script");
         brandController.src = "/js/brand.controller.js";
         root.appendChild(brandController);
-        document.getElementById('titlePage').innerHTML='Nhãn hiệu';
+        document.getElementById('titlePage').innerHTML = 'Nhãn hiệu';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -117,7 +118,7 @@ function CategoryList() {
         var categoryController = document.createElement("script");
         categoryController.src = "/js/category.controller.js";
         root.appendChild(categoryController);
-        document.getElementById('titlePage').innerHTML='Thể loại';
+        document.getElementById('titlePage').innerHTML = 'Thể loại';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -137,7 +138,7 @@ function AccountList() {
         var accountController = document.createElement("script");
         accountController.src = "/js/account.controller.js";
         root.appendChild(accountController);
-        document.getElementById('titlePage').innerHTML='Tài khoản';
+        document.getElementById('titlePage').innerHTML = 'Tài khoản';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
@@ -145,9 +146,9 @@ function AccountList() {
 //trang cart
 function CartList() {
   var account_id = getCookie('id');
-  if(!account_id){
+  if (!account_id) {
     if (confirm("Để tiếp tục bạn cần đăng nhập hoặc đăng ký, bạn có muốn đăng nhập không?")) {
-        window.location.href="/signin";
+      window.location.href = "/signin";
     }
   }
   var ejsFilePath = "/page/cart/cart.list.ejs";
@@ -168,7 +169,7 @@ function CartList() {
           var cartController = document.createElement("script");
           cartController.src = "/js/cart.controller.js";
           root.appendChild(cartController);
-          document.getElementById('titlePage').innerHTML='Giỏ hàng';
+          document.getElementById('titlePage').innerHTML = 'Giỏ hàng';
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
     });
@@ -193,7 +194,7 @@ function HistoryList() {
           // var cartController = document.createElement("script");
           // cartController.src = "/js/cart.controller.js";
           // root.appendChild(cartController);
-          document.getElementById('titlePage').innerHTML='Lịch sử mua hàng';
+          document.getElementById('titlePage').innerHTML = 'Lịch sử mua hàng';
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
     });
@@ -214,31 +215,31 @@ function getCookie(cname) {
   return "";
 }
 //trang quản lý tài khoản
-function PersonalAccountEdit(){
+function PersonalAccountEdit() {
   var ejsFilePath = "/page/account/personal.account.ejs";
   var root = document.getElementById("root");
-  axios.get("http://jul2nd.ddns.net/account/"+getCookie('id')).then((response) => {
+  axios.get("http://jul2nd.ddns.net/account/" + getCookie('id')).then((response) => {
     const account = response.data;
     fetch(ejsFilePath)
-    .then((response) => response.text())
-    .then((data) => {
-      const renderedHtml = ejs.render(data, { data: account });
-      root.innerHTML = renderedHtml;
-      var script1 = document.createElement("script");
-      script1.src = "/js/account/edit.account.js";
-      var script2 = document.createElement("script");
-      script2.src = "/js/form.handle.js";
-      var script3 = document.createElement("script");
-      script3.src = "/js/fetch.address.js";
-      script1.onload="fetchAccountDetails()";
-      root.appendChild(script1);
-      root.appendChild(script2);
-      root.appendChild(script3);
-      document.getElementById('titlePage').innerHTML='Quản lý tài khoản';
-    })
-    .catch((error) => console.error("Error fetching HTML file:", error));
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data, { data: account });
+        root.innerHTML = renderedHtml;
+        var script1 = document.createElement("script");
+        script1.src = "/js/account/edit.account.js";
+        var script2 = document.createElement("script");
+        script2.src = "/js/form.handle.js";
+        var script3 = document.createElement("script");
+        script3.src = "/js/fetch.address.js";
+        script1.onload = "fetchAccountDetails()";
+        root.appendChild(script1);
+        root.appendChild(script2);
+        root.appendChild(script3);
+        document.getElementById('titlePage').innerHTML = 'Quản lý tài khoản';
+      })
+      .catch((error) => console.error("Error fetching HTML file:", error));
   });
-  
+
 }
 //trang post
 function PostList() {
@@ -246,20 +247,46 @@ function PostList() {
   var root = document.getElementById("root");
   var data;
   axios.get("http://jul2nd.ddns.net/post").then(response => {
-      data = response.data;
+    data = response.data;
+    fetch(ejsFilePath)
+      .then(response => response.text())
+      .then(data => {
+        const renderedHtml = ejs.render(data, {
+          titlePage: "Post",
+          data: response.data,
+        });
+        root.innerHTML = renderedHtml;
+        var postController = document.createElement("script");
+        postController.src = "/js/post.controller.js";
+        root.appendChild(postController);
+        document.getElementById('titlePage').innerHTML = 'Bài viết';
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
+  });
+}
+async function SubmitSearch(event) {
+  event.preventDefault();
+  var search = document.getElementById('search-bar').value;
+  if (search) {
+    var ejsFilePath = "/page/product/product.view.ejs";
+    var root = document.getElementById("root");
+    axios.get("http://jul2nd.ddns.net/product/search/" + search).then((response) => {
       fetch(ejsFilePath)
-        .then(response => response.text())
-        .then(data => {
+        .then((response) => response.text())
+        .then((data) => {
           const renderedHtml = ejs.render(data, {
-            titlePage: "Post",
             data: response.data,
           });
           root.innerHTML = renderedHtml;
-          var postController = document.createElement("script");
-          postController.src = "/js/post.controller.js";
-          root.appendChild(postController);
-          document.getElementById('titlePage').innerHTML='Bài viết';
+          var productController = document.createElement("script");
+          productController.src = "/js/product.controller.js";
+          root.appendChild(productController);
+          document.getElementById('titlePage').innerHTML = 'Sản phẩm';
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
     });
+  }
+  else{
+    alert('Vui lòng nhập từ khoá bạn muốn tìm')
+  }
 }

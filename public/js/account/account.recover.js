@@ -16,10 +16,14 @@ async function SendEmail(event) {
                 document.getElementById('emailMessage').innerHTML = 'Không tìm thấy tài khoản khớp với email trên';
             }
             if (response.status === 200) {
-                alert('Send email success');
-                SwitchToCodeForm();
+                return response.text();
+                
             }
-        }).catch(err => {
+        }).then(data =>{
+            alert(data);
+            SwitchToCodeForm();
+        })
+        .catch(err => {
             console.log(err);
         });
 

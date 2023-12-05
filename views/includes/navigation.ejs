@@ -11,16 +11,16 @@
           <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="Introduce(); changeActiveState(this)">Giới thiệu</a>
+          <a id="introduce-nav" class="nav-link" onclick="Introduce(); changeActiveState('introduce-nav')">Giới thiệu</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="ProductView(); changeActiveState(this)">Sản phẩm</a>
+          <a id="product-nav" class="nav-link" onclick="ProductView(); changeActiveState('product-nav')">Sản phẩm</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="PostList(); changeActiveState(this)">Cộng đồng</a>
+          <a id="community-nav" class="nav-link" onclick="PostList(); changeActiveState('community-nav')">Cộng đồng</a>
         </li>
         <li class="nav-item nav-main">
-          <a class="nav-link" onclick="Contact(); changeActiveState(this)">Liên hệ</a>
+          <a id="contact-nav" class="nav-link" onclick="Contact(); changeActiveState('contact-nav')">Liên hệ</a>
         </li>
         <% if (isAdmin) { %>
         <li  class="nav-item nav-main">
@@ -31,19 +31,19 @@
                 Quản lý
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" onclick="AccountList(); changeActiveState(dropdownContainer)">Tài khoản</a>
-                <a class="dropdown-item" onclick="ProductList(); changeActiveState(dropdownContainer)">Sản phẩm</a>
-                <a class="dropdown-item" onclick="BrandList(); changeActiveState(dropdownContainer)">Nhãn hiệu</a>
-                <a class="dropdown-item" onclick="CategoryList(); changeActiveState(dropdownContainer)">Loại sản phẩm</a>
+                <a class="dropdown-item" onclick="AccountList(); changeActiveState('dropdownContainer')">Tài khoản</a>
+                <a class="dropdown-item" onclick="ProductList(); changeActiveState('dropdownContainer')">Sản phẩm</a>
+                <a class="dropdown-item" onclick="BrandList(); changeActiveState('dropdownContainer')">Nhãn hiệu</a>
+                <a class="dropdown-item" onclick="CategoryList(); changeActiveState('dropdownContainer')">Loại sản phẩm</a>
               </div>
             </li>
           </ul>
         </li>
         <% } %>
-        <li class="nav-item search-bar" >
-          <form action="" medthod="">
+        <li id="search-nav" class="nav-item search-bar" >
+          <form onsubmit="SubmitSearch(event); changeActiveState()">
             <!-- ko bik m làm s nên t bỏ v tạm nha -->
-            <input type="search" placeholder="&#128269;Tìm kiếm sản phẩm...">
+            <input id="search-bar" type="search" placeholder="&#128269;Tìm kiếm sản phẩm...">
           </form>
         </li>
         <li class="nav-item nav-main" id="li-cart" style="width:80px">
@@ -54,7 +54,7 @@
         </li>
         
         <li class="nav-item dropdown" id="log">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="account-nav" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img id="accountImage" src="/images/account.png" alt="#" style="height: 40px" />
           </a>
           <ul class="dropdown-menu drop1">
