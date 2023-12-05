@@ -55,16 +55,32 @@
               <tr id="product<%=item.product.id%>item" class="productItem">
                 <td><%=item.product.name%></td>
                 <td>
-                  <img src="<%=item.product.image%>" alt="Hình ảnh" style="height: 100px" />
+                  <img
+                    src="<%=item.product.image%>"
+                    alt="Hình ảnh"
+                    style="height: 100px"
+                  />
                 </td>
                 <td>
-                  <input id="product<%=item.product.id%>number" style="width: 80px;text-align: center;" 
-                    type="number" min="1" value="<%=item.quantity%>" attr="data-id= <%=item.product_id%>"
-                    class="form-control quantity" readonly />
+                  <input
+                    id="product<%=item.product.id%>number"
+                    style="width: 80px;text-align: center;"
+                    type="number"
+                    min="1"
+                    value="<%=item.quantity%>"
+                    attr="data-id= <%=item.product_id%>"
+                    class="form-control quantity"
+                    readonly
+                  />
                 </td>
                 <td>
-                  <label> <span id="product<%=item.product.id%>total" class="itemTotal" >
-                    <%=(item.quantity*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%></span >
+                  <label>
+                    <span
+                      id="product<%=item.product.id%>total"
+                      class="itemTotal"
+                      ><%=(item.quantity*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+                      ".")%></span
+                    >
                     <span>₫</span>
                   </label>
                 </td>
@@ -73,9 +89,17 @@
             </tbody>
           </table>
           <div class="col-md-12">
-            <h3>Tổng hoá đơn:
-              <input id="hiddenBillTotal" type="number" style="display: none" value="<%=toTal%>" />
-              <span id="billTotal"> <%=toTal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %> </span>
+            <h3>
+              Tổng hoá đơn:
+              <input
+                id="hiddenBillTotal"
+                type="number"
+                style="display: none"
+                value="<%=toTal%>"
+              />
+              <span id="billTotal">
+                <%=toTal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %>
+              </span>
               <span>₫</span>
             </h3>
           </div>
@@ -90,7 +114,7 @@
             <input type="email" id="email" value="<%=account.email%>" readonly name="email" required />
 
             <label for="phone">Số Điện Thoại:</label>
-            <input type="tel" id="phone" value="<%=account.phone%>" name="phone" required />
+            <input type="tel" id="phone" name="phone" required />
 
             <div class="form-group">
                 <label for="accountEmail">Địa chỉ:</label>
@@ -113,8 +137,9 @@
                   </select>
                 </div>
               </div>
+
+            <button type="submit">Hoàn Thành Đơn Hàng</button>
           </form>
-          <button class="btn btn-success" onclick="SubmitOrder(event)">Đặt hàng</button>
         </div>
       </div>
     </div>

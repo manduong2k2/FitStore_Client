@@ -173,6 +173,31 @@ function CartList() {
         .catch((error) => console.error("Error fetching EJS file:", error));
     });
 }
+function HistoryList() {
+  var account_id = getCookie('id');
+  var ejsFilePath = "/page/cart/cart.history.ejs";
+  var root = document.getElementById("root");
+  var data;
+  axios
+    .get("http://jul2nd.ddns.net/order/acc/" + account_id)
+    .then(response => {
+      data = response.data;
+      fetch(ejsFilePath)
+        .then(response => response.text())
+        .then(data => {
+          const renderedHtml = ejs.render(data, {
+            titlePage: "Lịch sử mua hàng",
+            data: response.data,
+          });
+          root.innerHTML = renderedHtml;
+          // var cartController = document.createElement("script");
+          // cartController.src = "/js/cart.controller.js";
+          // root.appendChild(cartController);
+          document.getElementById('titlePage').innerHTML='Lịch sử mua hàng';
+        })
+        .catch((error) => console.error("Error fetching EJS file:", error));
+    });
+}
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);

@@ -1,0 +1,58 @@
+<div class="container form-container">
+  <h1>Lịch sử mua hàng</h1>
+  <div class="form" style="display: flex">
+    <div id="product-info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Mã đơn hàng</th>
+            <th>Ngày đặt hàng</th>
+            <th>Tổng tiền</th>
+            <th>Chi tiết</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% data.forEach(item => { %>
+          <tr class="productItem">
+            <td><%=item.id%></td>
+            <td><%=item.date%></td>
+            <td><%=item.total%></td>
+            <td>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Hình</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng</th>
+                    <th>Đánh giá</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% item.Items.forEach(it => { %>
+                  <tr>
+                    <td><%=it.product.name%></td>
+                    <td>
+                      <img
+                        src="<%=it.product.image%>"
+                        style="height: 100px"
+                        alt=""
+                      />
+                    </td>
+                    <td><%=it.product.price%></td>
+                    <td><%=it.quantity%></td>
+                    <td><%=it.cost%></td>
+                    <td><%=it.rating%></td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
