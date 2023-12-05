@@ -103,7 +103,7 @@ function Payment() {
       .then((data) => {
         const renderedHtml = ejs.render(data, {
           data: response.data,
-          account: account
+          account: account,
         });
         root.innerHTML = renderedHtml;
         var cartController = document.createElement("script");
@@ -129,28 +129,39 @@ function getCookie(cname) {
   }
   return "";
 }
-async function SubmitOrder(event){
+async function SubmitOrder(event) {
   event.preventDefault();
-  var account_id = getCookie('id');
-  var total = document.getElementById('hiddenBillTotal').value;
-  var ward_code = document.getElementById('wards').value;
+  var account_id = getCookie("id");
+  var total = document.getElementById("hiddenBillTotal").value;
+  var ward_code = document.getElementById("wards").value;
   var formData = new FormData();
-  formData.append('account_id',account_id);
-  formData.append('total',total);
-  formData.append('ward_code',ward_code);
-  await axios('http://jul2nd.ddns.net/order/' ,{
-    method:'POST',
-    data:formData,
-    headers:{
-      Authorization: getCookie('token'),
-      "Content-Type": "application/json"
-    }
-  }).then(response =>{
-    if(response.status===201){
-      alert('Ordered successfully');
-      
-    }
-  }).catch(err=>{
-    console.log(err);
-  });
+  formData.append("account_id", account_id);
+  formData.append("total", total);
+  formData.append("ward_code", ward_code);
+  await axios("http://jul2nd.ddns.net/order/", {
+    method: "POST",
+    data: formData,
+    headers: {
+      Authorization: getCookie("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.status === 201) {
+        alert("Ordered successfully");
+        var ejsFilePath = "/page/cart/cart.success.ejs";
+        var targetElement = document.getElementById("root");
+        fetch(ejsFilePath)
+          .then((response) => response.text())
+          .then((data) => {
+            targetElement.innerHTML = data;
+            document.getElementById("titlePage").innerHTML =
+              "Thanh toán thành công";
+          })
+          .catch((error) => console.error("Error fetching HTML file:", error));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
