@@ -37,7 +37,23 @@
                     <td><%=it.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%><span>₫</span></td>
                     <td><%=it.quantity%></td>
                     <td><%=it.cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%><span>₫</span></td>
-                    <td><%=it.rating%></td>
+                    <% if (it.rating) { %>
+                      <td>
+                        <div class="rating">
+                          <% for (let i = 1; i <= it.rating; i++) { %>
+                            <span class="star-rated" data-rating="<%= i %>" >&#9733;</span>
+                          <% } %>
+                        </div>
+                      </td>
+                    <% } else { %>
+                      <td>
+                        <div class="rating">
+                          <% for (let i = 1; i <= 5; i++) { %>
+                            <span class="star-unrated" style="cursor: pointer;" data-rating="<%= i %>" onclick="rating('<%= i %>','<%=item.id%>','<%=it.product.id%>')">&#9733;</span>
+                          <% } %>
+                        </div>
+                      </td>
+                    <% } %>
                   </tr>
                   <% }); %>
                 </tbody>

@@ -191,9 +191,6 @@ function HistoryList() {
             data: response.data,
           });
           root.innerHTML = renderedHtml;
-          // var cartController = document.createElement("script");
-          // cartController.src = "/js/cart.controller.js";
-          // root.appendChild(cartController);
           document.getElementById('titlePage').innerHTML = 'Lịch sử mua hàng';
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
@@ -289,4 +286,26 @@ async function SubmitSearch(event) {
   else{
     alert('Vui lòng nhập từ khoá bạn muốn tìm')
   }
+}
+async function rating(stars,order_id,product_id){
+  var formData =new FormData();
+  formData.append('product_id',product_id);
+  formData.append('order_id',order_id);
+  formData.append('rating',stars);
+  await axios("http://jul2nd.ddns.net/order/rating", {
+    method: "PUT",
+    data: formData,
+    headers: {
+      Authorization: getCookie("token"),
+      "Content-Type": "application/json",
+    },
+  }).then((response) => {
+    if (response.status === 200) {
+      alert("Đánh giá thành công !");
+      HistoryList();
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 }

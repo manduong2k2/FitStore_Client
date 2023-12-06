@@ -280,4 +280,18 @@ th {
 #navMain li {
   width: 120px;
 }
-/* CSS để tạo hiệu ứng mờ cho phần overlay */
+.star-rated {
+  color: goldenrod;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.star-unrated {
+  color: black; 
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.star-unrated:hover{
+  color: goldenrod; 
+}
