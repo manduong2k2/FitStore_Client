@@ -37,14 +37,15 @@ function ProductList() {
 function ProductView() {
   var ejsFilePath = "/page/product/product.view.ejs";
   var root = document.getElementById("root");
-  var data;
+  var products;
   axios.get("http://jul2nd.ddns.net/product").then((response) => {
-    data = response.data;
+    products = response.data;
     fetch(ejsFilePath)
       .then((response) => response.text())
       .then((data) => {
+        console.log(products);
         const renderedHtml = ejs.render(data, {
-          data: response.data,
+          data: products,
         });
         root.innerHTML = renderedHtml;
         var productController = document.createElement("script");

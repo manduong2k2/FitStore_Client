@@ -118,27 +118,66 @@ function fetchOptions() {
     })
     .catch((error) => console.error("Error fetching brands:", error));
 }
-async function submitProductForm(event, method) {
+async function submitProductForm(event) {
   event.preventDefault();
-  var productId = "";
-  var productName = document.getElementById("productName").value;
-  var category = document.getElementById("category").value;
-  var brand = document.getElementById("brand").value;
-  var productImage = document.getElementById("productImage").files[0];
-  var productPrice = document.getElementById("productPrice").value;
-  var productInfo = document.getElementById("productInfo").value;
-  var productStock = document.getElementById("productStock").value;
-  if (
-    !productName ||
-    !category ||
-    !brand ||
-    !productImage ||
-    !productPrice ||
-    !productInfo ||
-    !productStock
-  ) {
-    alert("Vui lòng nhập đầy đủ thông tin");
-  } else {
+  try {
+    var productName = document.getElementById("productName").value;
+    var category = document.getElementById("category").value;
+    var brand = document.getElementById("brand").value;
+    var productImage = document.getElementById("productImage").files[0];
+    var productPrice = document.getElementById("productPrice").value;
+    var productInfo = document.getElementById("productInfo").value;
+    var productStock = document.getElementById("productStock").value;
+    if ( !productName || !category || !brand || !productImage || !productPrice || !productInfo || !productStock ) {
+      alert("Vui lòng nhập đầy đủ thông tin");
+    } else {
+      const formData = new FormData();
+      formData.append("name", productName);
+      formData.append("category_id", category);
+      formData.append("brand_id", brand);
+      formData.append("price", productPrice);
+      formData.append("info", productInfo);
+      formData.append("stock", productStock);
+      if (productImage) formData.append("image", productImage);
+      console.log(formData);
+      const response = await fetch(
+        "http://jul2nd.ddns.net/product",
+        {
+          method: 'POST',
+          body: formData,
+          withCredentials: true,
+          headers: {
+            Authorization: getCookie("token"),
+          },
+        }
+      );
+      if (response.status === 201) {
+        closeCreatePopup();
+        ProductList();
+        alert("Thêm sản phẩm thành công");
+      }
+      else {
+        const errorData = await response.json();
+        alert(errorData.message);
+        ProductList();
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+async function submitEditProductForm(event) {
+  event.preventDefault();
+  try {
+    var productId = document.getElementById("productId").value;
+    var productName = document.getElementById("productName").value;
+    var category = document.getElementById("category").value;
+    var brand = document.getElementById("brand").value;
+    var productImage = document.getElementById("productImage").files[0];
+    var productPrice = document.getElementById("productPrice").value;
+    var productInfo = document.getElementById("productInfo").value;
+    var productStock = document.getElementById("productStock").value;
+
     const formData = new FormData();
     formData.append("name", productName);
     formData.append("category_id", category);
@@ -147,40 +186,30 @@ async function submitProductForm(event, method) {
     formData.append("info", productInfo);
     formData.append("stock", productStock);
     if (productImage) formData.append("image", productImage);
-    if (method === "PUT") {
-      productId = document.getElementById("productId").value;
-    }
-
-    try {
-      const response = await fetch(
-        "http://jul2nd.ddns.net/product/" + productId,
-        {
-          method: method,
-          data: formData,
-          withCredentials: true,
-          headers: {
-            Authorization: getCookie("token"),
-          },
-        }
-      );
-      if (response.status !== 200) {
-        const errorData = await response.json();
-        alert(errorData.message);
-        ProductList();
-      } else {
-        if (method === "PUT") {
-          ProductList();
-          alert("Cập nhật thành công");
-        }
-        if (method === "POST") {
-          closeCreatePopup();
-          ProductList();
-          alert("Thêm sản phẩm thành công");
-        }
+    console.log(formData);
+    const response = await fetch(
+      "http://jul2nd.ddns.net/product/" + productId,
+      {
+        method: 'PUT',
+        body: formData,
+        withCredentials: true,
+        headers: {
+          Authorization: getCookie("token"),
+        },
       }
-    } catch (error) {
-      console.error("Error:", error);
+    );
+    if (response.status === 201) {
+      closeCreatePopup();
+      ProductList();
+      alert("Cập nhật thành công");
     }
+    else {
+      const errorData = await response.json();
+      alert(errorData.message);
+      ProductList();
+    }
+  } catch (error) {
+    console.error("Error:", error);
   }
 }
 function getCookie(cname) {

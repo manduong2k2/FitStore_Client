@@ -2,13 +2,12 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
 router.use(express.json());
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
-
+const request = require('request-promise');
 router.use(express.urlencoded({ extended: true }));
-const request = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 router.get("/", (req, res) => {
   try {
@@ -21,7 +20,7 @@ router.get("/", (req, res) => {
     else {
       res.render("home", { titlePage: "Trang chủ", isAdmin: false });
     }
-  }catch(err){
+  } catch (err) {
     res.send(err);
   }
 });
@@ -62,9 +61,9 @@ router.post('/login', (req, res) => {
       res.redirect('/signin?message=Sai thông tin đăng nhập');
     });
 });
-router.get('/logout', (req, res) => {
+router.get('/logout', async (req, res) => {
   try {
-    request('http://jul2nd.ddns.net/account/logout', {
+    await axios('http://jul2nd.ddns.net/account/logout', {
       method: 'POST',
       withCredentials: true,
       headers: {
@@ -73,14 +72,15 @@ router.get('/logout', (req, res) => {
     })
       .then(response => {
         console.log(response);
+        res.clearCookie('id');
+        res.clearCookie('name');
+        res.clearCookie('image');
+        res.clearCookie('token');
+        res.redirect('/');
       }).catch(error => {
         console.log(error);
       });
-    res.clearCookie('id', { SameSite: 'None', httpOnly: false, secure: true });
-    res.clearCookie('name', { SameSite: 'None', httpOnly: false, secure: true });
-    res.clearCookie('image', { SameSite: 'None', httpOnly: false, secure: true });
-    res.clearCookie('token', { SameSite: 'None', httpOnly: false, secure: true });
-    res.redirect('/');
+
   } catch (err) {
     console.log(err);
   }
