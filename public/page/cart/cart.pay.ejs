@@ -49,6 +49,15 @@
       <div class="form" style="display: flex">
         <div id="product-info">
           <table class="table">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Hình</th>
+                <th>Số lượng</th>
+                <th>Giá &#128181;</th>
+                <th>Tổng</th>
+              </tr>
+            </thead>
             <tbody>
               <% let toTal = 0; %> <% data.forEach(item => {
               toTal+=item.quantity * item.product.price %>
@@ -73,6 +82,15 @@
                     class="form-control quantity"
                     readonly
                   />
+                </td>
+                <td>
+                  <label>
+                    <span
+                      class="itemTotal"
+                      ><%=item.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+                      ".")%></span>
+                    <span>₫</span>
+                  </label>
                 </td>
                 <td>
                   <label>
