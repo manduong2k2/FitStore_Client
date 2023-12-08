@@ -94,39 +94,44 @@ async function Payment() {
       checkedItems.push(checkbox.id);
     }
   });
-  var account_id = getCookie("id");
-  var ejsFilePath = "/page/cart/cart.pay.ejs";
-  var root = document.getElementById("root");
-  var account;
+  if(checkedItems.length === 0){
+    alert('Vui lòng chọn ít nhất 1 sản phẩm để thanh toán');
+  }
+  else {
+    var account_id = getCookie("id");
+    var ejsFilePath = "/page/cart/cart.pay.ejs";
+    var root = document.getElementById("root");
+    var account;
 
-  axios.get("http://jul2nd.ddns.net/account/" + account_id).then((response) => {
-    account = response.data;
-  });
-  const reqData = {
-    ids: checkedItems,
-    account_id: account_id,
-  };
-  await axios.put("http://jul2nd.ddns.net/cart/ids", reqData, {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then((response) => {
-    fetch(ejsFilePath)
-      .then((response) => response.text())
-      .then((data) => {
-        const renderedHtml = ejs.render(data, {
-          data: response.data,
-          account: account,
-          items: checkedItems,
-        });
-        root.innerHTML = renderedHtml;
-        var cartController = document.createElement("script");
-        cartController.src = "/js/cart.controller.js";
-        root.appendChild(cartController);
-        document.getElementById("titlePage").innerHTML = "Thanh toán";
-      })
-      .catch((error) => console.error("Error fetching EJS file:", error));
-  });
+    axios.get("http://jul2nd.ddns.net/account/" + account_id).then((response) => {
+      account = response.data;
+    });
+    const reqData = {
+      ids: checkedItems,
+      account_id: account_id,
+    };
+    await axios.put("http://jul2nd.ddns.net/cart/ids", reqData, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      fetch(ejsFilePath)
+        .then((response) => response.text())
+        .then((data) => {
+          const renderedHtml = ejs.render(data, {
+            data: response.data,
+            account: account,
+            items: checkedItems,
+          });
+          root.innerHTML = renderedHtml;
+          var cartController = document.createElement("script");
+          cartController.src = "/js/cart.controller.js";
+          root.appendChild(cartController);
+          document.getElementById("titlePage").innerHTML = "Thanh toán";
+        })
+        .catch((error) => console.error("Error fetching EJS file:", error));
+    });
+  }
 }
 function getCookie(cname) {
   let name = cname + "=";
@@ -157,7 +162,7 @@ async function SubmitOrder(event) {
   formData.append("account_id", account_id);
   formData.append("total", total);
   formData.append("ward_code", ward_code);
-  formData.append('items',JSON.stringify(checkedItems));
+  formData.append('items', JSON.stringify(checkedItems));
   await axios("http://jul2nd.ddns.net/order/", {
     method: "POST",
     data: formData,

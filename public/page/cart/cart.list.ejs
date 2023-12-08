@@ -30,8 +30,8 @@
     <tbody>
       <% let toTal = 0; %> <% data.forEach(item => {  %>
       
-      <tr id="product<%=item.product.id%>item" class="productItem">
-        <td><input id="<%=item.product.id%>" class="item-check" type="checkbox" onchange="onItemChecked(this,'product<%=item.product.id%>number','<%=item.product.price%>')" ></td>
+      <tr id="product<%=item.product.id%>item"  class="productItem">
+        <td><input id="<%=item.product.id%>" class="item-check" style="cursor: pointer; height: 25px;width: 25px;" type="checkbox" onchange="onItemChecked(this,'product<%=item.product.id%>number','<%=item.product.price%>')" ></td>
         <td><%=item.product.name%></td>
         <td><img src="<%=item.product.image%>" alt="Hình ảnh" style="height: 100px" /></td>
         <td>
