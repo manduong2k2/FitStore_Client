@@ -8,16 +8,14 @@ async function IncreaseByOne(product_id, product_price) {
   document.getElementById("product" + product_id + "number").value++;
   document.getElementById("product" + product_id + "total").innerText = (
     document.getElementById("product" + product_id + "number").value *
-    product_price
-  )
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  var updateTotal = parseInt(document.getElementById("hiddenBillTotal").value);
-  updateTotal += parseInt(product_price);
-  document.getElementById("hiddenBillTotal").value = updateTotal;
-  document.getElementById("billTotal").innerText = updateTotal
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    product_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  var checkbox = document.getElementById(product_id);
+  if (checkbox.checked) {
+    var updateTotal = parseInt(document.getElementById("hiddenBillTotal").value);
+    updateTotal += parseInt(product_price);
+    document.getElementById("hiddenBillTotal").value = updateTotal;
+    document.getElementById("billTotal").innerText = updateTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
   checkItemNumber(product_id);
 }
 async function DecreaseByOne(product_id, product_price) {
@@ -34,12 +32,13 @@ async function DecreaseByOne(product_id, product_price) {
   )
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  var updateTotal = parseInt(document.getElementById("hiddenBillTotal").value);
-  updateTotal -= parseInt(product_price);
-  document.getElementById("hiddenBillTotal").value = updateTotal;
-  document.getElementById("billTotal").innerText = updateTotal
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  var checkbox = document.getElementById(product_id);
+  if (checkbox.checked) {
+    var updateTotal = parseInt(document.getElementById("hiddenBillTotal").value);
+    updateTotal -= parseInt(product_price);
+    document.getElementById("hiddenBillTotal").value = updateTotal;
+    document.getElementById("billTotal").innerText = updateTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
   checkItemNumber(product_id);
 }
 async function RemoveItem(product_id, product_price) {
@@ -87,23 +86,38 @@ function checkItemNumber(product_id) {
   else button.classList.remove("disable-btn");
 }
 //trang cart
-function Payment() {
+async function Payment() {
+  var items = document.querySelectorAll('.item-check');
+  const checkedItems = [];
+  items.forEach(checkbox => {
+    if (checkbox.checked) {
+      checkedItems.push(checkbox.id);
+    }
+  });
   var account_id = getCookie("id");
   var ejsFilePath = "/page/cart/cart.pay.ejs";
   var root = document.getElementById("root");
-  var data;
   var account;
+
   axios.get("http://jul2nd.ddns.net/account/" + account_id).then((response) => {
     account = response.data;
   });
-  axios.get("http://jul2nd.ddns.net/cart/" + account_id).then((response) => {
-    data = response.data;
+  const reqData = {
+    ids: checkedItems,
+    account_id: account_id,
+  };
+  await axios.put("http://jul2nd.ddns.net/cart/ids", reqData, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => {
     fetch(ejsFilePath)
       .then((response) => response.text())
       .then((data) => {
         const renderedHtml = ejs.render(data, {
           data: response.data,
           account: account,
+          items: checkedItems,
         });
         root.innerHTML = renderedHtml;
         var cartController = document.createElement("script");
@@ -131,6 +145,11 @@ function getCookie(cname) {
 }
 async function SubmitOrder(event) {
   event.preventDefault();
+  var items = document.querySelectorAll('.item-id');
+  const checkedItems = [];
+  items.forEach(id => {
+    checkedItems.push(parseInt(id.value));
+  });
   var account_id = getCookie("id");
   var total = document.getElementById("hiddenBillTotal").value;
   var ward_code = document.getElementById("wards").value;
@@ -138,6 +157,7 @@ async function SubmitOrder(event) {
   formData.append("account_id", account_id);
   formData.append("total", total);
   formData.append("ward_code", ward_code);
+  formData.append('items',JSON.stringify(checkedItems));
   await axios("http://jul2nd.ddns.net/order/", {
     method: "POST",
     data: formData,
@@ -155,8 +175,8 @@ async function SubmitOrder(event) {
           .then((response) => response.text())
           .then((data) => {
             targetElement.innerHTML = data;
-            document.getElementById("titlePage").innerHTML =
-              "Thanh toán thành công";
+            document.getElementById("titlePage").innerHTML = "Thanh toán thành công";
+            getCartNumber();
           })
           .catch((error) => console.error("Error fetching HTML file:", error));
       }
@@ -164,4 +184,15 @@ async function SubmitOrder(event) {
     .catch((err) => {
       console.log(err);
     });
+}
+function onItemChecked(checkbox, product_id, product_price) {
+  var product_number = parseInt(document.getElementById(product_id).value);
+  var updateTotal = parseInt(document.getElementById("hiddenBillTotal").value);
+  if (checkbox.checked) {
+    updateTotal += parseInt(product_price) * product_number;
+  } else {
+    updateTotal -= parseInt(product_price) * product_number;
+  }
+  document.getElementById("hiddenBillTotal").value = updateTotal;
+  document.getElementById("billTotal").innerText = updateTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }

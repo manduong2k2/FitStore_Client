@@ -18,6 +18,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>Chọn sản phẩm</th>
         <th>Tên sản phẩm</th>
         <th>Hình</th>
         <th>Số lượng</th>
@@ -27,36 +28,19 @@
       </tr>
     </thead>
     <tbody>
-      <% let toTal = 0; %> <% data.forEach(item => { toTal+=item.quantity *
-      item.product.price %>
+      <% let toTal = 0; %> <% data.forEach(item => {  %>
+      
       <tr id="product<%=item.product.id%>item" class="productItem">
+        <td><input id="<%=item.product.id%>" class="item-check" type="checkbox" onchange="onItemChecked(this,'product<%=item.product.id%>number','<%=item.product.price%>')" ></td>
         <td><%=item.product.name%></td>
-        <td>
-          <img
-            src="<%=item.product.image%>"
-            alt="Hình ảnh"
-            style="height: 100px"
-          />
-        </td>
+        <td><img src="<%=item.product.image%>" alt="Hình ảnh" style="height: 100px" /></td>
         <td>
           <div style="display: inline-flex">
-            <button
-              id="product<%=item.product.id%>button"
-              onclick="DecreaseByOne('<%=item.product.id%>','<%=item.product.price%>')"
-              class="btn btn-danger <%= item.quantity === 1 ? 'disable-btn' : '' %>"
-            >
-              -
+            <button id="product<%=item.product.id%>button" onclick="DecreaseByOne('<%=item.product.id%>','<%=item.product.price%>')" class="btn btn-danger <%= item.quantity === 1 ? 'disable-btn' : '' %>" >-
             </button>
-            <input
-              id="product<%=item.product.id%>number"
-              style="width: 80px; text-align: center"
-              type="number"
-              min="1"
-              value="<%=item.quantity%>"
-              attr="data-id= <%=item.product_id%>"
-              class="form-control quantity"
-              readonly
-            />
+            <input id="product<%=item.product.id%>number" style="width: 80px; text-align: center"
+              type="number" min="1" value="<%=item.quantity%>" attr="data-id= <%=item.product_id%>" class="form-control quantity"
+              readonly />
             <button
               onclick="IncreaseByOne('<%=item.product.id%>','<%=item.product.price%>')"
               class="btn btn-success"

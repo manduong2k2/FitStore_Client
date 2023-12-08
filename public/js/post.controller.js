@@ -100,7 +100,7 @@ function PostDetail(post_id) {
         // var script = document.createElement('script');
         // script.src = '/js/fetchOpt.js';
         // root.appendChild(script);
-        document.getElementById("titlePage").innerHTML = "post";
+        document.getElementById("titlePage").innerHTML = response.data.title;
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });

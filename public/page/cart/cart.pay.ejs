@@ -53,6 +53,7 @@
               <% let toTal = 0; %> <% data.forEach(item => {
               toTal+=item.quantity * item.product.price %>
               <tr id="product<%=item.product.id%>item" class="productItem">
+                <input class="item-id" type="hidden" value="<%=item.product.id%>">
                 <td><%=item.product.name%></td>
                 <td>
                   <img
