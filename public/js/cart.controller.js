@@ -201,3 +201,18 @@ function onItemChecked(checkbox, product_id, product_price) {
   document.getElementById("hiddenBillTotal").value = updateTotal;
   document.getElementById("billTotal").innerText = updateTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
+function ChangeAll(checkbox){
+  var otherCheckboxes = document.querySelectorAll('.item-check');
+  if(checkbox.checked){
+    otherCheckboxes.forEach(checkbox=>{
+      checkbox.checked=true;
+      checkbox.dispatchEvent(new Event('change'));
+    })
+  }
+  else{
+    otherCheckboxes.forEach(checkbox=>{
+      checkbox.checked=false;
+      checkbox.dispatchEvent(new Event('change'));
+    })
+  }
+}
