@@ -205,14 +205,18 @@ function ChangeAll(checkbox){
   var otherCheckboxes = document.querySelectorAll('.item-check');
   if(checkbox.checked){
     otherCheckboxes.forEach(checkbox=>{
-      checkbox.checked=true;
-      checkbox.dispatchEvent(new Event('change'));
+      if(!checkbox.checked){
+        checkbox.checked=true;
+        checkbox.dispatchEvent(new Event('change'));
+      }
     })
   }
   else{
     otherCheckboxes.forEach(checkbox=>{
-      checkbox.checked=false;
-      checkbox.dispatchEvent(new Event('change'));
+      if(checkbox.checked){
+        checkbox.checked=false;
+        checkbox.dispatchEvent(new Event('change'));
+      }
     })
   }
 }
