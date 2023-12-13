@@ -9,7 +9,7 @@
     }
 
     .btn {
-        margin: 5px 0 5px 241.4px;
+        margin: 5px 0 5px 130.4px;
     }
 
     label {
@@ -55,11 +55,16 @@
         <label for="productStock">Product Stock:</label>
         <input type="number" value="<%= product.stock %>" id="productStock" class="form-control" name="productStock" required /><br />
     </div>
-    <button onclick="submitEditProductForm(event)" class="btn btn-success">
-        Submit
-    </button>
+    <p><strong>Đã bán:</strong>
+        <%= solds %>
+    </p>
+    <div class="buttonstyle" style="display:flex">
+        <button onclick="submitEditProductForm(event)" class="btn btn-success">
+            Submit
+        </button>
+        <button onclick="ProductList()" class="btn btn-default">
+            Quay lại
+        </button>
+    </div>
 </form>
-<p><strong>Đã bán:</strong>
-    <%= solds %>
-</p>
 </div>
