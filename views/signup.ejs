@@ -2,7 +2,7 @@
 
   <body>
     <%- include('includes/navigation.ejs')%>
-      <div>
+      <div id="root">
         <!-- Section: Design Block -->
         <section class="background-radial-gradient overflow-hidden">
 
@@ -108,14 +108,14 @@
           </div>
         </section>
         <!-- Section: Design Block -->
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            // Load dữ liệu tỉnh/thành phố khi trang được tải
+            fetchProvinces();
+          });
+        </script>
+        <script src="js/form.handle.js"></script>
+        <script src="js/fetch.address.js"></script>
       </div>
-      <script>
-        document.addEventListener("DOMContentLoaded", function () {
-          // Load dữ liệu tỉnh/thành phố khi trang được tải
-          fetchProvinces();
-        });
-      </script>
-      <script src="js/form.handle.js"></script>
-      <script src="js/fetch.address.js"></script>
       <%- include('includes/footer.ejs')%>
   </body>

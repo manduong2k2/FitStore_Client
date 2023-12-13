@@ -27,13 +27,13 @@
 
           <td colspan="2">
             <a class="btn btn-primary" onclick="BrandEdit(<%= item.id %>)"
-              >Edit</a
+              >Chỉnh sửa</a
             >
             <a
               class="btn btn-danger"BrandDelete
-              onclick="BrandDelete(<%= item.id %>)"
+              onclick="BrandDelete('<%= item.id %>')"
               onclick="return confirm('Are you sure you want to delete this user?')"
-              >Delete</a
+              >Xoá</a
             >
           </td>
         </tr>

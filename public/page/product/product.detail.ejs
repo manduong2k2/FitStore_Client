@@ -1,4 +1,3 @@
-<h2 style="margin-left:20px">Thông tin Sản Phẩm</h2>
 <div style="margin-left:20px">
   <hr />
   <h2 style="text-decoration:underline">
@@ -9,11 +8,10 @@
       <img src="<%= product.image%>" alt="Hình ảnh" style="width:50%;">
     </div>
     <div class="right" style="width:40%; margin-top: 5%">
-      <h4 style="color:orangered; font-size:30px"><%= product.price%> VND</h4>
+      <h4 style="color:orangered; font-size:30px"><%= product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫%></h4>
       <p style="font-size:18px; width:100%">Loại sản phẩm: <%= product.category.name%></p>
       <p style="font-size:18px; width:100%">Nhãn hiệu: <%= product.brand.name%></p>
       <p style="font-size:18px; width:100%">Thông tin: <%= product.info%></p>
-      <p style="font-size:18px; width:100%"><strong>Công dụng:</strong></p>
     <ul>
       <% product.use_id_Uses.forEach(use => { %>
       <li><strong>Name:</strong> <%= use.name %></li>
@@ -21,10 +19,13 @@
     </ul>
     <p><strong>Đã bán:</strong> <%= solds %></p>
       <div class="button" style="display:flex">
-        <a class="btn btn-default" style="margin-right:20px" onclick="ProductView()" >Quay lại</a>
+        <a class="btn btn-primary" style="margin-right:20px" onclick="ProductView()" >Quay lại</a>
+        <%if(product.stock > 0){%>
           <button type="submit" class="btn btn-success"
                   onclick="AddToCart('<%= product.id%>')">
-            Add to cart</button>
+            Thêm giỏ hàng</button>
+            <%} else%>
+
         </form>
       </div>
     </div>
