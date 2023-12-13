@@ -1,7 +1,13 @@
-function ProductDetail(product_id) {
+async function ProductDetail(product_id) {
   var ejsFilePath = "/page/product/product.detail.ejs";
   var root = document.getElementById("root");
-  axios.get("http://jul2nd.ddns.net/product/" + product_id).then((response) => {
+  fetch('http://jul2nd.ddns.net/product/watch/'+product_id,{
+    method:'POST',
+    headers:{
+      Authorization: getCookie('token')
+    }
+  });
+  await axios.get("http://jul2nd.ddns.net/product/" + product_id).then((response) => {
     data = response.data;
     fetch(ejsFilePath)
       .then((response) => response.text())
@@ -14,7 +20,7 @@ function ProductDetail(product_id) {
         var script = document.createElement("script");
         script.src = "/js/fetchOpt.js";
         root.appendChild(script);
-        document.getElementById("titlePage").innerHTML = "Chi tiết sản phẩm";
+        document.getElementById("titlePage").innerHTML = response.data.product.name;
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
