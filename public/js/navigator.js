@@ -1,3 +1,31 @@
+//trang home
+document.addEventListener("DOMContentLoaded", (event) => {
+  Home();
+});
+function Home() {
+  var ejsFilePath = "/page/home/home.view.ejs";
+  var root = document.getElementById("root");
+  var products;
+  axios.get("http://jul2nd.ddns.net/recommend/topSolds", {
+    headers: { authorization: getCookie('token')}
+  }).then((response) => {
+    products = response.data.products;
+    fetch(ejsFilePath)
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(products);
+        const renderedHtml = ejs.render(data, {
+          data: products,
+        });
+        root.innerHTML = renderedHtml;
+        var productController = document.createElement("script");
+        productController.src = "/js/product.controller.js";
+        root.appendChild(productController);
+        document.getElementById('titlePage').innerHTML = 'Trang chủ';
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
+  });
+}
 //Trang giới thiệu
 function Introduce() {
   var ejsFilePath = "/page/introduce.ejs";

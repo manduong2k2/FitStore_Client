@@ -11,6 +11,7 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 
 router.get("/", (req, res) => {
   try {
+    
     const token = req.cookies.token;
     if (token) {
       decodedToken = jwt.verify(token, 'ABC');
