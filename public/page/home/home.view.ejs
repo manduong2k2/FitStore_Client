@@ -3,6 +3,7 @@
         <h1>Được mua nhiều nhất</h1>
         <div id="row-products">
           <% data.forEach(item => { %>
+            <%if(item.totalQuantity > 0){%>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-item">
               <div  class="panel panel-default product-item" style="width: 170px;">
                 <div class="panel-heading">
@@ -10,8 +11,8 @@
                 <div onclick="ProductDetail('<%= item.product.id %>')" style="cursor: pointer;" class="panel-body">
                   <img style="height: 30%; width: 30%;" src="<%= item.product.image %>" alt="#" />
                   <h4  style="font-size: 20px;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><%= item.product.name %></h4>
-                  <p><strong style="font-size: 15px;"">Giá: <%= item.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
-                  <p style="font-size: 15px;"">Đã bán: <%= item.totalQuantity%></p>
+                  <p><strong style="font-size: 15px;">Giá: <%= item.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
+                  <p style="font-size: 15px;">Đã bán: <%= item.totalQuantity%></p>
                 </div>
                 <div class="panel-footer clearfix">
                   <div class="d-flex justify-content-between">
@@ -38,6 +39,7 @@
                 </div>
               </div>
             </div>
+            <%}%>
             <% }); %>
         </div>
       </div>
