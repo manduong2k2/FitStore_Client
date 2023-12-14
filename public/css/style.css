@@ -295,3 +295,13 @@ th {
 .star-unrated:hover{
   color: goldenrod; 
 }
+#row-products {
+  display: flex;
+  overflow-x: auto; /* Cho phép thanh cuộn ngang */
+  white-space: nowrap; /* Ngăn các dòng mới xuất hiện */
+}
+
+.col-item {
+  flex: 0 0 auto; /* Không co dãn các cột */
+  margin-right: 10px; /* Khoảng cách giữa các cột */
+}
