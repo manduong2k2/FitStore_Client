@@ -295,7 +295,7 @@ th {
 .star-unrated:hover{
   color: goldenrod; 
 }
-#row-products {
+.row-products {
   display: flex;
   overflow-x: auto; /* Cho phép thanh cuộn ngang */
   white-space: nowrap; /* Ngăn các dòng mới xuất hiện */

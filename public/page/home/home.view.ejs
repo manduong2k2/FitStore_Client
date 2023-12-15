@@ -1,24 +1,23 @@
-<main>
+
       <div class="row justify-content-center" style="margin: 30px">
-        <h1>Được mua nhiều nhất</h1>
-        <div id="row-products">
+        <div class="row-products">
           <% data.forEach(item => { %>
-            <%if(item.totalQuantity > 0){%>
+            <%if(item.totalQuantity > 0 || !item.totalQuantity){%>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-item">
               <div  class="panel panel-default product-item" style="width: 170px;">
                 <div class="panel-heading">
                 </div>
-                <div onclick="ProductDetail('<%= item.product.id %>')" style="cursor: pointer;" class="panel-body">
-                  <img style="height: 30%; width: 30%;" src="<%= item.product.image %>" alt="#" />
-                  <h4  style="font-size: 20px;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><%= item.product.name %></h4>
-                  <p><strong style="font-size: 15px;">Giá: <%= item.product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
-                  <p style="font-size: 15px;">Đã bán: <%= item.totalQuantity%></p>
+                <div onclick="ProductDetail('<%= item.id %>')" style="cursor: pointer;" class="panel-body">
+                  <img style="height: 30%; width: 30%;" src="<%= item.image %>" alt="#" />
+                  <h4  style="font-size: 20px;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><%= item.name %></h4>
+                  <p><strong style="font-size: 15px;">Giá: <%= item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
+                  <%if(item.totalQuantity){ %><p style="font-size: 15px;">Đã bán: <%= item.totalQuantity%></p> <%}%>
                 </div>
                 <div class="panel-footer clearfix">
                   <div class="d-flex justify-content-between">
                     <div>
-                      <%if(item.product.stock > 0){%>
-                      <svg class="cartIcon" onclick="AddToCart('<%= item.product.id %>')" style="height: 30px; width: 30px; margin-left:40px ; cursor:pointer " xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
+                      <%if(item.stock > 0){%>
+                      <svg class="cartIcon" onclick="AddToCart('<%= item.id %>')" style="height: 30px; width: 30px; margin-left:40px ; cursor:pointer " xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="256" height="256" viewBox="0 0 256 256" xml:space="preserve">
                         <defs>
                         </defs>
                         <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
@@ -43,5 +42,5 @@
             <% }); %>
         </div>
       </div>
-</main>
+
   

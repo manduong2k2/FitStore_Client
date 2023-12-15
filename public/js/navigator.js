@@ -2,29 +2,52 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   Home();
 });
-function Home() {
+async function Home() {
   var ejsFilePath = "/page/home/home.view.ejs";
   var root = document.getElementById("root");
-  var products;
+  fetch('/page/home/home.header.ejs')
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data);
+        root.innerHTML = renderedHtml;
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
   axios.get("http://jul2nd.ddns.net/recommend/topSolds", {
-    headers: { authorization: getCookie('token')}
+    headers: { authorization: getCookie('token') }
   }).then((response) => {
-    products = response.data.products;
     fetch(ejsFilePath)
       .then((response) => response.text())
       .then((data) => {
-        console.log(products);
         const renderedHtml = ejs.render(data, {
-          data: products,
+          data: response.data,
         });
-        root.innerHTML = renderedHtml;
+        var list1 = document.createElement('div');
+        list1.innerHTML+='<h4>Được mua nhiều nhất</h4>';
+        list1.innerHTML+= renderedHtml;
+        root.appendChild(list1);
         var productController = document.createElement("script");
         productController.src = "/js/product.controller.js";
         root.appendChild(productController);
         document.getElementById('titlePage').innerHTML = 'Trang chủ';
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
-  });
+  }).catch(err =>console.log(err));
+  axios.get("http://jul2nd.ddns.net/recommend", {
+    headers: { authorization: getCookie('token') }
+  }).then((response) => {
+    fetch(ejsFilePath)
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data, {
+          data: response.data,
+        });
+        var list2 = document.createElement('div');
+        list2.innerHTML += '<h4>Có thể bạn sẽ thích</h4>';
+        list2.innerHTML += renderedHtml;
+        root.appendChild(list2);
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
+  }).catch(err => console.log(err));
 }
 //Trang giới thiệu
 function Introduce() {
@@ -172,7 +195,7 @@ function AccountList() {
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
 }
-//trang cart
+//Trang cart
 function CartList() {
   var account_id = getCookie('id');
   if (!account_id) {
@@ -312,15 +335,15 @@ async function SubmitSearch(event) {
         .catch((error) => console.error("Error fetching EJS file:", error));
     });
   }
-  else{
+  else {
     alert('Vui lòng nhập từ khoá bạn muốn tìm')
   }
 }
-async function rating(stars,order_id,product_id){
-  var formData =new FormData();
-  formData.append('product_id',product_id);
-  formData.append('order_id',order_id);
-  formData.append('rating',stars);
+async function rating(stars, order_id, product_id) {
+  var formData = new FormData();
+  formData.append('product_id', product_id);
+  formData.append('order_id', order_id);
+  formData.append('rating', stars);
   await axios("http://jul2nd.ddns.net/order/rating", {
     method: "PUT",
     data: formData,
@@ -334,7 +357,7 @@ async function rating(stars,order_id,product_id){
       HistoryList();
     }
   })
-  .catch((err) => {
-    console.log(err);
-  });
+    .catch((err) => {
+      console.log(err);
+    });
 }
