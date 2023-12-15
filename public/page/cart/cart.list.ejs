@@ -39,7 +39,7 @@
             <button id="product<%=item.product.id%>button" onclick="DecreaseByOne('<%=item.product.id%>','<%=item.product.price%>')" class="btn btn-danger <%= item.quantity === 1 ? 'disable-btn' : '' %>" >-
             </button>
             <input id="product<%=item.product.id%>number" style="width: 80px; text-align: center"
-              type="number" min="1" value="<%=item.quantity%>" attr="data-id= <%=item.product_id%>" class="form-control quantity"
+              type="number" min="1" value="<%=item.number%>" attr="data-id= <%=item.product_id%>" class="form-control quantity"
               readonly />
             <button
               onclick="IncreaseByOne('<%=item.product.id%>','<%=item.product.price%>')"
@@ -60,7 +60,7 @@
         <td>
           <label>
             <span id="product<%=item.product.id%>total" class="itemTotal"
-              ><%=(item.quantity*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+              ><%=(item.number*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
               ".")%></span
             >
             <span>₫</span>
@@ -97,9 +97,7 @@
       </h3>
     </div>
     <div class="col-md-12 text-center" style="margin: 10px 0">
-      <a onclick="RemoveAllItem()" class="btn btn-danger"
-        >Xoá toàn bộ sản phẩm</a
-      >
+      <a onclick="RemoveAllItem()" class="btn btn-danger">Xoá toàn bộ sản phẩm</a>
       <a class="btn btn-success" onclick="Payment()" style="margin: 0px 15px" >Xác nhận đơn hàng
         <svg fill="white" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" >
           <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />

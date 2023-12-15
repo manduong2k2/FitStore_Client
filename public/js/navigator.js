@@ -1,9 +1,5 @@
 //trang home
-document.addEventListener("DOMContentLoaded", (event) => {
-  Home();
-});
 async function Home() {
-  var ejsFilePath = "/page/home/home.view.ejs";
   var root = document.getElementById("root");
   fetch('/page/home/home.header.ejs')
       .then((response) => response.text())
@@ -12,10 +8,11 @@ async function Home() {
         root.innerHTML = renderedHtml;
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
+  //Danh sách sản phẩm bán chạy
   axios.get("http://jul2nd.ddns.net/recommend/topSolds", {
     headers: { authorization: getCookie('token') }
   }).then((response) => {
-    fetch(ejsFilePath)
+    fetch('/page/home/top.sold.ejs')
       .then((response) => response.text())
       .then((data) => {
         const renderedHtml = ejs.render(data, {
@@ -32,10 +29,32 @@ async function Home() {
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   }).catch(err =>console.log(err));
+  //Sản phẩm đánh giá trung bình cao 
+  axios.get("http://jul2nd.ddns.net/recommend/topRating", {
+    headers: { authorization: getCookie('token') }
+  }).then((response) => {
+    fetch('/page/home/top.rating.ejs')
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data, {
+          data: response.data,
+        });
+        var list1 = document.createElement('div');
+        list1.innerHTML+='<h4>Đánh giá trung bình cao</h4>';
+        list1.innerHTML+= renderedHtml;
+        root.appendChild(list1);
+        var productController = document.createElement("script");
+        productController.src = "/js/product.controller.js";
+        root.appendChild(productController);
+        document.getElementById('titlePage').innerHTML = 'Trang chủ';
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
+  }).catch(err =>console.log(err));
+  //Sản phẩm đề xuất cá nhân
   axios.get("http://jul2nd.ddns.net/recommend", {
     headers: { authorization: getCookie('token') }
   }).then((response) => {
-    fetch(ejsFilePath)
+    fetch('/page/home/home.view.ejs')
       .then((response) => response.text())
       .then((data) => {
         const renderedHtml = ejs.render(data, {
@@ -213,6 +232,7 @@ function CartList() {
       fetch(ejsFilePath)
         .then(response => response.text())
         .then(data => {
+          console.log(response.data);
           const renderedHtml = ejs.render(data, {
             titlePage: "Giỏ hàng",
             data: response.data,

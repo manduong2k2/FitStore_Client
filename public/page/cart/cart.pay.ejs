@@ -60,7 +60,7 @@
             </thead>
             <tbody>
               <% let toTal = 0; %> <% data.forEach(item => {
-              toTal+=item.quantity * item.product.price %>
+              toTal+=item.number * item.product.price %>
               <tr id="product<%=item.product.id%>item" class="productItem">
                 <input class="item-id" type="hidden" value="<%=item.product.id%>">
                 <td><%=item.product.name%></td>
@@ -97,7 +97,7 @@
                     <span
                       id="product<%=item.product.id%>total"
                       class="itemTotal"
-                      ><%=(item.quantity*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
+                      ><%=(item.number*item.product.price).toString().replace(/\B(?=(\d{3})+(?!\d))/g,
                       ".")%></span
                     >
                     <span>₫</span>
@@ -110,12 +110,7 @@
           <div class="col-md-12">
             <h3>
               Tổng hoá đơn:
-              <input
-                id="hiddenBillTotal"
-                type="number"
-                style="display: none"
-                value="<%=toTal%>"
-              />
+              <input id="hiddenBillTotal" type="number" style="display: none" value="<%=toTal%>" />
               <span id="billTotal">
                 <%=toTal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") %>
               </span>

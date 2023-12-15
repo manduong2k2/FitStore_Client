@@ -2,7 +2,6 @@
       <div class="row justify-content-center" style="margin: 30px">
         <div class="row-products">
           <% data.forEach(item => { %>
-            <%if(item.totalQuantity > 0 || !item.totalQuantity){%>
             <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-item">
               <div  class="panel panel-default product-item" style="width: 170px;">
                 <div class="panel-heading">
@@ -31,14 +30,13 @@
                         </g>
                         </svg>
                         <% } else { %>
-                          <h3 style="color:red">Hết hàng</h3>
+                          <h6 style="color:red">Hết hàng</h6>
                           <% } %>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <%}%>
             <% }); %>
         </div>
       </div>
