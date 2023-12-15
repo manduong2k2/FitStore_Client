@@ -7,7 +7,7 @@
             <div class="panel-heading">
             </div>
             <div onclick="ProductDetail('<%= item.id %>')" style="cursor: pointer;" class="panel-body">
-              <img style="height: 30%; width: 30%;" src="<%= item.image %>" alt="#" />
+              <img style="height: 45px; width: 30%;" src="<%= item.image %>" alt="#" />
               <h4  style="font-size: 20px;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><%= item.name %></h4>
               <p><strong style="font-size: 15px;">Giá: <%= item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
               <p style="font-size: 15px;">Đã bán: <%= item.totalQuantity%></p>

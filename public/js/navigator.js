@@ -19,7 +19,7 @@ async function Home() {
           data: response.data,
         });
         var list1 = document.createElement('div');
-        list1.innerHTML+='<h4>Được mua nhiều nhất</h4>';
+        list1.innerHTML+='<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Được mua nhiều nhất</h4>';
         list1.innerHTML+= renderedHtml;
         root.appendChild(list1);
         var productController = document.createElement("script");
@@ -40,7 +40,7 @@ async function Home() {
           data: response.data,
         });
         var list1 = document.createElement('div');
-        list1.innerHTML+='<h4>Đánh giá trung bình cao</h4>';
+        list1.innerHTML+='<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Đánh giá trung bình cao</h4>';
         list1.innerHTML+= renderedHtml;
         root.appendChild(list1);
         var productController = document.createElement("script");
@@ -61,7 +61,7 @@ async function Home() {
           data: response.data,
         });
         var list2 = document.createElement('div');
-        list2.innerHTML += '<h4>Có thể bạn sẽ thích</h4>';
+        list2.innerHTML += '<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Có thể bạn sẽ thích</h4>';
         list2.innerHTML += renderedHtml;
         root.appendChild(list2);
       })
