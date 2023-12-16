@@ -42,12 +42,12 @@
       </div>
       <% }); %>
     </div>
-    <div class="pagination">
+    <div class="pagination" style="margin: 0 40px 10px 440px;">
       <% for (let i = 1; i <= totalPages; i++) { %>
-        <% if (i === currentPage) { %>
-          <span class="current-page"><%= i %></span>
+        <% if (i == currentPage) { %>
+          <a  class="current-page page-link" style="margin-left:20px; color: #000; border-color: #000; border-radius:60px"><%= i %></a>
         <% } else { %>
-          <a style="margin-left:10px" onclick="ProductView('<%= i%>')" class="page-link" data-page="<%= i %>"><%= i %></a>
+          <a  style="cursor: pointer;margin-left:20px; border-radius:60px" onclick="ProductView('<%= i%>')" class="page-link" data-page="<%= i %>"><%= i %></a>
         <% } %>
       <% } %>
     </div>

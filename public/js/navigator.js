@@ -6,9 +6,9 @@ function Home() {
     .then((data) => {
       const renderedHtml = ejs.render(data);
       root.innerHTML = renderedHtml;
-      var autoSlider = document.createElement('script');
-      autoSlider.src = '/js/auto.slide.js';
-      root.appendChild(autoSlider);
+      // var autoSlider = document.createElement('script');
+      // autoSlider.src = '/js/auto.slide.js';
+      // root.appendChild(autoSlider);
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
   //Danh sách sản phẩm bán chạy
@@ -148,6 +148,7 @@ function ProductView(page) {
   var ejsFilePath = "/page/product/product.view.ejs";
   var root = document.getElementById("root");
   var products;
+  console.log(page);
   let currentPage = page || 1;
   const itemsPerPage = 8;
   const startIndex = (currentPage - 1) * itemsPerPage;
