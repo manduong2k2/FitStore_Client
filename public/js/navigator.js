@@ -1,5 +1,5 @@
 //trang home
-async function Home() {
+function Home() {
   var root = document.getElementById("root");
   fetch('/page/home/home.header.ejs')
       .then((response) => response.text())
@@ -54,7 +54,8 @@ async function Home() {
   axios.get("http://jul2nd.ddns.net/recommend", {
     headers: { authorization: getCookie('token') }
   }).then((response) => {
-    fetch('/page/home/home.view.ejs')
+    if(response.data){
+      fetch('/page/home/home.view.ejs')
       .then((response) => response.text())
       .then((data) => {
         const renderedHtml = ejs.render(data, {
@@ -66,6 +67,7 @@ async function Home() {
         root.appendChild(list2);
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
+    }
   }).catch(err => console.log(err));
 }
 //Trang giới thiệu
