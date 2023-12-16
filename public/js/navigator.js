@@ -25,9 +25,6 @@ function Home() {
             '<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Được mua nhiều nhất</h4>';
           list1.innerHTML += renderedHtml;
           root.appendChild(list1);
-          var productController = document.createElement("script");
-          productController.src = "/js/product.controller.js";
-          root.appendChild(productController);
           document.getElementById("titlePage").innerHTML = "Trang chủ";
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
@@ -50,9 +47,6 @@ function Home() {
             '<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Đánh giá trung bình cao</h4>';
           list1.innerHTML += renderedHtml;
           root.appendChild(list1);
-          var productController = document.createElement("script");
-          productController.src = "/js/product.controller.js";
-          root.appendChild(productController);
           document.getElementById("titlePage").innerHTML = "Trang chủ";
         })
         .catch((error) => console.error("Error fetching EJS file:", error));
