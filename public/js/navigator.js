@@ -6,6 +6,9 @@ function Home() {
     .then((data) => {
       const renderedHtml = ejs.render(data);
       root.innerHTML = renderedHtml;
+      var autoSlider = document.createElement('script');
+      autoSlider.src = '/js/auto.slide.js';
+      root.appendChild(autoSlider);
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
   //Danh sách sản phẩm bán chạy
