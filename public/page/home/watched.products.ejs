@@ -1,8 +1,6 @@
-
 <div class="row justify-content-center" style="margin: 30px">
     <div class="row-products">
       <% data.forEach(item => { %>
-        <%if(item.avgRating >= 1){%>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-item">
           <div  class="panel panel-default product-item" style="width: 170px;">
             <div class="panel-heading">
@@ -11,7 +9,6 @@
               <img style="margin-left: 35%; height: 45px; width: 30%;" src="<%= item.image %>" alt="#" />
               <h4  style="font-size: 20px;white-space: nowrap;overflow: hidden; text-overflow: ellipsis;"><%= item.name %></h4>
               <p><strong style="font-size: 15px;">Giá: <%= item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")%>₫</strong></p>
-              <p style="font-size: 15px;">Trung bình: <%= item.avgRating%> &#11088;</p>
             </div>
             <div class="panel-footer clearfix">
               <div class="d-flex justify-content-between">
@@ -38,7 +35,6 @@
             </div>
           </div>
         </div>
-        <% } %>
         <% }); %>
     </div>
   </div>

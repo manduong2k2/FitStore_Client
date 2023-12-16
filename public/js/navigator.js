@@ -69,6 +69,24 @@ function Home() {
       .catch((error) => console.error("Error fetching EJS file:", error));
     }
   }).catch(err => console.log(err));
+  axios.get("http://jul2nd.ddns.net/recommend/watched", {
+    headers: { authorization: getCookie('token') }
+  }).then((response) => {
+    if(response.data){
+      fetch('/page/home/watched.products.ejs')
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data, {
+          data: response.data,
+        });
+        var list2 = document.createElement('div');
+        list2.innerHTML += '<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Sản phẩm bạn đã xem: </h4>';
+        list2.innerHTML += renderedHtml;
+        root.appendChild(list2);
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
+    }
+  }).catch(err => console.log(err));
 }
 //Trang giới thiệu
 function Introduce() {
