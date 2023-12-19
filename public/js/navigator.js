@@ -6,9 +6,6 @@ function Home() {
     .then((data) => {
       const renderedHtml = ejs.render(data);
       root.innerHTML = renderedHtml;
-      var autoSlider = document.createElement('script');
-      autoSlider.src = '/js/auto.slide.js';
-      root.appendChild(autoSlider);
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
   //Danh sách sản phẩm bán chạy
@@ -168,7 +165,7 @@ function ProductView(page) {
         var productController = document.createElement("script");
         productController.src = "/js/product.controller.js";
         root.appendChild(productController);
-        document.getElementById('titlePage').innerHTML = 'Sản phẩm';
+        document.getElementById("titlePage").innerHTML = "Sản phẩm";
 
         // Update state without modifying the URL
         window.currentPage = currentPage;
@@ -394,7 +391,7 @@ async function SubmitSearch(event) {
   event.preventDefault();
   var search = document.getElementById("search-bar").value;
   if (search) {
-    var ejsFilePath = "/page/product/product.view.ejs";
+    var ejsFilePath = "/page/product/product.search.ejs";
     var root = document.getElementById("root");
     axios
       .get("http://jul2nd.ddns.net/product/search/" + search)

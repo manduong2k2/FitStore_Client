@@ -13,12 +13,26 @@ document.getElementById("profileImage").addEventListener("change", function (e) 
         reader.readAsDataURL(file);
     }
 });
-
+function EditPassword() {
+    const editAccountInfoFrm = document.getElementById("editAccountInfo");
+    const editAccountPasswordFrm = document.getElementById("editAccountPassword");
+    const btnEdit = document.getElementById("btnEdit");
+    const btnEditPassword = document.getElementById("btnEditPassword");
+    const btnCancel = document.getElementById("btnCancel");
+    const btnSubmit = document.getElementById("btnSubmit");
+    editAccountInfoFrm.style.display = "none";
+    editAccountPasswordFrm.style.display = "block";
+    btnEditPassword.style.display = "none";
+    btnSubmit.style.display = "inline-block";
+    btnEdit.style.display = "none";
+    btnCancel.style.display = "inline-block";
+}
 function Edit() {
     const accountEmail = document.querySelector("#accountEmail");
     const accountPhone = document.querySelector("#accountPhone");
     const accountName = document.querySelector("#accountName");
     const btnEdit = document.getElementById("btnEdit");
+    const btnEditPassword = document.getElementById("btnEditPassword");
     const btnCancel = document.getElementById("btnCancel");
     const btnSubmit = document.getElementById("btnSubmit");
     const Avt = document.getElementById("Avt");
@@ -27,6 +41,7 @@ function Edit() {
     // Toggle button visibility
     btnSubmit.style.display = "inline-block";
     btnEdit.style.display = "none";
+    btnEditPassword.style.display = "none";
     btnCancel.style.display = "inline-block";
     Avt.style.cursor = "pointer";
     text.style.display = "inherit";
@@ -40,17 +55,22 @@ function CancelEdit() {
     const accountEmail = document.querySelector("#accountEmail");
     const accountName = document.querySelector("#accountName");
     const btnEdit = document.getElementById("btnEdit");
+    const btnEditPassword = document.getElementById("btnEditPassword");
     const btnCancel = document.getElementById("btnCancel");
     const btnSubmit = document.getElementById("btnSubmit");
     const img = document.getElementById("Avt");
     const text = document.getElementById("text");
-
+    const editAccountInfoFrm = document.getElementById("editAccountInfo");
+    const editAccountPasswordFrm = document.getElementById("editAccountPassword");
+    editAccountInfoFrm.style.display = "block";
+    editAccountPasswordFrm.style.display = "none";
     // Restore the previous values
     fetchAccountDetails();
     // Toggle button visibility
     text.style.display = "none";
     btnSubmit.style.display = "none";
     btnEdit.style.display = "inline-block";
+    btnEditPassword.style.display = "inline-block";
     btnCancel.style.display = "none";
     img.style.cursor = "none";
 
