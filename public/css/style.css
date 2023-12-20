@@ -193,9 +193,6 @@ td {
   vertical-align: middle;
 }
 
-th {
-  background-color: #000; /* Màu nền cho phần đầu bảng */
-}
 #height-img td {
   height: 131px;
 }
