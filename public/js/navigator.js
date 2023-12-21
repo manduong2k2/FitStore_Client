@@ -458,4 +458,21 @@ function Statistic(){
       })
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
+  monthIncome((new Date()).getMonth() + 1);
+}
+async function monthIncome(month){
+  console.log(month);
+  await axios.get("http://jul2nd.ddns.net/statistic/income/" + month).then((response) => {
+    fetch('/page/statistic/income.ejs')
+      .then((response) => response.text())
+      .then((data) => {
+        const renderedHtml = ejs.render(data,{data:response.data});
+        var chart = document.createElement('div');
+        chart.style.display = "flex";
+        chart.style.justifyContent = "center";
+        chart.innerHTML = renderedHtml;
+        root.appendChild(chart);
+      })
+      .catch((error) => console.error("Error fetching EJS file:", error));
+  });
 }
