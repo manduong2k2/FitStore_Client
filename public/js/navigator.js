@@ -446,33 +446,8 @@ function Statistic(){
       root.innerHTML = renderedHtml;
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
-  axios.get("http://jul2nd.ddns.net/statistic/topSales").then((response) => {
-    fetch('/page/statistic/top.sale.ejs')
-      .then((response) => response.text())
-      .then((data) => {
-        const renderedHtml = ejs.render(data,{data:response.data});
-        var chart = document.createElement('div');
-        chart.innerHTML = renderedHtml;
-        root.appendChild(chart);
-        document.getElementById("titlePage").innerHTML = "Thống kê";
-      })
-      .catch((error) => console.error("Error fetching EJS file:", error));
-  });
-  monthIncome((new Date()).getMonth() + 1);
+  var controller = document.createElement('script');
+  controller.src='/js/statistic.controller.js';
+  root.appendChild(controller);
 }
-async function monthIncome(month){
-  console.log(month);
-  await axios.get("http://jul2nd.ddns.net/statistic/income/" + month).then((response) => {
-    fetch('/page/statistic/income.ejs')
-      .then((response) => response.text())
-      .then((data) => {
-        const renderedHtml = ejs.render(data,{data:response.data});
-        var chart = document.createElement('div');
-        chart.style.display = "flex";
-        chart.style.justifyContent = "center";
-        chart.innerHTML = renderedHtml;
-        root.appendChild(chart);
-      })
-      .catch((error) => console.error("Error fetching EJS file:", error));
-  });
-}
+

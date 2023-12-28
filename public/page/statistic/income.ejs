@@ -138,17 +138,12 @@
     <caption style="text-align: center">
       Doanh thu trong tháng: 
       <div style="display: inline-flex">
-        <button onclick="" class="btn btn-danger">-
+        <button id="btnDecrease" onclick="decrease()" class="btn btn-danger">-
         </button>
-        <input style="width: 80px; text-align: center"
+        <input style="width: 80px; text-align: center" id="month"
           type="number" min="1" max="12" class="form-control quantity"
           readonly value="<%= new Date().getMonth() + 1%>" />
-        <button
-          onclick=""
-          class="btn btn-success"
-        >
-          +
-        </button>
+        <button id="btnIncrease" onclick="increase()" class="btn btn-success" >+</button>
       </div>
     </caption>
   <thead>
