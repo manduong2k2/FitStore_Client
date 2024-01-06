@@ -5,6 +5,9 @@ function Home() {
     .then((response) => response.text())
     .then((data) => {
       const renderedHtml = ejs.render(data);
+      var productController = document.createElement("script");
+      productController.src = "/js/product.controller.js";
+      root.appendChild(productController);
       root.innerHTML = renderedHtml;
     })
     .catch((error) => console.error("Error fetching EJS file:", error));
@@ -89,7 +92,7 @@ function Home() {
             });
             var list2 = document.createElement("div");
             list2.innerHTML +=
-              '<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Sản phẩm bạn đã xem: </h4>';
+              '<h4 style="font-style:italic; text-decoration: underline; margin:30px 0 0 50px;">Sản phẩm bạn đã xem </h4>';
             list2.innerHTML += renderedHtml;
             root.appendChild(list2);
           })

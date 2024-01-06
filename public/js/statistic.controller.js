@@ -1,7 +1,7 @@
 topSales();
-monthIncome((new Date()).getMonth() + 1);
-function monthIncome(month) {
-    axios.get("http://jul2nd.ddns.net/statistic/income/" + month).then((response) => {
+monthIncome((new Date()).getMonth() + 1,(new Date()).getFullYear());
+function monthIncome(month,year) {
+    axios.get("http://jul2nd.ddns.net/statistic/income/" + month +'/'+year).then((response) => {
         fetch('/page/statistic/income.ejs')
             .then((response) => response.text())
             .then((data) => {
@@ -12,7 +12,7 @@ function monthIncome(month) {
                 chart.style.justifyContent = "center";
                 chart.innerHTML = renderedHtml;
                 root.appendChild(chart);
-                checkMonthNumber();
+                //checkMonthNumber();
             })
             .catch((error) => console.error("Error fetching EJS file:", error));
     });
@@ -31,8 +31,8 @@ function topSales(){
       .catch((error) => console.error("Error fetching EJS file:", error));
   });
 }
-async function updateMonthIncome(month) {
-    axios.get("http://jul2nd.ddns.net/statistic/income/" + month).then((response) => {
+async function updateMonthIncome(month,year) {
+    axios.get("http://jul2nd.ddns.net/statistic/income/" + month+'/'+year).then((response) => {
         fetch('/page/statistic/income.ejs')
             .then((response) => response.text())
             .then((data) => {
@@ -40,20 +40,43 @@ async function updateMonthIncome(month) {
                 var chart = document.getElementById('month_income');
                 chart.innerHTML = renderedHtml;
                 document.getElementById('month').value=parseInt(month);
-                checkMonthNumber();
+                document.getElementById('year').value=parseInt(year);
+                //checkMonthNumber();
             })
             .catch((error) => console.error("Error fetching EJS file:", error));
     });
 }
 function increase(){
     var month = document.getElementById('month');
-    month.value++;
-    updateMonthIncome(month.value);
+    var year = document.getElementById('year');
+    if(month.value === '12') {
+        year.value++;
+        month.value = '1';
+    }
+    else month.value++;
+    updateMonthIncome(month.value,year.value);
 }
 function decrease(){
     var month = document.getElementById('month');
-    month.value--;
-    updateMonthIncome(month.value);
+    var year = document.getElementById('year');
+    if(month.value === '1') {
+        year.value--;
+        month.value = '12';
+    }
+    else month.value--;
+    updateMonthIncome(month.value,year.value);
+}
+function increaseYear(){
+    var month = document.getElementById('month');
+    var year = document.getElementById('year');
+    year.value++;
+    updateMonthIncome(month.value,year.value);
+}
+function decreaseYear(){
+    var month = document.getElementById('month');
+    var year = document.getElementById('year');
+    year.value--;
+    updateMonthIncome(month.value,year.value);
 }
 function checkMonthNumber() {
     var number = document.getElementById('month').value;

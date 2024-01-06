@@ -145,6 +145,15 @@
           readonly value="<%= new Date().getMonth() + 1%>" />
         <button id="btnIncrease" onclick="increase()" class="btn btn-success" >+</button>
       </div>
+      Năm: 
+      <div style="display: inline-flex">
+        <button id="btnDecreaseYear" onclick="decreaseYear()" class="btn btn-danger">-
+        </button>
+        <input style="width: 80px; text-align: center" id="year"
+          type="number" min="1" max="12" class="form-control quantity"
+          readonly value="<%= new Date().getFullYear()%>" />
+        <button id="btnIncreaseYear" onclick="increaseYear()" class="btn btn-success" >+</button>
+      </div>
     </caption>
   <thead>
     <tr>

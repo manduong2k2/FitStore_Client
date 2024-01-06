@@ -49,7 +49,6 @@ router.post('/login', (req, res) => {
       }
       else {
         var account = JSON.parse(response.data.account);
-        console.log(account);
         res.cookie('id', account.id);
         res.cookie('name', account.name);
         res.cookie('image', account.image);
@@ -70,9 +69,7 @@ router.get('/logout', async (req, res) => {
       headers: {
         Authorization: req.cookies.token
       }
-    })
-      .then(response => {
-        console.log(response);
+    }).then(response => {
         res.clearCookie('id');
         res.clearCookie('name');
         res.clearCookie('image');
